@@ -4,6 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Add Controllers for manage our classes
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 
@@ -17,5 +20,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//Mapping Controllers EndPoints
+app.MapControllers();
 
 app.Run();
