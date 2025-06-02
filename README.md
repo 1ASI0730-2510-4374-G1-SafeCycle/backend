@@ -9,4 +9,5 @@ Microsoft.EntityFrameworkCore.Design
 Swashbuckle.AspNetCore
 Swashbuckle.AspNetCore.Swagger
 Humanizer
+Microsoft.AspNetCore.Identity
 ```
