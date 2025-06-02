@@ -10,6 +10,13 @@ builder.Services.AddSwaggerGen();
 //Add Controllers for manage our classes
 builder.Services.AddControllers();
 
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (!string.IsNullOrEmpty(connection))
+{
+  throw new Exception("Database connection string not set");
+}
+   
 //Add our DbContext connection to Dependency Injector
 builder.Services.AddDbContext<SafecycleDBContext>(options =>
 {
