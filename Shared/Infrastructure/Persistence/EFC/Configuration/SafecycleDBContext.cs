@@ -1,4 +1,4 @@
-using backend.Bike_Management.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using backend.User_Management.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -27,13 +27,19 @@ public class SafecycleDBContext : DbContext
         modelBuilder.Entity<BikeStations>(entity =>
         {
             entity.HasKey(e => e.Id);
+    
             entity.Property(e => e.name).IsRequired();
             entity.Property(e => e.address).IsRequired();
             entity.Property(e => e.maxCapacity).IsRequired();
-            entity.Property(e => e.lat).IsRequired();
-            entity.Property(e => e.lng).IsRequired();
+            entity.OwnsOne(e => e.Location, loc =>
+            {
+                loc.Property(l => l.Latitude).HasColumnName("lat").IsRequired();
+                loc.Property(l => l.Longitude).HasColumnName("lng").IsRequired();
+
+                loc.WithOwner().HasForeignKey("Id");
+                loc.HasKey("Id");
+            });
         });
-        
         modelBuilder.UseSnakeCaseNamingConvention();
     }
 }

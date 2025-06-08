@@ -248,3 +248,4 @@ C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\refint\backe
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\backend.pdb
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\backend.genruntimeconfig.cache
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\ref\backend.dll
+C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Annotations.dll

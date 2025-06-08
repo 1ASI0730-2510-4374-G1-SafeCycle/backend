@@ -10,6 +10,9 @@ builder.Services.AddSwaggerGen();
 //Add Controllers for manage our classes
 builder.Services.AddControllers();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
+
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 if (string.IsNullOrEmpty(connection))

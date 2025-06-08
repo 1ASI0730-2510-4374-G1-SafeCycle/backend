@@ -1,5 +1,5 @@
-﻿using backend.Bike_Management.Domain.Model.Aggregates;
-using backend.Bike_Management.Domain.Model.Commands;
+﻿using backend.Bikes.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Model.Commands;
 
 namespace backend.Bike_Management.Domain.Services;
 
