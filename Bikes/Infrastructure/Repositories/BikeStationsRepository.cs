@@ -1,5 +1,5 @@
-﻿using backend.Bike_Management.Domain.Repositories;
-using backend.Bikes.Domain.Model.Aggregates;
+﻿using backend.Bikes.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 

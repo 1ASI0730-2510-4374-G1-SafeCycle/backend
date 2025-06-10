@@ -1,7 +1,8 @@
 ﻿using backend.Bike_Management.Domain.Model.Queries;
 using backend.Bikes.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Model.Queries;
 
-namespace backend.Bike_Management.Domain.Services;
+namespace backend.Bikes.Domain.Services;
 
 public interface IBikeStationQueryService
 {

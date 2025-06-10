@@ -1,6 +1,6 @@
 ﻿using System.Net.Mime;
 using backend.Bike_Management.Domain.Model.Queries;
-using backend.Bike_Management.Domain.Services;
+using backend.Bikes.Domain.Services;
 using backend.Bikes.Interfaces.REST.Resources;
 using backend.Bikes.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +45,24 @@ public class BikeStationController(IBikeStationCommandService bikeStationCommand
         if (result is null) return NotFound();
         var resource = BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result);
         return Ok(resource);
+    }
+    
+    [HttpPut("{id}")]
+    [SwaggerOperation(
+        Summary = "Update a Bike Station",
+        Description = "Updates the details of an existing Bike Station",
+        OperationId = "UpdateBikeStation"
+    )]
+    [SwaggerResponse(200, "The Bike Station was updated successfully.")]
+    [SwaggerResponse(400, "Invalid data supplied.")]
+    [SwaggerResponse(404, "Bike Station not found.")]
+    public async Task<ActionResult> UpdateBikeStation(Guid id, [FromBody] UpdateBikeStationResource resource)
+    {
+        var updateCommand = UpdateBikeStationCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var result = await bikeStationCommandService.Handle(updateCommand);
+
+        if (result is null) return NotFound();
+
+        return Ok(BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result));
     }
 }
