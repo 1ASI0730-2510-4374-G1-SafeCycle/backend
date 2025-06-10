@@ -61,7 +61,7 @@ public class UserController(
     public async Task<IActionResult> DeleteUser([FromRoute] int id)
     {
         var deleteUserCommand = new DeleteUserCommand(id);
-        var result = await commandService.Handle(deleteUserCommand);
+        await commandService.Handle(deleteUserCommand);
     
         return NoContent();
     }

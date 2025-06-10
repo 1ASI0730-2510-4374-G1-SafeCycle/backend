@@ -32,7 +32,7 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
         return user;
     }
 
-    public async Task<IActionResult> Handle(DeleteUserCommand command)
+    public async Task Handle(DeleteUserCommand command)
     {
         var user = await userRepository.FindByIdAsync(command.id);
         
@@ -45,9 +45,8 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
         }
         catch (Exception e)
         {
-            return null;
+            throw new Exception($"User with id {command.id} doesnt exists.", e);
         }
         
-        return null;
     }
 }

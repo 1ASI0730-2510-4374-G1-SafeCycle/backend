@@ -7,5 +7,5 @@ namespace backend.User_Management.Domain.Services;
 public interface IUserCommandService
 {
     Task<User?> Handle(CreateUserCommand command);
-    Task<IActionResult> Handle(DeleteUserCommand command);
+    Task Handle(DeleteUserCommand command);
 }
