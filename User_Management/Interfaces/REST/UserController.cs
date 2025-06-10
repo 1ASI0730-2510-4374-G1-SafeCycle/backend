@@ -41,4 +41,28 @@ public class UserController(
         
         return Ok(resource);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<UserResource>>> GetUsers()
+    {
+        var getAllQuery = new GetAllUsersQuery();
+        var result = await userQueryService.Handle(getAllQuery);
+        if (result == null) return NotFound();
+
+        foreach (var user in result)
+        {
+            UserResourceFromEntityAssembler.ToResourceFromEntity(user);
+        }
+        
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser([FromRoute] int id)
+    {
+        var deleteUserCommand = new DeleteUserCommand(id);
+        var result = await commandService.Handle(deleteUserCommand);
+    
+        return NoContent();
+    }
 }
