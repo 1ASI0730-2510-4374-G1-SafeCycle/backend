@@ -4,5 +4,5 @@ public record CreateUserCommand(string Username,
  string Email,
  string Password, 
  string TypeUser, 
-TimeSpan MaxDailyReservationHour, 
+string MaxDailyReservationHour, 
  string IdentificationUser );

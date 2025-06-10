@@ -1,12 +1,11 @@
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
-using backend.User_Management.Domain.Model.Entities;
+using backend.User_Management.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class SafecycleDBContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
