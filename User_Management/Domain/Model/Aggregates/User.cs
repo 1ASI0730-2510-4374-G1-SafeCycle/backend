@@ -18,7 +18,7 @@ public class User
     public string Email { get; private set; }
     public string Password { get; private set; }
     public string TypeUser { get; private set; }
-    public string MaxDailyReservationHour { get; private set; }
+    public TimeSpan MaxDailyReservationHour { get; private set; }
     public string IdentificationUser { get; private set; }
 
     public User()
@@ -27,7 +27,7 @@ public class User
         this.Email = string.Empty;
         this.Password = string.Empty;
         this.TypeUser = string.Empty;
-        this.MaxDailyReservationHour = string.Empty;
+        this.MaxDailyReservationHour = TimeSpan.Zero;
         this.IdentificationUser = string.Empty;
     }
 }

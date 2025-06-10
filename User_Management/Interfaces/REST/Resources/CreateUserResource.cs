@@ -4,5 +4,5 @@ public record CreateUserResource(string Username,
     string Email,
     string Password, 
     string TypeUser, 
-    string MaxDailyReservationHour, 
+    TimeSpan MaxDailyReservationHour, 
     string IdentificationUser );
