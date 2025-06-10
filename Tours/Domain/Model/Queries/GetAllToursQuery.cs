@@ -1,6 +1,3 @@
 ﻿namespace backend.Tours.Domain.Model.Queries;
 
-public class GetAllToursQuery
-{
-    
-}
+public record GetAllToursQuery();

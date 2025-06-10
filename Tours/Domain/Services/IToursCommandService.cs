@@ -4,5 +4,6 @@ namespace backend.Tours.Domain.Services;
 
 public interface IToursCommandService
 {
-    Task<Model.Aggregates.Tours?> Handle(CreateToursCommand command);
+    Task<Model.Entities.Tours?> Handle(CreateToursCommand command);
+    Task<Model.Entities.Tours?> Handle(UpdateToursCommand command);
 }

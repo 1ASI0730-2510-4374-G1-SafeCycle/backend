@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using backend.Tours.Domain.Model.Commands;
 
-namespace backend.Tours.Domain.Model.Aggregates;
+namespace backend.Tours.Domain.Model.Entities;
 
 public partial class Tours
 {

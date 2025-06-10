@@ -26,8 +26,6 @@
   <ItemGroup>
     <Folder Include="Payment\" />
     <Folder Include="Renting\" />
-    <Folder Include="Tours\Infrastructure\" />
-    <Folder Include="Tours\Interfaces\" />
   </ItemGroup>
 
 </Project>
