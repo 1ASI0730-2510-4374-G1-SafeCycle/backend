@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using backend.Bike_Management.Domain.Model.Queries;
+using backend.Bikes.Domain.Model.Queries;
 using backend.Bikes.Domain.Services;
 using backend.Bikes.Interfaces.REST.Resources;
 using backend.Bikes.Interfaces.REST.Transform;
@@ -56,7 +57,7 @@ public class BikeStationController(IBikeStationCommandService bikeStationCommand
     [SwaggerResponse(200, "The Bike Station was updated successfully.")]
     [SwaggerResponse(400, "Invalid data supplied.")]
     [SwaggerResponse(404, "Bike Station not found.")]
-    public async Task<ActionResult> UpdateBikeStation(Guid id, [FromBody] UpdateBikeStationResource resource)
+    public async Task<ActionResult> UpdateBikeStation(int id, [FromBody] UpdateBikeStationResource resource)
     {
         var updateCommand = UpdateBikeStationCommandFromResourceAssembler.ToCommandFromResource(resource);
         var result = await bikeStationCommandService.Handle(updateCommand);

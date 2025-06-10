@@ -1,4 +1,4 @@
 ﻿
-namespace backend.Bike_Management.Domain.Model.Queries;
+namespace backend.Bikes.Domain.Model.Queries;
 
 public record GetBikeStationByIdQuery(int id);
