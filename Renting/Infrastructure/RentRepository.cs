@@ -8,7 +8,7 @@ namespace backend.Renting.Infrastructure;
 
 public class RentRepository : BaseRepository<Rent>, IRentRepository
 {
-    protected RentRepository(SafecycleDBContext context) : base(context)
+    public RentRepository(SafecycleDBContext context) : base(context)
     {
     }
 
