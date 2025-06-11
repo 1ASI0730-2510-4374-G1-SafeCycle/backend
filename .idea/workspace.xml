@@ -5,39 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="195721d1-5b16-4c30-8b9b-cc53768309b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Model/Aggregates/BikeStations.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Model/Commands/CreateBikeStationCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetAllBikeStationsQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetBikeStationByIdQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Repositories/IBikeStationRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Services/IBikeStationCommandService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Domain/Services/IBikeStationQueryService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Bike_Management/Infrastructure/Repositories/BikeStationsRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/Microsoft.OpenApi.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/Microsoft.OpenApi.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.runtimeconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.GlobalUsings.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.genruntimeconfig.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.backend.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.backend.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/backend.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/backend.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/backend.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/backend.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/backend.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/backend.csproj.nuget.g.targets" afterDir="false" />
@@ -73,18 +52,50 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Model/Aggregates/BikeStations.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Model/Commands/CreateBikeStationCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Bike_Management/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/User_Management/Domain/Model/Entities/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/bin/Debug/net9.0/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/bin/Debug/net9.0/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/backend.csproj.nuget.dgspec.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/backend.csproj.nuget.dgspec.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -95,21 +106,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Executable.run safecycle.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/bikeStations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Executable.run safecycle.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "develop",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="run safecycle" type="RunExe" factoryName=".NET Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../../../../../Program Files/dotnet/dotnet.exe" />
@@ -138,6 +150,7 @@
       <updated>1749236258611</updated>
       <workItem from="1749236259891" duration="1974000" />
       <workItem from="1749245226883" duration="4675000" />
+      <workItem from="1749600793187" duration="2029000" />
     </task>
     <task id="LOCAL-00001" summary="chore: initial commit">
       <option name="closed" value="true" />
@@ -147,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749236295300</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="chore: move untracked files preventing merge">
+      <option name="closed" value="true" />
+      <created>1749600834445</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749600834445</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +179,9 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="chore: initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: initial commit" />
+    <MESSAGE value="chore: move untracked files preventing merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: move untracked files preventing merge" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

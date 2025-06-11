@@ -1,6 +1,7 @@
 using backend.Bikes.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using backend.User_Management.Domain.Model.Aggregates;
+using backend.Renting.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
