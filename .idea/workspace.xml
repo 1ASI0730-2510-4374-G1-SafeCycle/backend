@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="195721d1-5b16-4c30-8b9b-cc53768309b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Interfaces/BikeStationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Interfaces/BikeStationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" afterDir="false" />
-    </list>
+    <list default="true" id="195721d1-5b16-4c30-8b9b-cc53768309b6" name="Changes" comment="fix: tag name of API" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
