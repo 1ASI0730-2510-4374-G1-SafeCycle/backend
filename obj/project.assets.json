@@ -7556,23 +7556,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gabri\\.nuget\\packages\\": {},
+    "C:\\Users\\SANTIAGO\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gabri\\git-repos\\upc\\2025-1\\appWeb\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\SANTIAGO\\OneDrive\\Escritorio\\backend-feature-bikeStations\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\gabri\\git-repos\\upc\\2025-1\\appWeb\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gabri\\git-repos\\upc\\2025-1\\appWeb\\backend\\obj\\",
+      "projectPath": "C:\\Users\\SANTIAGO\\OneDrive\\Escritorio\\backend-feature-bikeStations\\backend.csproj",
+      "packagesPath": "C:\\Users\\SANTIAGO\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SANTIAGO\\OneDrive\\Escritorio\\backend-feature-bikeStations\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SANTIAGO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7599,7 +7599,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -7661,7 +7661,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

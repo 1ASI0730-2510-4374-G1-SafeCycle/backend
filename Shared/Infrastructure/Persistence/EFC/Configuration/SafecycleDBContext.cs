@@ -9,6 +9,7 @@ public class SafecycleDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<BikeStations> BikeStations { get; set; }
+    public DbSet<BikesManagement> BikesManagement { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +41,18 @@ public class SafecycleDBContext : DbContext
                 loc.HasKey("Id");
             });
         });
+        modelBuilder.Entity<BikesManagement>(entity =>
+        {
+            entity.HasKey(y => y.Id);
+            entity.Property(y => y.Id).ValueGeneratedOnAdd();
+
+            entity.Property(y => y.condition).IsRequired();
+            entity.Property(y => y.available).IsRequired();
+
+            entity.Property(y => y.bikeStationId).IsRequired();
+
+        });
+        
         
         modelBuilder.Entity<Tours.Domain.Model.Entities.Tours>(entity =>
         {

@@ -26,6 +26,7 @@
   <ItemGroup>
     <Folder Include="Payment\" />
     <Folder Include="Renting\" />
+    <Folder Include="Touring\" />
   </ItemGroup>
 
 </Project>
