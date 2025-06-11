@@ -5,7 +5,52 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Adding Swagger as a Service
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "SafeCycle.API",
+            Version = "v1",
+            Description = "ACME.SafeCycle.API",
+            TermsOfService = new Uri("https://safecycle.com/terms"),
+            Contact = new OpenApiContact
+            {
+                Name = "SafeCycle",
+                Email = "SafeCycle@gmail.com"
+            },
+            License = new OpenApiLicense
+            {
+                Name = "Apache 2.0",
+                Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+            }
+        });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme.",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            []
+        }
+    });
+    options.EnableAnnotations();
+});
 
 //Add Controllers for manage our classes
 builder.Services.AddControllers();
