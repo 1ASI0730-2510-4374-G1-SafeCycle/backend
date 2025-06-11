@@ -1,10 +1,13 @@
 namespace backend.Shared.Domain.Repositories;
 
-public interface IBaseRepository<T>
+public interface IBaseRepository<TEntity>
 {
-    Task AddAsync(T entity);
-    void Update(T entity);
-    void Remove(T entity);
-    
-    Task<IEnumerable<T>> GetAllAsync();
+    Task AddAsync(TEntity entity);
+
+    Task<TEntity?> FindByIdAsync(int id);
+
+    void Update(TEntity entity);
+    void Remove(TEntity entity);
+
+    Task<IEnumerable<TEntity>> ListAsync();
 }

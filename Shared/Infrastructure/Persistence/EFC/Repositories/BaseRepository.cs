@@ -1,35 +1,41 @@
 using backend.Shared.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 
-public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
 {
     
-    protected readonly SafecycleDBContext context;
+    protected readonly SafecycleDBContext Context;
 
-    public BaseRepository(SafecycleDBContext context)
+    protected BaseRepository(SafecycleDBContext context)
     {
-        this.context = context;
+        Context = context;
     }
-    
-    public Task AddAsync(TEntity entity)
+
+    public async Task AddAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Context.Set<TEntity>().AddAsync(entity);
+    }
+
+    public async Task<TEntity?> FindByIdAsync(int id)
+    {
+        return await Context.Set<TEntity>().FindAsync(id);
     }
 
     public void Update(TEntity entity)
     {
-        throw new NotImplementedException();
+        Context.Set<TEntity>().Update(entity);
     }
 
     public void Remove(TEntity entity)
     {
-        throw new NotImplementedException();
+        Context.Set<TEntity>().Remove(entity);
     }
 
-    public Task<IEnumerable<TEntity>> GetAllAsync()
+    public async Task<IEnumerable<TEntity>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await Context.Set<TEntity>().ToListAsync();
     }
 }

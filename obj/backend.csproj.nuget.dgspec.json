@@ -67,9 +67,9 @@
               "target": "Package",
               "version": "[9.0.5, )"
             },
-            "Swashbuckle.AspNetCore": {
+            "Swashbuckle.AspNetCore.Annotations": {
               "target": "Package",
-              "version": "[8.1.2, )"
+              "version": "[8.1.4, )"
             },
             "Swashbuckle.AspNetCore.Annotations": {
               "target": "Package",
@@ -77,7 +77,11 @@
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
-              "version": "[8.1.2, )"
+              "version": "[8.1.4, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[8.1.4, )"
             }
           },
           "imports": [
