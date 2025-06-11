@@ -11,7 +11,7 @@ namespace backend.Renting.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-[Tags("User API")]
+[Tags("Rent API")]
 public class RentController(
     IRentCommandService rentCommandService,
     IRentQueryService rentQueryService) : ControllerBase
