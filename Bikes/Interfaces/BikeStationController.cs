@@ -12,7 +12,7 @@ namespace backend.Bikes.Interfaces;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-[Tags("Favorite Sources API")]
+[Tags("Bike Station API")]
 public class BikeStationController(IBikeStationCommandService bikeStationCommandService, IBikeStationQueryService bikeStationQueryService) : ControllerBase
 {
     [HttpPost]
