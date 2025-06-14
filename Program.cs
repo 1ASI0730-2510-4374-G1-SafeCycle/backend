@@ -12,7 +12,7 @@ using backend.User_Management.Domain.Repositories;
 using backend.User_Management.Domain.Services;
 using backend.User_Management.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 //Adding Swagger as a Service
