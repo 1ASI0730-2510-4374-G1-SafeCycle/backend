@@ -57,7 +57,7 @@ builder.Services.AddControllers();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-if (!string.IsNullOrEmpty(connection))
+if (string.IsNullOrEmpty(connection))
 {
   throw new Exception("Database connection string not set");
 }
