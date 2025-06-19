@@ -1,4 +1,11 @@
+using backend.Bikes.Application.Internal.CommandServices;
+using backend.Bikes.Application.Internal.QueryServices;
+using backend.Bikes.Domain.Repositories;
+using backend.Bikes.Domain.Services;
+using backend.Bikes.Infrastructure.Repositories;
+using backend.Shared.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +32,12 @@ builder.Services.AddDbContext<SafecycleDBContext>(options =>
 {
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+// Shared
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//BikeStations
+builder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();
+builder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();
+builder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();
 
 var app = builder.Build();
 

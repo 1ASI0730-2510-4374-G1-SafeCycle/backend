@@ -1,6 +1,8 @@
-﻿namespace backend.Bikes.Domain.Model.Commands;
+﻿using backend.Bikes.Domain.Model.ValueObjects;
 
-public record UpdateBikeStationCommand(int id,string name, string address, int maxCapacity, float lat, float lng)
+namespace backend.Bikes.Domain.Model.Commands;
+
+public record UpdateBikeStationCommand(int id,string name, string address, int maxCapacity, Location location)
 {
     
 }

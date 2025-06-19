@@ -7,6 +7,6 @@ public static class CreateBikeStationCommandFromResourceAssembler
 {
     public static CreateBikeStationCommand ToCommandFromResource(this CreateBikeStationResource resource)
     {
-        return new CreateBikeStationCommand(resource.name,resource.address,resource.maxCapacity,resource.location.latitude, resource.location.longitude);
+        return new CreateBikeStationCommand(resource.name,resource.address,resource.maxCapacity,resource.location.ToLocation());
     }
 }

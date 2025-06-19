@@ -19,7 +19,7 @@ public partial class BikeStations
         name = command.name;
         address = command.address;
         maxCapacity = command.maxCapacity;
-        Location = new Location(command.lat, command.lng);
+        Location = command.location;
     }
 
     public int Id { get; set; }
@@ -36,4 +36,14 @@ public partial class BikeStations
 
     [Required]
     public Location Location { get; set; }
+    
+    
+    public void UpdateFromCommand(UpdateBikeStationCommand command)
+    {
+        name = command.name;
+        address = command.address;
+        maxCapacity = command.maxCapacity;
+        Location = command.location;
+    }
+    
 }
