@@ -9,7 +9,7 @@ public class SafecycleDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<BikeStations> BikeStations { get; set; }
-    public DbSet<BikesManagement> BikesManagement { get; set; }
+    public DbSet<Bikes.Domain.Model.Aggregates.Bikes> BikesManagement { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ public class SafecycleDBContext : DbContext
                 loc.HasKey("Id");
             });
         });
-        modelBuilder.Entity<BikesManagement>(entity =>
+        modelBuilder.Entity<Bikes.Domain.Model.Aggregates.Bikes>(entity =>
         {
             entity.HasKey(y => y.Id);
             entity.Property(y => y.Id).ValueGeneratedOnAdd();

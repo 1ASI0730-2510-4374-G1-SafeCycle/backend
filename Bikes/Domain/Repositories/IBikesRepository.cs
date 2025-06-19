@@ -3,11 +3,11 @@ using backend.Shared.Domain.Repositories;
 
 namespace backend.Bike_Management.Domain.Repositories;
 
-public interface IBikesRepository : IBaseRepository<BikesManagement>
+public interface IBikesRepository : IBaseRepository<Bikes.Domain.Model.Aggregates.Bikes>
 {
-    Task<IEnumerable<BikesManagement>> GetAllBikesAsync();
+    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync();
     
-    Task<IEnumerable<BikesManagement>> GetAllAvailableBikesAsync();
+    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync();
     
-    Task<BikesManagement> GetBikeByIdAsync(int id);
+    Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id);
 }

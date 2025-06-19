@@ -5,20 +5,20 @@ using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace backend.Bike_Management.Infrastructure.Repositories;
 
-public class BikesRepository(SafecycleDBContext context) : BaseRepository<BikesManagement>(context), IBikesRepository
+public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bikes.Domain.Model.Aggregates.Bikes>(context), IBikesRepository
 
 {
-    public Task<IEnumerable<BikesManagement>> GetAllBikesAsync()
+    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<BikesManagement>> GetAllAvailableBikesAsync()
+    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<BikesManagement> GetBikeByIdAsync(int id)
+    public Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id)
     {
         throw new NotImplementedException();
     }

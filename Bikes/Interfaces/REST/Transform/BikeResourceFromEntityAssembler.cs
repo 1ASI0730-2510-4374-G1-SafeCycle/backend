@@ -5,6 +5,6 @@ namespace backend.Bikes.Interfaces.REST.Transform;
 
 public static class BikeResourceFromEntityAssembler
 {
-    public static BikeResource ToResourceFromEntity(BikesManagement bikesManagement) =>
-    new BikeResource(bikesManagement.Id,bikesManagement.available,bikesManagement.condition, bikesManagement.bikeStationId);
+    public static BikeResource ToResourceFromEntity(Domain.Model.Aggregates.Bikes bikes) =>
+    new BikeResource(bikes.Id,bikes.available,bikes.condition, bikes.bikeStation);
 }

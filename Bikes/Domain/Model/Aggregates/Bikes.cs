@@ -4,15 +4,15 @@ using backend.Bikes.Domain.Model.Commands;
 
 namespace backend.Bikes.Domain.Model.Aggregates;
 
-public partial class BikesManagement
+public partial class Bikes
 {
-    protected BikesManagement()
+    protected Bikes()
     {
         condition = string.Empty;
         available = string.Empty;
     }
 
-    public BikesManagement(CreateBikeCommand command)
+    public Bikes(CreateBikeCommand command)
     {
         condition = command.condition;
         available = command.available;
@@ -28,5 +28,6 @@ public partial class BikesManagement
     [StringLength(5, MinimumLength = 1)]
     public string available {get; set;}
     
-    public int bikeStationId { get; set; }
+    [Required]
+    public BikeStations bikeStation { get; set; }
 }

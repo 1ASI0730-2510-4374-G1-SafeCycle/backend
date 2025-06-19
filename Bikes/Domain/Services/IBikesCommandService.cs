@@ -5,5 +5,5 @@ namespace backend.Bike_Management.Domain.Services;
 
 public interface IBikesCommandService
 {
-    Task<BikesManagement?> Handle(CreateBikeCommand command);
+    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(CreateBikeCommand command);
 }

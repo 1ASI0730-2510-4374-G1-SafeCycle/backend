@@ -5,7 +5,7 @@ namespace backend.Bike_Management.Domain.Services;
 
 public interface IBikesQueryService
 {
-    Task<BikesManagement?> Handle(GetBikeByIdQuery query);
-    Task<IEnumerable<BikesManagement>> Handle(GetAllBikesQuery query);
-    Task<IEnumerable<BikesManagement>> Handle(GetAvailableBikesQuery query);
+    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(GetBikeByIdQuery query);
+    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAllBikesQuery query);
+    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAvailableBikesQuery query);
 }
