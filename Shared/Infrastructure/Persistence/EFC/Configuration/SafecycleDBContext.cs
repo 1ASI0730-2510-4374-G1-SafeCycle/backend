@@ -44,8 +44,8 @@ public class SafecycleDBContext : DbContext
             entity.Property(e => e.maxCapacity).IsRequired();
             entity.OwnsOne(e => e.Location, loc =>
             {
-                loc.Property(l => l.Latitude).HasColumnName("lat").IsRequired();
-                loc.Property(l => l.Longitude).HasColumnName("lng").IsRequired();
+                loc.Property(l => l.Latitude).HasColumnName("Latitude").IsRequired();
+                loc.Property(l => l.Longitude).HasColumnName("Longitude").IsRequired();
 
                 loc.WithOwner().HasForeignKey("Id");
                 loc.HasKey("Id");

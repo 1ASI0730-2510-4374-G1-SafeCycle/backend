@@ -10,5 +10,4 @@ public interface IBikeStationQueryService
 
     Task<IEnumerable<BikeStations>> Handle(GetAllBikeStationsQuery query);
     
-    Task<IEnumerable<BikeStations>> Handle(GetAvailableBikeStationsQuery query);
 }

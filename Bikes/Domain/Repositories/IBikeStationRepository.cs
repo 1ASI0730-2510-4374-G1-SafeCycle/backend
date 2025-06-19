@@ -5,9 +5,4 @@ namespace backend.Bikes.Domain.Repositories;
 
 public interface IBikeStationRepository : IBaseRepository<BikeStations>
 {
-    Task<IEnumerable<BikeStations>> GetAllStationsAsync();
-    
-    Task<IEnumerable<BikeStations>> GetAllAvailableStationsAsync();
-    
-    Task<BikeStations> GetBikeStationByIdAsync(int id);
 }
