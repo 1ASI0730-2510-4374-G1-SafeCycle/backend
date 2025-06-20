@@ -11,12 +11,14 @@ public partial class Bikes
     {
         condition = string.Empty;
         available = false;
+        BikeStationId = 0;
     }
 
     public Bikes(CreateBikeCommand command)
     {
         condition = command.condition;
         available = command.available;
+        BikeStationId = command.bikeStationId;
     }
     
     public int Id { get; set; }
@@ -35,4 +37,10 @@ public partial class Bikes
     [ForeignKey("BikeStationId")]
     public BikeStations bikeStation { get; set; }
     
+    public void UpdateFromCommand(UpdateBikeCommand command)
+    {
+        condition = command.condition;
+        available = command.available;
+        BikeStationId = command.bikeStationId;
+    }
 }

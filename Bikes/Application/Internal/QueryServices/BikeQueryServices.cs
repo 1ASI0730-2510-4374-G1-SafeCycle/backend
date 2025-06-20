@@ -1,6 +1,6 @@
 ﻿using backend.Bike_Management.Domain.Model.Queries;
-using backend.Bike_Management.Domain.Repositories;
 using backend.Bike_Management.Domain.Services;
+using backend.Bikes.Domain.Repositories;
 
 namespace backend.Bikes.Application.Internal.QueryServices;
 

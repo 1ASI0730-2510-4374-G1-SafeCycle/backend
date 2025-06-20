@@ -1,25 +1,33 @@
-﻿using backend.Bike_Management.Domain.Repositories;
-using backend.Bikes.Domain.Model.Aggregates;
+﻿using backend.Bikes.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Bike_Management.Infrastructure.Repositories;
 
 public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bikes.Domain.Model.Aggregates.Bikes>(context), IBikesRepository
 
 {
-    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()
+    public async Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()
     {
-        throw new NotImplementedException();
+        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
+            .Include(b => b.bikeStation)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync()
+    public async Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync()
     {
-        throw new NotImplementedException();
+        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
+            .Where(b => b.available == true)
+            .Include(b => b.bikeStation)
+            .ToListAsync();
     }
 
-    public Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id)
+    public async Task<Bikes.Domain.Model.Aggregates.Bikes?> GetBikeByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
+            .Include(b => b.bikeStation)
+            .FirstOrDefaultAsync(b => b.Id == id);
     }
 }

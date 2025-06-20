@@ -1,5 +1,4 @@
-﻿using backend.Bike_Management.Domain.Repositories;
-using backend.Bike_Management.Domain.Services;
+﻿using backend.Bike_Management.Domain.Services;
 using backend.Bikes.Domain.Model.Aggregates;
 using backend.Bikes.Domain.Model.Commands;
 using backend.Bikes.Domain.Repositories;
@@ -23,6 +22,16 @@ public class BikeCommandService(IBikesRepository bikesRepository, IBikeStationRe
         await bikesRepository.AddAsync(bike);
         await unitOfWork.CompleteAsync();
 
+        return bike;
+    }
+
+    public async Task<Domain.Model.Aggregates.Bikes?> Handle(UpdateBikeCommand command)
+    {
+        var bike = await bikesRepository.FindByIdAsync(command.id);
+
+        bike.UpdateFromCommand(command);  
+
+        await unitOfWork.CompleteAsync();  
         return bike;
     }
 }
