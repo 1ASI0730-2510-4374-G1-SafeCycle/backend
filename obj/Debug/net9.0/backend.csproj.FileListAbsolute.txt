@@ -430,3 +430,5 @@ C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\staticwebass
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\backend.csproj.Up2Date
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\backend.genruntimeconfig.cache
 C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\obj\Debug\net9.0\ref\backend.dll
+C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\bin\Debug\net9.0\EntityFrameworkCore.CreatedUpdatedDate.dll
+C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.Design.dll

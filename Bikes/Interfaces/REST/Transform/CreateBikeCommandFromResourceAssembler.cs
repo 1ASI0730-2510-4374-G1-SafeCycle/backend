@@ -8,6 +8,6 @@ public static class CreateBikeCommandFromResourceAssembler
 {
     public static CreateBikeCommand ToCommandFromResource(this CreateBikeResource resource)
     {
-        return new CreateBikeCommand(resource.available, resource.condition);
+        return new CreateBikeCommand(resource.condition, resource.available, resource.bikeStationId);
     }
 }

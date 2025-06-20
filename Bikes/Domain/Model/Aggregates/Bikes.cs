@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using backend.Bikes.Domain.Model.Commands;
 
 
@@ -9,7 +10,7 @@ public partial class Bikes
     protected Bikes()
     {
         condition = string.Empty;
-        available = string.Empty;
+        available = false;
     }
 
     public Bikes(CreateBikeCommand command)
@@ -26,8 +27,12 @@ public partial class Bikes
     
     [Required]
     [StringLength(5, MinimumLength = 1)]
-    public string available {get; set;}
+    public bool available {get; set;}
     
     [Required]
+    public int BikeStationId { get; set; } 
+    
+    [ForeignKey("BikeStationId")]
     public BikeStations bikeStation { get; set; }
+    
 }

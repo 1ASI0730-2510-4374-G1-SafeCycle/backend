@@ -1,3 +1,6 @@
+using backend.Bike_Management.Domain.Repositories;
+using backend.Bike_Management.Domain.Services;
+using backend.Bike_Management.Infrastructure.Repositories;
 using backend.Bikes.Application.Internal.CommandServices;
 using backend.Bikes.Application.Internal.QueryServices;
 using backend.Bikes.Domain.Repositories;
@@ -94,6 +97,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();
 builder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();
 builder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();
+//Bikes
+builder.Services.AddScoped<IBikesRepository, BikesRepository>();
+builder.Services.AddScoped<IBikesCommandService, BikeCommandService>();
+builder.Services.AddScoped<IBikesQueryService, BikeQueryServices>();
 
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
