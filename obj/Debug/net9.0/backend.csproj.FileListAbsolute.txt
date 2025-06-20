@@ -465,3 +465,5 @@ C:\Users\SANTIAGO\OneDrive\Escritorio\backend-feature-bikeStations\obj\Debug\net
 C:\Users\SANTIAGO\OneDrive\Escritorio\backend-feature-bikeStations\obj\Debug\net9.0\backend.pdb
 C:\Users\SANTIAGO\OneDrive\Escritorio\backend-feature-bikeStations\obj\Debug\net9.0\backend.genruntimeconfig.cache
 C:\Users\SANTIAGO\OneDrive\Escritorio\backend-feature-bikeStations\obj\Debug\net9.0\ref\backend.dll
+C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\bin\Debug\net9.0\EntityFrameworkCore.CreatedUpdatedDate.dll
+C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
