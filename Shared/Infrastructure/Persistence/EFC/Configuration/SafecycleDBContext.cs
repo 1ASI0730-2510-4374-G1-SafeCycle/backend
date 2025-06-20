@@ -1,4 +1,5 @@
 using backend.Bikes.Domain.Model.Aggregates;
+using backend.Payment.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using backend.User_Management.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Aggregates;
@@ -82,7 +83,25 @@ public class SafecycleDBContext : DbContext
                 .IsRequired()
                 .HasColumnType("decimal(10,2)");
         });
-        
+
+        modelBuilder.Entity<Payments>(entity =>
+        {
+            entity.HasKey(y => y.id);
+            entity.Property(y => y.id).ValueGeneratedOnAdd();
+            entity.Property(y => y.payMoment).IsRequired();
+            entity.Property(y => y.userId).IsRequired();
+            entity.Property(y => y.paymentInformationId).IsRequired();
+        });
+        modelBuilder.Entity<PaymentInformation>(entity =>
+        {
+            entity.HasKey(y => y.id);
+            entity.Property(y => y.id).ValueGeneratedOnAdd();
+            entity.Property(y => y.amount).IsRequired();
+            entity.Property(y => y.userId).IsRequired();
+            entity.Property(y => y.holder).IsRequired();
+            entity.Property(y => y.cardNumber).IsRequired();
+            entity.Property(y => y.type).IsRequired();
+        });
         modelBuilder.UseSnakeCaseNamingConvention();
     }
 }
