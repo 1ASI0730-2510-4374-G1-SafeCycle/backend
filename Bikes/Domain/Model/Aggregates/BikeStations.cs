@@ -36,4 +36,6 @@ public partial class BikeStations
 
     [Required]
     public Location Location { get; set; }
+    
+    public ICollection<Bikes> Bikes { get; set; } = new List<Bikes>();
 }

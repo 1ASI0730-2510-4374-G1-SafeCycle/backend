@@ -37,11 +37,8 @@ using (var scope = app.Services.CreateScope())
 
 // Add Swagger for use on Development
 
-if (app.Environment.IsDevelopment())
-{
-  app.UseSwagger();
-  app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

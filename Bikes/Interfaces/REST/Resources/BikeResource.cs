@@ -1,3 +1,3 @@
 ﻿namespace backend.Bikes.Interfaces.REST.Resources;
 
-public record BikeResource(int id, string available, string condition, int bikeStationId);
+public record BikeResource(int id, string available, string condition, BikeStationResource bikeStation);

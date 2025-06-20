@@ -9,7 +9,7 @@ public class SafecycleDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<BikeStations> BikeStations { get; set; }
-    public DbSet<Bikes.Domain.Model.Aggregates.Bikes> BikesManagement { get; set; }
+    public DbSet<Bikes.Domain.Model.Aggregates.Bikes> Bikes { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,7 +49,9 @@ public class SafecycleDBContext : DbContext
             entity.Property(y => y.condition).IsRequired();
             entity.Property(y => y.available).IsRequired();
 
-            entity.Property(y => y.bikeStationId).IsRequired();
+            entity.HasOne(b => b.bikeStation)
+                .WithMany(bs => bs.Bikes)
+                .IsRequired();
 
         });
         modelBuilder.UseSnakeCaseNamingConvention();
