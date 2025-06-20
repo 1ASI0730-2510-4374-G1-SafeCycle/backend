@@ -11,7 +11,7 @@ namespace backend.Bikes.Interfaces;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-[Tags("Favorite Sources API")]
+[Tags("Bikes API")]
 
 public class BikesController(IBikesCommandService bikesCommandService, IBikesQueryService bikesQueryService) : ControllerBase
 {

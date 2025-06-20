@@ -1,6 +1,7 @@
 using backend.Bikes.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
-using backend.User_Management.Domain.Model.Entities;
+using backend.User_Management.Domain.Model.Aggregates;
+using backend.Renting.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -25,6 +26,15 @@ public class SafecycleDBContext : DbContext
         modelBuilder.Entity<User>().Property(x => x.MaxDailyReservationHour).IsRequired();
         modelBuilder.Entity<User>().Property(x => x.IdentificationUser).IsRequired();
         
+        modelBuilder.Entity<Rent>().HasKey(x => x.Id);
+        modelBuilder.Entity<Rent>().Property(x => x.Id).ValueGeneratedOnAdd();
+        modelBuilder.Entity<Rent>().Property(x => x.StartTime).IsRequired();
+        modelBuilder.Entity<Rent>().Property(x => x.EndTime).IsRequired();
+        modelBuilder.Entity<Rent>().Property(x => x.PaymentId).IsRequired();
+        modelBuilder.Entity<Rent>().Property(x => x.UserId).IsRequired();
+        modelBuilder.Entity<Rent>().Property(x => x.BikeStationStartId).IsRequired();
+        modelBuilder.Entity<Rent>().Property(x => x.BikeStationEndId).IsRequired();
+        
         modelBuilder.Entity<BikeStations>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -34,8 +44,8 @@ public class SafecycleDBContext : DbContext
             entity.Property(e => e.maxCapacity).IsRequired();
             entity.OwnsOne(e => e.Location, loc =>
             {
-                loc.Property(l => l.Latitude).HasColumnName("lat").IsRequired();
-                loc.Property(l => l.Longitude).HasColumnName("lng").IsRequired();
+                loc.Property(l => l.Latitude).HasColumnName("Latitude").IsRequired();
+                loc.Property(l => l.Longitude).HasColumnName("Longitude").IsRequired();
 
                 loc.WithOwner().HasForeignKey("Id");
                 loc.HasKey("Id");
@@ -54,6 +64,27 @@ public class SafecycleDBContext : DbContext
                 .IsRequired();
 
         });
+        
+        
+        modelBuilder.Entity<Tours.Domain.Model.Entities.Tours>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.Property(e => e.hour)
+                .HasMaxLength(500);
+
+            entity.Property(e => e.img)
+                .IsRequired();
+
+            entity.Property(e => e.price)
+                .IsRequired()
+                .HasColumnType("decimal(10,2)");
+        });
+        
         modelBuilder.UseSnakeCaseNamingConvention();
     }
 }

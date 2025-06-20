@@ -8,6 +8,7 @@ Microsoft.EntityFrameworkCore.SqlServer
 Microsoft.EntityFrameworkCore.Design
 Swashbuckle.AspNetCore
 Swashbuckle.AspNetCore.Swagger
+Swashbuckle.AspNetCore.Swagger.
 Humanizer
 Microsoft.AspNetCore.Identity
 ```

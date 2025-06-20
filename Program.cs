@@ -1,11 +1,74 @@
+using backend.Bikes.Application.Internal.CommandServices;
+using backend.Bikes.Application.Internal.QueryServices;
+using backend.Bikes.Domain.Repositories;
+using backend.Bikes.Domain.Services;
+using backend.Bikes.Infrastructure.Repositories;
+using backend.Shared.Domain.Repositories;
+using backend.Renting.Application.Internal.CommandServices;
+using backend.Renting.Application.Internal.QueryServices;
+using backend.Renting.Domain.Repositories;
+using backend.Renting.Domain.Services;
+using backend.Renting.Infrastructure;
+using backend.Shared.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
+using backend.User_Management.Application.Internal.CommandServices;
+using backend.User_Management.Application.Internal.QueryServices;
+using backend.User_Management.Domain.Repositories;
+using backend.User_Management.Domain.Services;
+using backend.User_Management.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 //Adding Swagger as a Service
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "SafeCycle.API",
+            Version = "v1",
+            Description = "ACME.SafeCycle.API",
+            TermsOfService = new Uri("https://safecycle.com/terms"),
+            Contact = new OpenApiContact
+            {
+                Name = "SafeCycle",
+                Email = "SafeCycle@gmail.com"
+            },
+            License = new OpenApiLicense
+            {
+                Name = "Apache 2.0",
+                Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+            }
+        });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme.",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            []
+        }
+    });
+    options.EnableAnnotations();
+});
 
 //Add Controllers for manage our classes
 builder.Services.AddControllers();
@@ -25,6 +88,23 @@ builder.Services.AddDbContext<SafecycleDBContext>(options =>
 {
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+// Shared
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//BikeStations
+builder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();
+builder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();
+builder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();
+
+// Shared Bounded Context Injection Configuration
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+
+builder.Services.AddScoped<IRentRepository, RentRepository>();
+builder.Services.AddScoped<IRentQueryService, RentQueryService>();
+builder.Services.AddScoped<IRentCommandService, RentCommandService>();
 
 var app = builder.Build();
 
@@ -34,6 +114,7 @@ using (var scope = app.Services.CreateScope())
   var services = scope.ServiceProvider.GetRequiredService<SafecycleDBContext>();
   services.Database.EnsureCreated();
 }
+
 
 // Add Swagger for use on Development
 

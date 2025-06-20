@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="195721d1-5b16-4c30-8b9b-cc53768309b6" name="Changes" comment="fix: tag name of API" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/template" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;yigabriel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/1ASI0730-2510-4374-G1-SafeCycle/backend.git&quot;,
+    &quot;accountId&quot;: &quot;d90e1d8a-c694-4ec8-8f77-869189f61a85&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetAllBikeStationsQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Model/Queries/GetBikeStationByIdQuery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Repositories/IBikeStationRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationCommandService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Domain/Services/IBikeStationQueryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Bikes/Interfaces/BikeStationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/bin/Debug/net9.0/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/bin/Debug/net9.0/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.GlobalUsings.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/Debug/net9.0/backend.MvcApplicationPartsAssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/backend.csproj.nuget.dgspec.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/backend.csproj.nuget.dgspec.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2y9A8fqAfazoM78knNg9pk6w5t7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Executable.run safecycle.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="run safecycle" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../../../../../Program Files/dotnet/dotnet.exe" />
+      <option name="PROGRAM_PARAMETERS" value="run --project C:\Users\gabri\git-repos\upc\2025-1\appWeb\backend\backend.csproj" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../../Program Files/dotnet" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="195721d1-5b16-4c30-8b9b-cc53768309b6" name="Changes" comment="" />
+      <created>1749236258611</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749236258611</updated>
+      <workItem from="1749236259891" duration="1974000" />
+      <workItem from="1749245226883" duration="4675000" />
+      <workItem from="1749600793187" duration="2029000" />
+    </task>
+    <task id="LOCAL-00001" summary="chore: initial commit">
+      <option name="closed" value="true" />
+      <created>1749236295300</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749236295300</updated>
+    </task>
+    <task id="LOCAL-00002" summary="chore: move untracked files preventing merge">
+      <option name="closed" value="true" />
+      <created>1749600834445</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749600834445</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="chore: initial commit" />
+    <MESSAGE value="chore: move untracked files preventing merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: move untracked files preventing merge" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
