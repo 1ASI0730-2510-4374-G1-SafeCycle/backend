@@ -53,6 +53,18 @@ public class UserController(
         
         return Ok(resource);
     }
+    [HttpGet("secret/{email}/{password}")]
+    public async Task<IActionResult> GetUserByEmailAndPassword([FromRoute]string email, [FromRoute]string password)
+    {
+        var getByEmailAndPasswordQuery = new GetUserByEmailAndPasswordQuery(email,password);
+        var result = await  userQueryService.Handle(getByEmailAndPasswordQuery);
+        
+        if (result == null) return NotFound();
+        
+        var resource = UserResourceFromEntityAssembler.ToResourceFromEntity(result);
+        
+        return Ok(resource);
+    }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserResource>>> GetUsers()
     {

@@ -26,4 +26,9 @@ public class UserQueryService(IUserRepository userRepository) : IUserQueryServic
     {
         return await userRepository.FindUserByEmail(query.email);
     }
+
+    public async Task<User?> Handle(GetUserByEmailAndPasswordQuery query)
+    {
+        return await userRepository.FindUserByEmailAndPassword(query.email, query.password);
+    }
 }

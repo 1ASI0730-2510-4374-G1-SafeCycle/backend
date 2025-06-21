@@ -9,4 +9,5 @@ public interface IUserQueryService
     Task<User?> Handle(GetUserByIdQuery query);
     Task<IEnumerable<User?>> Handle(GetUserByTypeUserQuery query);
     Task<User?> Handle(GetUserByEmailQuery query);
+    Task<User?> Handle(GetUserByEmailAndPasswordQuery query);
 }
