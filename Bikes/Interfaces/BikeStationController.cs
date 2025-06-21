@@ -65,4 +65,20 @@ public class BikeStationController(IBikeStationCommandService bikeStationCommand
 
         return Ok(BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result));
     }
+    
+    [HttpGet]
+    [SwaggerOperation(
+        Summary = "Get all bike stations",
+        Description = "Retrieves a list of all available bike stations",
+        OperationId = "GetAllBikeStations"
+    )]
+    [SwaggerResponse(200, "Returns the list of bike stations.")]
+    public async Task<ActionResult<IEnumerable<BikeStationResource>>> GetAllBikeStations()
+    {
+        var result = await bikeStationQueryService.Handle(new GetAllBikeStationsQuery());
+
+        var resources = result.Select(BikeStationResourceFromEntityAssembler.ToResourceFromEntity);
+
+        return Ok(resources);
+    }
 }
