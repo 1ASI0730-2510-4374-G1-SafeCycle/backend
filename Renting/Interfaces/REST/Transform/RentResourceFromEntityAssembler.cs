@@ -14,8 +14,8 @@ public static class RentResourceFromEntityAssembler
             rent.Id,
             rent.StartTime,
             rent.EndTime,
-            rent.payment != null
-                ? PaymentResourceFromEntityAssembler.ToResourceFromEntity(rent.payment)
+            rent.Payment != null
+                ? PaymentResourceFromEntityAssembler.ToResourceFromEntity(rent.Payment)
                 : null,
             rent.user != null
                 ? UserResourceFromEntityAssembler.ToResourceFromEntity(rent.user)

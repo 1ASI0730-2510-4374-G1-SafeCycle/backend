@@ -1,10 +1,10 @@
 using backend.Bikes.Domain.Model.Aggregates;
-using backend.Payment.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using backend.IAM.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Aggregates;
 using backend.Tours.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
+using PaymentInformation = backend.Payments.Domain.Model.Aggregates.PaymentInformation;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 
@@ -13,10 +13,23 @@ public class SafecycleDBContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<BikeStations> BikeStations { get; set; }
     public DbSet<Bike> Bikes { get; set; }
-    public DbSet<Payments> Payments { get; set; }
+    public DbSet<Payments.Domain.Model.Aggregates.Payment> Payments { get; set; }
     public DbSet<Tour> Tours { get; set; }
     public DbSet<PaymentInformation> PaymentInformation { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
+    
+    private readonly TimestampAudit _timestampsAudit;
+
+    public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options, TimestampAudit timestampsAudit)
+        : base(options)
+    {
+        _timestampsAudit = timestampsAudit;
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(_timestampsAudit);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,7 +48,7 @@ public class SafecycleDBContext : DbContext
         modelBuilder.Entity<Rent>().Property(x => x.Id).ValueGeneratedOnAdd();
         modelBuilder.Entity<Rent>().Property(x => x.StartTime).IsRequired();
         modelBuilder.Entity<Rent>().Property(x => x.EndTime).IsRequired();
-        modelBuilder.Entity<Rent>().HasOne(x => x.payment).WithMany(xs => xs.Rents).IsRequired();
+        modelBuilder.Entity<Rent>().HasOne(x => x.Payment).WithMany(xs => xs.Rents).IsRequired();
         modelBuilder.Entity<Rent>().HasOne(x => x.user).WithMany(xs => xs.Rents).IsRequired().OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<Rent>().HasOne(x => x.bikeStations).WithMany(xs => xs.Rents).IsRequired();
         
@@ -89,7 +102,7 @@ public class SafecycleDBContext : DbContext
                 .HasColumnType("decimal(10,2)");
         });
         
-        modelBuilder.Entity<Payments>(entity =>
+        modelBuilder.Entity<Payments.Domain.Model.Aggregates.Payment>(entity =>
         {
             entity.HasKey(y => y.id);
             entity.Property(y => y.id).ValueGeneratedOnAdd();

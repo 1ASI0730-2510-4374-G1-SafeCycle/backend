@@ -1,13 +1,11 @@
 using backend.Bikes.Domain.Services;
+using backend.Bikes.Domain.Services;
+using backend.Bikes.Infrastructure.Repositories;
+using backend.Bikes.Domain.Services;
 using backend.Bikes.Infrastructure.Repositories;
 using backend.Bikes.Application.Internal.CommandServices;
 using backend.Bikes.Application.Internal.QueryServices;
 using backend.Bikes.Domain.Repositories;
-using backend.Payment.Application.Internal.CommandServices;
-using backend.Payment.Application.Internal.QueryServices;
-using backend.Payment.Domain.Repositories;
-using backend.Payment.Domain.Services;
-using backend.Payment.Infrastructure.Repositories;
 using backend.Shared.Domain.Repositories;
 using backend.Renting.Application.Internal.CommandServices;
 using backend.Renting.Application.Internal.QueryServices;
@@ -21,6 +19,11 @@ using backend.IAM.Application.Internal.QueryServices;
 using backend.IAM.Domain.Repositories;
 using backend.IAM.Domain.Services;
 using backend.IAM.Infrastructure;
+using backend.Payments.Application.Internal.CommandServices;
+using backend.Payments.Application.Internal.QueryServices;
+using backend.Payments.Domain.Repositories;
+using backend.Payments.Domain.Services;
+using backend.Payments.Infrastructure.Repositories;
 using backend.Tours.Application.Internal.CommandServices;
 using backend.Tours.Application.Internal.QueryServices;
 using backend.Tours.Domain.Repositories;
@@ -99,6 +102,7 @@ builder.Services.AddDbContext<SafecycleDBContext>(options =>
 });
 // Shared
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<TimestampAudit>();
 //BikeStations
 builder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();
 builder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();
