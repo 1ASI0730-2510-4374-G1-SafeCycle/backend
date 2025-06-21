@@ -22,4 +22,9 @@ public class BikeQueryServices(IBikesRepository bikesRepository): IBikesQuerySer
         var allBikes = await bikesRepository.GetAllBikesAsync();
         return allBikes.Where(bike => bike.available == true);
     }
+
+    public async Task<IEnumerable<Bike>> Handle(GetAvailableBikeStationsByIdQuery query)
+    {
+        return await bikesRepository.GetAllAvailableBikesByIdAsync(query.id);
+    }
 }

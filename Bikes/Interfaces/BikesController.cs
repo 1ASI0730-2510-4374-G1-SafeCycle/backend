@@ -57,7 +57,19 @@ public class BikesController(IBikesCommandService bikesCommandService, IBikesQue
         var resources = result.Select(BikeResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }
-    
+    [HttpGet("available/{id}")]
+    [SwaggerOperation(
+        Summary = "Get all available bikes by id",
+        Description = "Returns a list of bikes marked as available in bikeStation choosed",
+        OperationId = "GetAllAvailableBikesById"
+    )]
+    [SwaggerResponse(200, "List of available bikes retrieved successfully.")]
+    public async Task<IActionResult> GetAvailableBikesById(int id)
+    {
+        var result = await bikesQueryService.Handle(new GetAvailableBikeStationsByIdQuery(id));
+        var resources = result.Select(BikeResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
     [HttpPut("{id}")]
     [SwaggerOperation(
         Summary = "Update a Bike",

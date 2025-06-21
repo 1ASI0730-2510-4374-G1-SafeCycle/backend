@@ -24,6 +24,14 @@ public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bike>(
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Bike>> GetAllAvailableBikesByIdAsync(int id)
+    {
+        return await Context.Set<Bike>()
+            .Where(b => b.BikeStationId == id && b.available == true)
+            .ToListAsync();
+
+    }
+
     public async Task<Bike?> GetBikeByIdAsync(int id)
     {
         return await Context.Set<Bike>()
