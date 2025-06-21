@@ -98,7 +98,7 @@ if (string.IsNullOrEmpty(connection))
 //Add our DbContext connection to Dependency Injector
 builder.Services.AddDbContext<SafecycleDBContext>(options =>
 {
-  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 // Shared
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
