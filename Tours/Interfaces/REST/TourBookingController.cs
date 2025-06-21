@@ -32,7 +32,19 @@ public class TourBookingController(ITourBookingCommandService tourBookingCommand
         return CreatedAtAction(nameof(GetTourBookingById), new { id = result.Id },
             TourBookingResourceFromEntityAssembler.ToResourceFromEntity(result));
     }
-    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TourBookingResource>>> GetAllToursBooking()
+    {
+        var getAllQuery = new GetAllTourBookingQuery();
+        var result = await tourbookingQueryService.Handle(getAllQuery);
+
+        foreach (var booking in result)
+        {
+            if (booking != null) TourBookingResourceFromEntityAssembler.ToResourceFromEntity(booking);
+        }
+        
+        return Ok(result);
+    }
     [HttpGet("{id}")]
     [SwaggerOperation(
         Summary = "Get Tour Booking by Id",
