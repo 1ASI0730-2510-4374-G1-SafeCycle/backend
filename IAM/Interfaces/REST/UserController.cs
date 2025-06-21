@@ -41,7 +41,18 @@ public class UserController(
         
         return Ok(resource);
     }
-
+    [HttpGet("email/{email}")]
+    public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
+    {
+        var getByIdQuery = new GetUserByEmailQuery(email);
+        var result = await  userQueryService.Handle(getByIdQuery);
+        
+        if (result == null) return NotFound();
+        
+        var resource = UserResourceFromEntityAssembler.ToResourceFromEntity(result);
+        
+        return Ok(resource);
+    }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserResource>>> GetUsers()
     {

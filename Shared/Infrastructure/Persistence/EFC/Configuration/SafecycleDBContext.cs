@@ -11,13 +11,6 @@ namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class SafecycleDBContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<BikeStations> BikeStations { get; set; }
-    public DbSet<Bike> Bikes { get; set; }
-    public DbSet<Payments.Domain.Model.Aggregates.Payment> Payments { get; set; }
-    public DbSet<Tour> Tours { get; set; }
-    public DbSet<PaymentInformation> PaymentInformation { get; set; }
-    public DbSet<TourBooking> TourBookings { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
     
     private readonly TimestampAudit _timestampsAudit;
