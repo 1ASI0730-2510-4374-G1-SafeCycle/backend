@@ -131,6 +131,10 @@ builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 builder.Services.AddScoped<IToursRepository, ToursRepository>();
 builder.Services.AddScoped<IToursCommandService, ToursCommandService>();
 builder.Services.AddScoped<IToursQueryService, ToursQueryServices>(); 
+//TourBooking
+builder.Services.AddScoped<ITourBookingRepository, TourBookingRepository>();
+builder.Services.AddScoped<ITourBookingCommandService, TourBookingCommandService>();
+builder.Services.AddScoped<ITourBookingQueryService, TourBookingQueryServices>();
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

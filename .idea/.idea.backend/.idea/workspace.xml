@@ -9,34 +9,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f110409-402a-497b-96ab-3bef04e99499" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM_[Changes]/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM_[Changes]1/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_12_46_PM__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_7_12_PM_[Changes]1/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_7_12_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_10_2025_7_12_PM__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Merge_at_6_10_2025_12_47_PM_[Changes]/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Merge_at_6_10_2025_12_47_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Merge_at_6_10_2025_12_47_PM__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Application/Internal/CommandServices/TourBookingCommandService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Application/Internal/QueryServices/TourBookingQueryServices.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Model/Commands/CreateTourBookingCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Model/Queries/GetAllTourBookingQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Model/Queries/GetTourBookingByIdQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Repositories/ITourBookingRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Services/ITourBookingCommandService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Domain/Services/ITourBookingQueryService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Infrastructure/Repositories/TourBookingRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Interfaces/REST/Resources/CreateTourBookingResource.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Interfaces/REST/Resources/TourBookingResource.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Interfaces/REST/TourBookingController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Interfaces/REST/Transform/CreateTourBookingCommandFromResourceAssembler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tours/Interfaces/REST/Transform/TourBookingResourceFromEntityAssembler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Renting/Domain/Model/Aggregates/Rent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Renting/Domain/Model/Aggregates/Rent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Infrastructure/Persistence/EFC/Configuration/SafecycleDBContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tours/Domain/Model/Entities/Tours.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tours/Domain/Model/Entities/Tours.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net9.0/backend.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/backend.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/ref/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net9.0/refint/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/bikes" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,21 +97,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.backend: http.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.backend: http.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/bikes",
+    "last_opened_file_path": "C:/Users/gabri/git-repos/upc/2025-1/appWeb/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.backend: http">
     <configuration name="backend: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/backend.csproj" />
@@ -161,6 +164,8 @@
       <workItem from="1749600594838" duration="178000" />
       <workItem from="1750456981639" duration="334000" />
       <workItem from="1750457928180" duration="2196000" />
+      <workItem from="1750481311544" duration="6083000" />
+      <workItem from="1750515812194" duration="4638000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add bikeStations Implementation">
       <option name="closed" value="true" />
@@ -250,7 +255,31 @@
       <option name="project" value="LOCAL" />
       <updated>1750388971102</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="chore: change payments bounded context name">
+      <option name="closed" value="true" />
+      <created>1750488699215</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1750488699215</updated>
+    </task>
+    <task id="LOCAL-00013" summary="chore: move dll and exe files">
+      <option name="closed" value="true" />
+      <created>1750488774855</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1750488774855</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: include user in paymentinformation endpoint">
+      <option name="closed" value="true" />
+      <created>1750489007312</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1750489007312</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,7 +300,10 @@
     <MESSAGE value="feat: add services for Bikes" />
     <MESSAGE value="feat: add update bike command" />
     <MESSAGE value="chore: change appsettings" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: change appsettings" />
+    <MESSAGE value="chore: change payments bounded context name" />
+    <MESSAGE value="chore: move dll and exe files" />
+    <MESSAGE value="feat: include user in paymentinformation endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: include user in paymentinformation endpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using backend.Tours.Domain.Model.Aggregates;
 using backend.Tours.Domain.Model.Commands;
 
 namespace backend.Tours.Domain.Model.Entities;
@@ -35,6 +36,8 @@ public partial class Tour
 
     [Range(1, 1000)]
     public float price { get; set; }
+    
+    public ICollection<TourBooking> TourBookings { get; set; } = new List<TourBooking>();
     
     public void UpdateFromCommand(UpdateToursCommand command)
     {
