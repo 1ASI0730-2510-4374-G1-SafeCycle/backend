@@ -10,7 +10,7 @@ public class TourBookingRepository(SafecycleDBContext context): BaseRepository<T
 {
     public Task<IEnumerable<TourBooking>> GetAllBookings()
     {
-        throw new NotImplementedException();
+        return await Context.Set<TourBooking>().ToListAsync();
     }
 
     public async Task<TourBooking?> GetBookingById(int id)
