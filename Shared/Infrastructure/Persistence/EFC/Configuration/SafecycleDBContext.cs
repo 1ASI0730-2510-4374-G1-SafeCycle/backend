@@ -8,8 +8,8 @@ namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 public class SafecycleDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
-    public DbSet<BikeStations> BikeStations { get; set; }
-    public DbSet<TourBooking.Domain.Model.Aggregates.TourBooking> TourBooking { get; set; }
+    public DbSet<BikeStations> BikeStations { get; set; } 
+    public DbSet<Tours.Domain.Model.Aggregates.TourBooking> TourBooking { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ public class SafecycleDBContext : DbContext
             });
         });
 
-        modelBuilder.Entity<TourBooking.Domain.Model.Aggregates.TourBooking>(entity =>
+        modelBuilder.Entity<Tours.Domain.Model.Aggregates.TourBooking>(entity =>
         {
             entity.HasKey(e => e.Id);
             
