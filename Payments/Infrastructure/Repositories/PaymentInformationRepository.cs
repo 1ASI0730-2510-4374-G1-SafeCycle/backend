@@ -16,6 +16,7 @@ public class PaymentInformationRepository(SafecycleDBContext context) : BaseRepo
     public async Task<PaymentInformation?> GetByIdAsync(int id)
     {
         return await Context.Set<PaymentInformation>()
+            .Include(r => r.user)
             .FirstOrDefaultAsync(b => b.id == id);
     }
 
