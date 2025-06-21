@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using backend.Bikes.Domain.Model.Aggregates;
 using backend.IAM.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Commands;
+using backend.Tours.Domain.Model.Aggregates;
 
 namespace backend.Renting.Domain.Model.Aggregates;
 
@@ -39,6 +40,7 @@ public partial class Rent
     [ForeignKey("BikeStationId")]
     public required BikeStations bikeStations { get; set; }
     
+    public ICollection<TourBooking> TourBookings { get; set; } = new List<TourBooking>();
     public Rent()
     {
         Id = 0;

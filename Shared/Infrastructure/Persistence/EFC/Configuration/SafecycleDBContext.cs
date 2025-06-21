@@ -2,6 +2,7 @@ using backend.Bikes.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using backend.IAM.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Aggregates;
+using backend.Tours.Domain.Model.Aggregates;
 using backend.Tours.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using PaymentInformation = backend.Payments.Domain.Model.Aggregates.PaymentInformation;
@@ -16,6 +17,7 @@ public class SafecycleDBContext : DbContext
     public DbSet<Payments.Domain.Model.Aggregates.Payment> Payments { get; set; }
     public DbSet<Tour> Tours { get; set; }
     public DbSet<PaymentInformation> PaymentInformation { get; set; }
+    public DbSet<TourBooking> TourBookings { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
     
     private readonly TimestampAudit _timestampsAudit;
@@ -100,6 +102,17 @@ public class SafecycleDBContext : DbContext
             entity.Property(e => e.price)
                 .IsRequired()
                 .HasColumnType("decimal(10,2)");
+        });
+        
+        modelBuilder.Entity<TourBooking>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasOne(e => e.rent)
+                .WithMany(bs => bs.TourBookings)
+                .IsRequired();
+            entity.HasOne(e => e.tour)
+                .WithMany(bs => bs.TourBookings)
+                .IsRequired();
         });
         
         modelBuilder.Entity<Payments.Domain.Model.Aggregates.Payment>(entity =>
