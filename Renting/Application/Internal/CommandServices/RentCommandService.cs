@@ -1,6 +1,6 @@
 using backend.Bikes.Domain.Repositories;
 using backend.IAM.Domain.Repositories;
-using backend.Payment.Domain.Repositories;
+using backend.Payments.Domain.Repositories;
 using backend.Renting.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Commands;
 using backend.Renting.Domain.Repositories;
@@ -26,7 +26,7 @@ public class RentCommandService(IRentRepository repository, IPaymentRepository p
         {
             user = user,
             bikeStations = bikeStations,
-            payment = payment
+            Payment = payment
         };
         try
         {

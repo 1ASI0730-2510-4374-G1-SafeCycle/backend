@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using backend.Bikes.Domain.Model.Aggregates;
 using backend.IAM.Domain.Model.Aggregates;
-using backend.Payment.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Commands;
 
 namespace backend.Renting.Domain.Model.Aggregates;
@@ -30,7 +29,7 @@ public partial class Rent
     
     [Required]
     [ForeignKey("PaymentId")]
-    public required Payments payment { get; set; }
+    public required Payments.Domain.Model.Aggregates.Payment Payment { get; set; }
     
     [Required]
     [ForeignKey("UserId")]

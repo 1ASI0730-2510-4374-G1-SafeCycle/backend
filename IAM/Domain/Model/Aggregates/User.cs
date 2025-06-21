@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using backend.IAM.Domain.Model.Commands;
-using backend.Payment.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Aggregates;
+using PaymentInformation = backend.Payments.Domain.Model.Aggregates.PaymentInformation;
 
 namespace backend.IAM.Domain.Model.Aggregates;
 
