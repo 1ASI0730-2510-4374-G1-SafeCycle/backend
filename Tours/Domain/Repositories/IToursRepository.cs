@@ -1,11 +1,12 @@
 ﻿using backend.Shared.Domain.Repositories;
+using backend.Tours.Domain.Model.Entities;
 
 namespace backend.Tours.Domain.Repositories;
 
-public interface IToursRepository: IBaseRepository<Model.Entities.Tours>
+public interface IToursRepository: IBaseRepository<Tour>
 {
     
-    Task<IEnumerable<Model.Entities.Tours>> GetAllToursAsync();
+    Task<IEnumerable<Tour>> GetAllToursAsync();
     
-    Task<Model.Entities.Tours> GetToursByIdAsync(int id);
+    Task<Tour?> GetToursByIdAsync(int id);
 }

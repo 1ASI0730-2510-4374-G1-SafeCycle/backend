@@ -3,9 +3,9 @@ using backend.Tours.Domain.Model.Commands;
 
 namespace backend.Tours.Domain.Model.Entities;
 
-public partial class Tours
+public partial class Tour
 {
-    protected Tours()
+    protected Tour()
     {
         name = string.Empty;
         hour = string.Empty;
@@ -13,7 +13,7 @@ public partial class Tours
         price = 0;
     }
     
-    public Tours(CreateToursCommand command)
+    public Tour(CreateToursCommand command)
     {
         name = command.name;
         hour = command.hour;
@@ -30,9 +30,17 @@ public partial class Tours
     [StringLength(10, MinimumLength = 1)]
     public string hour { get; set; }
 
-    [Range(1, 1000)]
+   [StringLength(10, MinimumLength = 1)]
     public string img { get; set; }
 
     [Range(1, 1000)]
     public float price { get; set; }
+    
+    public void UpdateFromCommand(UpdateToursCommand command)
+    {
+        name = command.name;
+        hour = command.hour;
+        img = command.img;
+        price = command.price;
+    }
 }

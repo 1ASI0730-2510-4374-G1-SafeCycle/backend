@@ -1,9 +1,10 @@
 ﻿using backend.Tours.Domain.Model.Commands;
+using backend.Tours.Domain.Model.Entities;
 
 namespace backend.Tours.Domain.Services;
 
 public interface IToursCommandService
 {
-    Task<Model.Entities.Tours?> Handle(CreateToursCommand command);
-    Task<Model.Entities.Tours?> Handle(UpdateToursCommand command);
+    Task<Tour?> Handle(CreateToursCommand command);
+    Task<Tour?> Handle(UpdateToursCommand command);
 }
