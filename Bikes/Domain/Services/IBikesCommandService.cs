@@ -1,10 +1,11 @@
-﻿using backend.Bikes.Domain.Model.Commands;
+﻿using backend.Bikes.Domain.Model.Aggregates;
+using backend.Bikes.Domain.Model.Commands;
 
 namespace backend.Bikes.Domain.Services;
 
 public interface IBikesCommandService
 {
-    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(CreateBikeCommand command);
+    Task<Bike?> Handle(CreateBikeCommand command);
     
-    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(UpdateBikeCommand command);
+    Task<Bike?> Handle(UpdateBikeCommand command);
 }

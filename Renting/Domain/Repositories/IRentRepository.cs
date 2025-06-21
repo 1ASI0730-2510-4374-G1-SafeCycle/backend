@@ -5,5 +5,6 @@ namespace backend.Renting.Domain.Repositories;
 
 public interface IRentRepository : IBaseRepository<Rent>
 {
-    Task<IEnumerable<Rent>> FindByUserIdAsync(int id);
+    Task<Rent?> GetByIdAsync(int id);
+    
 }

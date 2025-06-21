@@ -1,5 +1,4 @@
 ﻿using System.Net.Mime;
-using backend.Bike_Management.Domain.Model.Queries;
 using backend.Bikes.Domain.Model.Queries;
 using backend.Bikes.Domain.Services;
 using backend.Bikes.Interfaces.REST.Resources;

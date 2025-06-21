@@ -1,7 +1,9 @@
 using backend.Bikes.Domain.Model.Aggregates;
+using backend.Payment.Domain.Model.Aggregates;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
-using backend.User_Management.Domain.Model.Aggregates;
+using backend.IAM.Domain.Model.Aggregates;
 using backend.Renting.Domain.Model.Aggregates;
+using backend.Tours.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -10,7 +12,10 @@ public class SafecycleDBContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<BikeStations> BikeStations { get; set; }
-    public DbSet<Bikes.Domain.Model.Aggregates.Bikes> Bikes { get; set; }
+    public DbSet<Bike> Bikes { get; set; }
+    public DbSet<Payments> Payments { get; set; }
+    public DbSet<Tour> Tours { get; set; }
+    public DbSet<PaymentInformation> PaymentInformation { get; set; }
     public SafecycleDBContext(DbContextOptions<SafecycleDBContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,10 +35,9 @@ public class SafecycleDBContext : DbContext
         modelBuilder.Entity<Rent>().Property(x => x.Id).ValueGeneratedOnAdd();
         modelBuilder.Entity<Rent>().Property(x => x.StartTime).IsRequired();
         modelBuilder.Entity<Rent>().Property(x => x.EndTime).IsRequired();
-        modelBuilder.Entity<Rent>().Property(x => x.PaymentId).IsRequired();
-        modelBuilder.Entity<Rent>().Property(x => x.UserId).IsRequired();
-        modelBuilder.Entity<Rent>().Property(x => x.BikeStationStartId).IsRequired();
-        modelBuilder.Entity<Rent>().Property(x => x.BikeStationEndId).IsRequired();
+        modelBuilder.Entity<Rent>().HasOne(x => x.payment).WithMany(xs => xs.Rents).IsRequired();
+        modelBuilder.Entity<Rent>().HasOne(x => x.user).WithMany(xs => xs.Rents).IsRequired().OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Rent>().HasOne(x => x.bikeStations).WithMany(xs => xs.Rents).IsRequired();
         
         modelBuilder.Entity<BikeStations>(entity =>
         {
@@ -51,7 +55,7 @@ public class SafecycleDBContext : DbContext
                 loc.HasKey("Id");
             });
         });
-        modelBuilder.Entity<Bikes.Domain.Model.Aggregates.Bikes>(entity =>
+        modelBuilder.Entity<Bike>(entity =>
         {
             entity.HasKey(y => y.Id);
             entity.Property(y => y.Id).ValueGeneratedOnAdd();
@@ -60,13 +64,13 @@ public class SafecycleDBContext : DbContext
             entity.Property(y => y.available).IsRequired();
 
             entity.HasOne(b => b.bikeStation)
-                .WithMany(bs => bs.Bikes)
+                .WithMany(bs => bs.Bike)
                 .IsRequired();
 
         });
         
         
-        modelBuilder.Entity<Tours.Domain.Model.Entities.Tours>(entity =>
+        modelBuilder.Entity<Tour>(entity =>
         {
             entity.HasKey(e => e.Id);
 
@@ -85,6 +89,28 @@ public class SafecycleDBContext : DbContext
                 .HasColumnType("decimal(10,2)");
         });
         
+        modelBuilder.Entity<Payments>(entity =>
+        {
+            entity.HasKey(y => y.id);
+            entity.Property(y => y.id).ValueGeneratedOnAdd();
+            entity.Property(y => y.payMoment).IsRequired();
+            entity.HasOne(y => y.paymentInformation)
+                .WithMany(ys => ys.Payments)
+                .IsRequired();
+        });
+        modelBuilder.Entity<PaymentInformation>(entity =>
+        {
+            entity.HasKey(y => y.id);
+            entity.Property(y => y.id).ValueGeneratedOnAdd();
+            entity.Property(y => y.amount).IsRequired();
+            entity.HasOne(y => y.user)
+                .WithMany(ys => ys.PaymentInformation)
+                .IsRequired();
+            entity.Property(y => y.holder).IsRequired();
+            entity.Property(y => y.cardNumber).IsRequired();
+            entity.Property(y => y.type).IsRequired();
+        });
+
         modelBuilder.UseSnakeCaseNamingConvention();
     }
 }

@@ -5,5 +5,4 @@ public record CreateRentResource(
     DateTime EndTime ,
     int PaymentId,
     int UserId,
-    int BikeStationStartId,
-    int BikeStationEndId);
+    int BikeStationId);

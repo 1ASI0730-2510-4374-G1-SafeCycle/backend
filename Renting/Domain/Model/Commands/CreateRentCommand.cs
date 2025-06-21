@@ -1,9 +1,8 @@
 namespace backend.Renting.Domain.Model.Commands;
 
-public record CreateRentCommand( int Id ,
+public record CreateRentCommand(
 DateTime StartTime,
 DateTime EndTime ,
 int PaymentId,
 int UserId,
-int BikeStationStartId,
-int BikeStationEndId);
+int BikeStationId);

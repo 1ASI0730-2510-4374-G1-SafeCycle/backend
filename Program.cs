@@ -1,24 +1,31 @@
-using backend.Bike_Management.Domain.Services;
-using backend.Bike_Management.Infrastructure.Repositories;
+using backend.Bikes.Domain.Services;
+using backend.Bikes.Infrastructure.Repositories;
 using backend.Bikes.Application.Internal.CommandServices;
 using backend.Bikes.Application.Internal.QueryServices;
 using backend.Bikes.Domain.Repositories;
-using backend.Bikes.Domain.Services;
-using backend.Bikes.Infrastructure.Repositories;
+using backend.Payment.Application.Internal.CommandServices;
+using backend.Payment.Application.Internal.QueryServices;
+using backend.Payment.Domain.Repositories;
+using backend.Payment.Domain.Services;
+using backend.Payment.Infrastructure.Repositories;
 using backend.Shared.Domain.Repositories;
 using backend.Renting.Application.Internal.CommandServices;
 using backend.Renting.Application.Internal.QueryServices;
 using backend.Renting.Domain.Repositories;
 using backend.Renting.Domain.Services;
 using backend.Renting.Infrastructure;
-using backend.Shared.Domain.Repositories;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
-using backend.User_Management.Application.Internal.CommandServices;
-using backend.User_Management.Application.Internal.QueryServices;
-using backend.User_Management.Domain.Repositories;
-using backend.User_Management.Domain.Services;
-using backend.User_Management.Infrastructure;
+using backend.IAM.Application.Internal.CommandServices;
+using backend.IAM.Application.Internal.QueryServices;
+using backend.IAM.Domain.Repositories;
+using backend.IAM.Domain.Services;
+using backend.IAM.Infrastructure;
+using backend.Tours.Application.Internal.CommandServices;
+using backend.Tours.Application.Internal.QueryServices;
+using backend.Tours.Domain.Repositories;
+using backend.Tours.Domain.Services;
+using backend.Tours.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
@@ -100,7 +107,26 @@ builder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>()
 builder.Services.AddScoped<IBikesRepository, BikesRepository>();
 builder.Services.AddScoped<IBikesCommandService, BikeCommandService>();
 builder.Services.AddScoped<IBikesQueryService, BikeQueryServices>();
-
+//Payment
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
+builder.Services.AddScoped<IPaymentQueryService, PaymentQueryServices>(); 
+//PaymentInformation
+builder.Services.AddScoped<IPaymentInformationRepository, PaymentInformationRepository>();
+builder.Services.AddScoped<IPaymentInformationCommandService, PaymentInformationCommandService>();
+builder.Services.AddScoped<IPaymentInformationQueryService, PaymentInformationQueryServices>();
+//Renting
+builder.Services.AddScoped<IRentRepository, RentRepository>();
+builder.Services.AddScoped<IRentCommandService, RentCommandService>();
+builder.Services.AddScoped<IRentQueryService, RentQueryService>();
+//IAM
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+//Tours
+builder.Services.AddScoped<IToursRepository, ToursRepository>();
+builder.Services.AddScoped<IToursCommandService, ToursCommandService>();
+builder.Services.AddScoped<IToursQueryService, ToursQueryServices>(); 
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

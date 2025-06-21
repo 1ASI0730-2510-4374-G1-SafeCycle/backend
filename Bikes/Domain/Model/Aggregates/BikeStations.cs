@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using backend.Bikes.Domain.Model.Commands;
 using backend.Bikes.Domain.Model.ValueObjects;
+using backend.Renting.Domain.Model.Aggregates;
 
 namespace backend.Bikes.Domain.Model.Aggregates;
 
@@ -37,8 +38,9 @@ public partial class BikeStations
     [Required]
     public Location Location { get; set; }
     
-    public ICollection<Bikes> Bikes { get; set; } = new List<Bikes>();
+    public ICollection<Bike> Bike { get; set; } = new List<Bike>();
     
+    public ICollection<Rent> Rents { get; set; } = new List<Rent>();
     public void UpdateFromCommand(UpdateBikeStationCommand command)
     {
         name = command.name;

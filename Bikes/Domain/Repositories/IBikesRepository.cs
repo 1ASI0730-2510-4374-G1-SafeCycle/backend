@@ -1,12 +1,13 @@
-﻿using backend.Shared.Domain.Repositories;
+﻿using backend.Bikes.Domain.Model.Aggregates;
+using backend.Shared.Domain.Repositories;
 
 namespace backend.Bikes.Domain.Repositories;
 
-public interface IBikesRepository : IBaseRepository<Bikes.Domain.Model.Aggregates.Bikes>
+public interface IBikesRepository : IBaseRepository<Bike>
 {
-    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync();
+    Task<IEnumerable<Bike>> GetAllBikesAsync();
     
-    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync();
+    Task<IEnumerable<Bike>> GetAllAvailableBikesAsync();
     
-    Task<Bikes.Domain.Model.Aggregates.Bikes?> GetBikeByIdAsync(int id);
+    Task<Bike?> GetBikeByIdAsync(int id);
 }

@@ -27,10 +27,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Payment\" />
-    <Folder Include="Renting\" />
-    <Folder Include="Touring\" />
-  </ItemGroup>
-
 </Project>

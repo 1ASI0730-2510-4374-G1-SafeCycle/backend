@@ -1,3 +1,3 @@
-﻿namespace backend.Bike_Management.Domain.Model.Queries;
+﻿namespace backend.Bikes.Domain.Model.Queries;
 
 public record GetAvailableBikesQuery();

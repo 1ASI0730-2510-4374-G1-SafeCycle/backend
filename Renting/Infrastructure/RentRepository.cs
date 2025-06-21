@@ -6,14 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Renting.Infrastructure;
 
-public class RentRepository : BaseRepository<Rent>, IRentRepository
+public class RentRepository(SafecycleDBContext context) : BaseRepository<Rent>(context), IRentRepository
 {
-    public RentRepository(SafecycleDBContext context) : base(context)
+    public async Task<Rent?> GetByIdAsync(int id)
     {
-    }
-
-    public async Task<IEnumerable<Rent>> FindByUserIdAsync(int id)
-    {
-        return await Context.Set<Rent>().Where(x => x.UserId == id).ToListAsync();
+        return await Context.Set<Rent>()
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
 }

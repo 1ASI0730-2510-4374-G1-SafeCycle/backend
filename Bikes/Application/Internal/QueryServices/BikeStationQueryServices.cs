@@ -1,6 +1,5 @@
-﻿using backend.Bike_Management.Domain.Model.Queries;
+﻿using backend.Bikes.Domain.Model.Queries;
 using backend.Bikes.Domain.Model.Aggregates;
-using backend.Bikes.Domain.Model.Queries;
 using backend.Bikes.Domain.Repositories;
 using backend.Bikes.Domain.Services;
 

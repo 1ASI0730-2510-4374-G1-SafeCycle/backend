@@ -27,7 +27,7 @@ public class BikeStationCommandService(IBikeStationRepository bikeStationReposit
     {
         var station = await bikeStationRepository.FindByIdAsync(command.id);
 
-        station.UpdateFromCommand(command);  
+        station?.UpdateFromCommand(command);  
 
         await unitOfWork.CompleteAsync();  
         return station;

@@ -5,14 +5,13 @@ namespace backend.Renting.Interfaces.REST.Transform;
 
 public static class CreateRentCommandFromResourceAssembler
 {
-    public static CreateRentCommand ToCommandFromResource(this RentResource resource)
+    public static CreateRentCommand ToCommandFromResource(this CreateRentResource resource)
     {
-        return new CreateRentCommand(resource.Id,
+        return new CreateRentCommand(
             resource.StartTime,
             resource.EndTime,
             resource.PaymentId,
             resource.UserId,
-            resource.BikeStationStartId,
-            resource.BikeStationEndId);
+            resource.BikeStationId);
     }
 }
