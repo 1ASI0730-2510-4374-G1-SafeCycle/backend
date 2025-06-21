@@ -1,0 +1,574 @@
+Index: Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Application.Internal.CommandServices;\r\nusing backend.Bikes.Application.Internal.QueryServices;\r\nusing backend.Bikes.Domain.Repositories;\r\nusing backend.Bikes.Domain.Services;\r\nusing backend.Bikes.Infrastructure.Repositories;\r\nusing backend.Shared.Domain.Repositories;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Repositories;\r\nusing Microsoft.EntityFrameworkCore;\r\n\r\nvar builder = WebApplication.CreateBuilder(args);\r\n\r\n//Adding Swagger as a Service\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen();\r\n\r\n//Add Controllers for manage our classes\r\nbuilder.Services.AddControllers();\r\n\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen(options => options.EnableAnnotations());\r\n\r\nvar connection = builder.Configuration.GetConnectionString(\"DefaultConnection\");\r\n\r\nif (string.IsNullOrEmpty(connection))\r\n{\r\n  throw new Exception(\"Database connection string not set\");\r\n}\r\n   \r\n//Add our DbContext connection to Dependency Injector\r\nbuilder.Services.AddDbContext<SafecycleDBContext>(options =>\r\n{\r\n  options.UseSqlServer(builder.Configuration.GetConnectionString(\"DefaultConnection\"));\r\n});\r\n// Shared\r\nbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();\r\n//BikeStations\r\nbuilder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();\r\nbuilder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();\r\nbuilder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();\r\n\r\nvar app = builder.Build();\r\n\r\n//Add scope for our DbContext\r\nusing (var scope = app.Services.CreateScope())\r\n{\r\n  var services = scope.ServiceProvider.GetRequiredService<SafecycleDBContext>();\r\n  services.Database.EnsureCreated();\r\n}\r\n\r\n// Add Swagger for use on Development\r\n\r\nif (app.Environment.IsDevelopment())\r\n{\r\n  app.UseSwagger();\r\n  app.UseSwaggerUI();\r\n}\r\n\r\napp.UseHttpsRedirection();\r\n\r\n//Mapping Controllers EndPoints\r\napp.MapControllers();\r\n\r\napp.Run();\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Program.cs b/Program.cs
+--- a/Program.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/Program.cs	(date 1750373382477)
+@@ -1,11 +1,16 @@
+-using backend.Bikes.Application.Internal.CommandServices;
+-using backend.Bikes.Application.Internal.QueryServices;
+-using backend.Bikes.Domain.Repositories;
+-using backend.Bikes.Domain.Services;
+-using backend.Bikes.Infrastructure.Repositories;
++using backend.Renting.Application.Internal.CommandServices;
++using backend.Renting.Application.Internal.QueryServices;
++using backend.Renting.Domain.Repositories;
++using backend.Renting.Domain.Services;
++using backend.Renting.Infrastructure;
+ using backend.Shared.Domain.Repositories;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+ using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
++using backend.User_Management.Application.Internal.CommandServices;
++using backend.User_Management.Application.Internal.QueryServices;
++using backend.User_Management.Domain.Repositories;
++using backend.User_Management.Domain.Services;
++using backend.User_Management.Infrastructure;
+ using Microsoft.EntityFrameworkCore;
+ 
+ var builder = WebApplication.CreateBuilder(args);
+@@ -32,12 +37,17 @@
+ {
+   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+ });
+-// Shared
++
++// Shared Bounded Context Injection Configuration
+ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+-//BikeStations
+-builder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();
+-builder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();
+-builder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();
++
++builder.Services.AddScoped<IUserRepository, UserRepository>();
++builder.Services.AddScoped<IUserQueryService, UserQueryService>();
++builder.Services.AddScoped<IUserCommandService, UserCommandService>();
++
++builder.Services.AddScoped<IRentRepository, RentRepository>();
++builder.Services.AddScoped<IRentQueryService, RentQueryService>();
++builder.Services.AddScoped<IRentCommandService, RentCommandService>();
+ 
+ var app = builder.Build();
+ 
+@@ -48,6 +58,7 @@
+   services.Database.EnsureCreated();
+ }
+ 
++
+ // Add Swagger for use on Development
+ 
+ if (app.Environment.IsDevelopment())
+Index: Bikes/Application/Internal/CommandServices/BikeStationCommandService.cs
+===================================================================
+diff --git a/Bikes/Application/Internal/CommandServices/BikeStationCommandService.cs b/Bikes/Application/Internal/CommandServices/BikeStationCommandService.cs
+deleted file mode 100644
+--- a/Bikes/Application/Internal/CommandServices/BikeStationCommandService.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ /dev/null	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
+@@ -1,35 +0,0 @@
+-using backend.Bikes.Domain.Model.Aggregates;
+-using backend.Bikes.Domain.Model.Commands;
+-using backend.Bikes.Domain.Repositories;
+-using backend.Bikes.Domain.Services;
+-using backend.Shared.Domain.Repositories;
+-
+-namespace backend.Bikes.Application.Internal.CommandServices;
+-
+-public class BikeStationCommandService(IBikeStationRepository bikeStationRepository, IUnitOfWork unitOfWork): IBikeStationCommandService
+-{
+-    public async Task<BikeStations?> Handle(CreateBikeStationCommand command)
+-    {
+-        var station = new BikeStations(command); 
+-        try
+-        {
+-            await bikeStationRepository.AddAsync(station);
+-            await unitOfWork.CompleteAsync();
+-            return station;
+-        }
+-        catch (Exception)
+-        {
+-            return null;
+-        }
+-    }
+-
+-    public async Task<BikeStations?> Handle(UpdateBikeStationCommand command)
+-    {
+-        var station = await bikeStationRepository.FindByIdAsync(command.id);
+-
+-        station.UpdateFromCommand(command);  
+-
+-        await unitOfWork.CompleteAsync();  
+-        return station;
+-    }
+-}
+\ No newline at end of file
+Index: Tours/Domain/Model/Aggregates/Tours.cs
+===================================================================
+diff --git a/Tours/Domain/Model/Aggregates/Tours.cs b/Tours/Domain/Model/Aggregates/Tours.cs
+deleted file mode 100644
+--- a/Tours/Domain/Model/Aggregates/Tours.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ /dev/null	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
+@@ -1,38 +0,0 @@
+-using System.ComponentModel.DataAnnotations;
+-using backend.Tours.Domain.Model.Commands;
+-
+-namespace backend.Tours.Domain.Model.Aggregates;
+-
+-public partial class Tours
+-{
+-    protected Tours()
+-    {
+-        name = string.Empty;
+-        hour = string.Empty;
+-        img = string.Empty;
+-        price = 0;
+-    }
+-    
+-    public Tours(CreateToursCommand command)
+-    {
+-        name = command.name;
+-        hour = command.hour;
+-        img = command.img;
+-        price = command.price;
+-    }
+-
+-    public int Id { get; set; }
+-
+-    [Required]
+-    [StringLength(50, MinimumLength = 1)]
+-    public string name { get; set; }
+-
+-    [StringLength(10, MinimumLength = 1)]
+-    public string hour { get; set; }
+-
+-    [Range(1, 1000)]
+-    public string img { get; set; }
+-
+-    [Range(1, 1000)]
+-    public float price { get; set; }
+-}
+\ No newline at end of file
+Index: Bikes/Interfaces/REST/Transform/LocationFromLocationResourceAssembler.cs
+===================================================================
+diff --git a/Bikes/Interfaces/REST/Transform/LocationFromLocationResourceAssembler.cs b/Bikes/Interfaces/REST/Transform/LocationFromLocationResourceAssembler.cs
+deleted file mode 100644
+--- a/Bikes/Interfaces/REST/Transform/LocationFromLocationResourceAssembler.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ /dev/null	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
+@@ -1,12 +0,0 @@
+-using backend.Bikes.Domain.Model.ValueObjects;
+-using backend.Bikes.Interfaces.REST.Resources;
+-
+-namespace backend.Bikes.Interfaces.REST.Transform;
+-
+-public static class LocationFromResourceAssembler
+-{
+-    public static Location ToLocation(this LocationResource resource)
+-    {
+-        return new Location(resource.latitude, resource.longitude);
+-    }
+-}
+\ No newline at end of file
+Index: User_Management/Domain/Model/Entities/User.cs
+===================================================================
+diff --git a/User_Management/Domain/Model/Entities/User.cs b/User_Management/Domain/Model/Entities/User.cs
+deleted file mode 100644
+--- a/User_Management/Domain/Model/Entities/User.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ /dev/null	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
+@@ -1,12 +0,0 @@
+-namespace backend.User_Management.Domain.Model.Entities;
+-
+-public class User
+-{
+-    public int Id { get; set; }
+-    public string Username { get; private set; }
+-    public string Email { get; private set; }
+-    public string Password { get; private set; }
+-    public string TypeUser { get; private set; }
+-    public TimeSpan MaxDailyReservationHour { get; private set; }
+-    public string IdentificationUser { get; private set; }
+-}
+\ No newline at end of file
+Index: Bikes/Application/Internal/QueryServices/BikeStationQueryServices.cs
+===================================================================
+diff --git a/Bikes/Application/Internal/QueryServices/BikeStationQueryServices.cs b/Bikes/Application/Internal/QueryServices/BikeStationQueryServices.cs
+deleted file mode 100644
+--- a/Bikes/Application/Internal/QueryServices/BikeStationQueryServices.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ /dev/null	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
+@@ -1,20 +0,0 @@
+-using backend.Bike_Management.Domain.Model.Queries;
+-using backend.Bikes.Domain.Model.Aggregates;
+-using backend.Bikes.Domain.Model.Queries;
+-using backend.Bikes.Domain.Repositories;
+-using backend.Bikes.Domain.Services;
+-
+-namespace backend.Bikes.Application.Internal.QueryServices;
+-
+-public class BikeStationQueryServices(IBikeStationRepository bikeStationRepository): IBikeStationQueryService
+-{
+-    public async Task<BikeStations?> Handle(GetBikeStationByIdQuery query)
+-    {
+-        return await bikeStationRepository.FindByIdAsync(query.id);
+-    }
+-
+-    public async Task<IEnumerable<BikeStations>> Handle(GetAllBikeStationsQuery query)
+-    {
+-        return await bikeStationRepository.ListAsync();
+-    }
+-}
+\ No newline at end of file
+Index: Bikes/Interfaces/BikesController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Interfaces/BikesController.cs b/Bikes/Interfaces/BikesController.cs
+new file mode 100644
+--- /dev/null	(date 1750373382996)
++++ b/Bikes/Interfaces/BikesController.cs	(date 1750373382996)
+@@ -0,0 +1,46 @@
++using System.Net.Mime;
++using backend.Bike_Management.Domain.Model.Queries;
++using backend.Bike_Management.Domain.Services;
++using backend.Bikes.Interfaces.REST.Resources;
++using backend.Bikes.Interfaces.REST.Transform;
++using Microsoft.AspNetCore.Mvc;
++using Swashbuckle.AspNetCore.Annotations;
++
++namespace backend.Bikes.Interfaces;
++
++[ApiController]
++[Route("api/v1/[controller]")]
++[Produces(MediaTypeNames.Application.Json)]
++[Tags("Bikes API")]
++
++public class BikesController(IBikesCommandService bikesCommandService, IBikesQueryService bikesQueryService) : ControllerBase
++{
++    [HttpPost]
++    [SwaggerOperation(
++        Summary = "Create a new Bike",
++        Description = "Create a new Bike",
++        OperationId = "CreateBike")]
++    [SwaggerResponse(201, "The Bike was created successfully.")]
++    [SwaggerResponse(400, "The Bike was not created successfully.")]
++    public async Task<ActionResult> CreateBike([FromBody] CreateBikeResource resource)
++    {
++        var createBikeSourceCommand = CreateBikeCommandFromResourceAssembler.ToCommandFromResource(resource);
++        var result = await bikesCommandService.Handle(createBikeSourceCommand); 
++        if(result is null) return BadRequest();
++        
++        return CreatedAtAction(nameof(GetBikeById), new { id = result.Id }, BikeResourceFromEntityAssembler.ToResourceFromEntity(result));
++    }
++
++    [HttpGet("´{id}")]
++    [SwaggerOperation(Summary = "Gets a Bike according to id", Description = "Gets a Bike according to id",
++        OperationId = "GetsBikeById")]
++    public async Task<ActionResult> GetBikeById(int id)
++    {
++        var getBikeById = new GetBikeByIdQuery(id);
++        var result = await bikesQueryService.Handle(getBikeById);
++        if(result is null) return NotFound();
++        var resource = BikeResourceFromEntityAssembler.ToResourceFromEntity(result);
++        return Ok(resource); 
++
++    }
++}
+\ No newline at end of file
+Index: Payment/Domain/Model/Aggregates/PaymentInformation.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Payment/Domain/Model/Aggregates/PaymentInformation.cs b/Payment/Domain/Model/Aggregates/PaymentInformation.cs
+new file mode 100644
+--- /dev/null	(date 1750373381737)
++++ b/Payment/Domain/Model/Aggregates/PaymentInformation.cs	(date 1750373381737)
+@@ -0,0 +1,41 @@
++using System.ComponentModel.DataAnnotations;
++using backend.Payment.Domain.Model.Commands;
++
++namespace backend.Payment.Domain.Model.Aggregates;
++
++public partial class PaymentInformation
++{
++    protected PaymentInformation()
++    {
++        cardNumber = 0;
++        type = string.Empty;
++        holder = string.Empty;
++        amount = 0;
++        userId = -1;
++    }
++
++    public PaymentInformation(CreatePaymentInformationCommand command)
++    {
++        cardNumber = command.cardNumber;
++        type = command.type;
++        holder = command.holder;
++        amount = command.amount;
++        userId = command.userId;
++    }
++    
++    public int id { get; private set; }
++    
++    [Required]
++    [Range(1, 1000)]
++    public int cardNumber { get; private set; }
++    [Required]
++    [StringLength(50, MinimumLength = 1)]
++    public string type { get; private set; }
++    [Required]
++    [StringLength(50, MinimumLength = 1)]
++    public string holder { get; private set; }
++
++    [Range(1, 1000)]
++    public double amount { get; private set; }
++    public int userId { get; private set; }
++}
+Index: Payment/Domain/Model/Aggregates/Payments.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Payment/Domain/Model/Aggregates/Payments.cs b/Payment/Domain/Model/Aggregates/Payments.cs
+new file mode 100644
+--- /dev/null	(date 1750373381746)
++++ b/Payment/Domain/Model/Aggregates/Payments.cs	(date 1750373381746)
+@@ -0,0 +1,36 @@
++using System.ComponentModel.DataAnnotations;
++using backend.Payment.Domain.Model.Commands;
++
++namespace backend.Payment.Domain.Model.Aggregates;
++
++public partial class Payments
++{
++    protected Payments()
++    {
++        payMoment = DateTime.MinValue;
++        price = 0;
++        paymentInformationId = -1;
++        userId = -1;
++    }
++
++    public Payments(CreatePaymentCommand command)
++    {
++        payMoment = command.payMoment;
++        price = command.price;
++        paymentInformationId = command.paymentInformationId;
++        userId = command.userId;
++    }
++    
++
++    
++    public int id { get; private set; }
++    
++    [Required]
++    public DateTime payMoment { get; private set; }
++    [Range(1, 1000)]
++    public float price { get; private set; }
++    public int paymentInformationId { get; private set; }
++    public int userId { get; private set; }
++        
++        
++}
+Index: Renting/Application/Internal/QueryServices/RentQueryService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Renting/Application/Internal/QueryServices/RentQueryService.cs b/Renting/Application/Internal/QueryServices/RentQueryService.cs
+new file mode 100644
+--- /dev/null	(date 1750373381852)
++++ b/Renting/Application/Internal/QueryServices/RentQueryService.cs	(date 1750373381852)
+@@ -0,0 +1,19 @@
++using backend.Renting.Domain.Model.Aggregates;
++using backend.Renting.Domain.Model.Queries;
++using backend.Renting.Domain.Repositories;
++using backend.Renting.Domain.Services;
++
++namespace backend.Renting.Application.Internal.QueryServices;
++
++public class RentQueryService(IRentRepository repository) : IRentQueryService
++{
++    public async Task<IEnumerable<Rent>> Handle(GetAllRentsQuery query)
++    {
++        return await repository.ListAsync();
++    }
++
++    public async Task<Rent?> Handle(GetRentByIdQuery query)
++    {
++        return await repository.FindByIdAsync(query.id);
++    }
++}
+\ No newline at end of file
+diff --git a/Renting/Domain/Model/Commands/RemoveRentCommand.cs b/Renting/Domain/Model/Commands/RemoveRentCommand.cs
+new file mode 100644
+diff --git a/Renting/Domain/Model/Commands/CreateRentCommand.cs b/Renting/Domain/Model/Commands/CreateRentCommand.cs
+new file mode 100644
+diff --git a/Renting/Domain/Model/Queries/GetRentByIdQuery.cs b/Renting/Domain/Model/Queries/GetRentByIdQuery.cs
+new file mode 100644
+diff --git a/Renting/Domain/Model/Queries/GetAllRentsQuery.cs b/Renting/Domain/Model/Queries/GetAllRentsQuery.cs
+new file mode 100644
+diff --git a/User_Management/Interfaces/REST/UserController.cs b/User_Management/Interfaces/REST/UserController.cs
+new file mode 100644
+diff --git a/User_Management/Interfaces/REST/Transform/CreateUserCommandFromResourceAssembler.cs b/User_Management/Interfaces/REST/Transform/CreateUserCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/User_Management/Interfaces/REST/Transform/UserResourceFromEntityAssembler.cs b/User_Management/Interfaces/REST/Transform/UserResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/User_Management/Interfaces/REST/Resources/CreateUserResource.cs b/User_Management/Interfaces/REST/Resources/CreateUserResource.cs
+new file mode 100644
+diff --git a/User_Management/Interfaces/REST/Resources/UserResource.cs b/User_Management/Interfaces/REST/Resources/UserResource.cs
+new file mode 100644
+diff --git a/User_Management/Infrastructure/UserRepository.cs b/User_Management/Infrastructure/UserRepository.cs
+new file mode 100644
+diff --git a/User_Management/Application/Internal/CommandServices/UserCommandService.cs b/User_Management/Application/Internal/CommandServices/UserCommandService.cs
+new file mode 100644
+diff --git a/User_Management/Application/Internal/QueryServices/UserQueryService.cs b/User_Management/Application/Internal/QueryServices/UserQueryService.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Repositories/IUserRepository.cs b/User_Management/Domain/Repositories/IUserRepository.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Services/IUserCommandService.cs b/User_Management/Domain/Services/IUserCommandService.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Services/IUserQueryService.cs b/User_Management/Domain/Services/IUserQueryService.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Queries/GetUserByTypeUserQuery.cs b/User_Management/Domain/Model/Queries/GetUserByTypeUserQuery.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Queries/GetUserByIdQuery.cs b/User_Management/Domain/Model/Queries/GetUserByIdQuery.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Queries/GetAllUsersQuery.cs b/User_Management/Domain/Model/Queries/GetAllUsersQuery.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Aggregates/User.cs b/User_Management/Domain/Model/Aggregates/User.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Commands/DeleteUserCommand.cs b/User_Management/Domain/Model/Commands/DeleteUserCommand.cs
+new file mode 100644
+diff --git a/User_Management/Domain/Model/Commands/CreateUserCommand.cs b/User_Management/Domain/Model/Commands/CreateUserCommand.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/ToursController.cs b/Tours/Interfaces/ToursController.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Transform/UpdateToursCommandFromResourceAssembler.cs b/Tours/Interfaces/REST/Transform/UpdateToursCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Transform/CreateToursCommandFromResourceAssembler.cs b/Tours/Interfaces/REST/Transform/CreateToursCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Transform/ToursResourceFromEntityAssembler.cs b/Tours/Interfaces/REST/Transform/ToursResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Resources/UpdateToursResource.cs b/Tours/Interfaces/REST/Resources/UpdateToursResource.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Resources/CreateToursResource.cs b/Tours/Interfaces/REST/Resources/CreateToursResource.cs
+new file mode 100644
+diff --git a/Tours/Interfaces/REST/Resources/ToursResource.cs b/Tours/Interfaces/REST/Resources/ToursResource.cs
+new file mode 100644
+diff --git a/Tours/Infrastructure/Repositories/ToursRepository.cs b/Tours/Infrastructure/Repositories/ToursRepository.cs
+new file mode 100644
+diff --git a/Tours/Domain/Services/IToursQueryService.cs b/Tours/Domain/Services/IToursQueryService.cs
+new file mode 100644
+diff --git a/Tours/Domain/Model/Entities/Tours.cs b/Tours/Domain/Model/Entities/Tours.cs
+new file mode 100644
+diff --git a/Tours/Domain/Model/Commands/UpdateToursCommand.cs b/Tours/Domain/Model/Commands/UpdateToursCommand.cs
+new file mode 100644
+diff --git a/Bikes/Infrastructure/Repositories/BikesRepository.cs b/Bikes/Infrastructure/Repositories/BikesRepository.cs
+new file mode 100644
+diff --git a/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs b/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/Bikes/Interfaces/REST/Transform/BikeResourceFromEntityAssembler.cs b/Bikes/Interfaces/REST/Transform/BikeResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs b/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs
+new file mode 100644
+diff --git a/Payment/Infrastructure/Repositories/PaymentInformationRepository.cs b/Payment/Infrastructure/Repositories/PaymentInformationRepository.cs
+new file mode 100644
+diff --git a/Payment/Infrastructure/Repositories/PaymentRepository.cs b/Payment/Infrastructure/Repositories/PaymentRepository.cs
+new file mode 100644
+diff --git a/Bikes/Interfaces/REST/Resources/BikeResource.cs b/Bikes/Interfaces/REST/Resources/BikeResource.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Repositories/IBikesRepository.cs b/Bikes/Domain/Repositories/IBikesRepository.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Services/IBikesQueryService.cs b/Bikes/Domain/Services/IBikesQueryService.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/PaymentInformationController.cs b/Payment/Interfaces/REST/PaymentInformationController.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Services/IBikesCommandService.cs b/Bikes/Domain/Services/IBikesCommandService.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Model/Aggregates/Bikes.cs b/Bikes/Domain/Model/Aggregates/Bikes.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/PaymentController.cs b/Payment/Interfaces/REST/PaymentController.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Model/Commands/CreateBikeCommand.cs b/Bikes/Domain/Model/Commands/CreateBikeCommand.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Model/Queries/GetBikeByIdQuery.cs b/Bikes/Domain/Model/Queries/GetBikeByIdQuery.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Transform/UpdatePaymentInformationCommandFromResourceAssembler.cs b/Payment/Interfaces/REST/Transform/UpdatePaymentInformationCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Model/Queries/GetAllBikesQuery.cs b/Bikes/Domain/Model/Queries/GetAllBikesQuery.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Transform/CreatePaymentInformationCommandFromEntityAssembler.cs b/Payment/Interfaces/REST/Transform/CreatePaymentInformationCommandFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs b/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Transform/PaymentInformationResourceFromEntityAssembler.cs b/Payment/Interfaces/REST/Transform/PaymentInformationResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Transform/CreatePaymentCommandFromEntityAssembler.cs b/Payment/Interfaces/REST/Transform/CreatePaymentCommandFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Transform/PaymentResourceFromEntityAssembler.cs b/Payment/Interfaces/REST/Transform/PaymentResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Resources/UpdatePaymentInformationResource.cs b/Payment/Interfaces/REST/Resources/UpdatePaymentInformationResource.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Resources/CreatePaymentInformationResource.cs b/Payment/Interfaces/REST/Resources/CreatePaymentInformationResource.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Resources/PaymentInformationResource.cs b/Payment/Interfaces/REST/Resources/PaymentInformationResource.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Resources/CreatePaymentResource.cs b/Payment/Interfaces/REST/Resources/CreatePaymentResource.cs
+new file mode 100644
+diff --git a/Payment/Interfaces/REST/Resources/PaymentResource.cs b/Payment/Interfaces/REST/Resources/PaymentResource.cs
+new file mode 100644
+diff --git a/Payment/Domain/Repositories/IPaymentInformationRepository.cs b/Payment/Domain/Repositories/IPaymentInformationRepository.cs
+new file mode 100644
+diff --git a/Payment/Domain/Repositories/IPaymentRepository.cs b/Payment/Domain/Repositories/IPaymentRepository.cs
+new file mode 100644
+diff --git a/Payment/Domain/Services/IPaymentInformationCommandService.cs b/Payment/Domain/Services/IPaymentInformationCommandService.cs
+new file mode 100644
+diff --git a/Payment/Domain/Services/IPaymentInformationQueryService.cs b/Payment/Domain/Services/IPaymentInformationQueryService.cs
+new file mode 100644
+diff --git a/Payment/Domain/Services/IPaymentCommandService.cs b/Payment/Domain/Services/IPaymentCommandService.cs
+new file mode 100644
+diff --git a/Payment/Domain/Services/IPaymentQueryService.cs b/Payment/Domain/Services/IPaymentQueryService.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Commands/UpdatePaymentInformationCommand.cs b/Payment/Domain/Model/Commands/UpdatePaymentInformationCommand.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Commands/CreatePaymentInformationCommand.cs b/Payment/Domain/Model/Commands/CreatePaymentInformationCommand.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Commands/CreatePaymentCommand.cs b/Payment/Domain/Model/Commands/CreatePaymentCommand.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetPaymentInformationByHolderQuery.cs b/Payment/Domain/Model/Queries/GetPaymentInformationByHolderQuery.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetPaymentInformationByIdQuery.cs b/Payment/Domain/Model/Queries/GetPaymentInformationByIdQuery.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetAllPaymentInformationQuery.cs b/Payment/Domain/Model/Queries/GetAllPaymentInformationQuery.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetPaymentByPriceQuery.cs b/Payment/Domain/Model/Queries/GetPaymentByPriceQuery.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetPaymentByIdQuery.cs b/Payment/Domain/Model/Queries/GetPaymentByIdQuery.cs
+new file mode 100644
+diff --git a/Payment/Domain/Model/Queries/GetAllPaymentsQuery.cs b/Payment/Domain/Model/Queries/GetAllPaymentsQuery.cs
+new file mode 100644
+diff --git a/Renting/Infrastructure/RentRepository.cs b/Renting/Infrastructure/RentRepository.cs
+new file mode 100644
+diff --git a/Renting/Application/Internal/CommandServices/RentCommandService.cs b/Renting/Application/Internal/CommandServices/RentCommandService.cs
+new file mode 100644
+diff --git a/Renting/Interfaces/REST/RentController.cs b/Renting/Interfaces/REST/RentController.cs
+new file mode 100644
+diff --git a/Renting/Interfaces/REST/Transform/CreateRentCommandFromResourceAssembler.cs b/Renting/Interfaces/REST/Transform/CreateRentCommandFromResourceAssembler.cs
+new file mode 100644
+diff --git a/Renting/Interfaces/REST/Transform/RentResourceFromEntityAssembler.cs b/Renting/Interfaces/REST/Transform/RentResourceFromEntityAssembler.cs
+new file mode 100644
+diff --git a/Renting/Interfaces/REST/Resources/CreateRentResource.cs b/Renting/Interfaces/REST/Resources/CreateRentResource.cs
+new file mode 100644
+diff --git a/Renting/Interfaces/REST/Resources/RentResource.cs b/Renting/Interfaces/REST/Resources/RentResource.cs
+new file mode 100644
+diff --git a/Renting/Domain/Repositories/IRentRepository.cs b/Renting/Domain/Repositories/IRentRepository.cs
+new file mode 100644
+diff --git a/Renting/Domain/Services/IRentCommandService.cs b/Renting/Domain/Services/IRentCommandService.cs
+new file mode 100644
+diff --git a/Renting/Domain/Services/IRentQueryService.cs b/Renting/Domain/Services/IRentQueryService.cs
+new file mode 100644
+diff --git a/Renting/Domain/Model/Aggregates/Rent.cs b/Renting/Domain/Model/Aggregates/Rent.cs
+new file mode 100644

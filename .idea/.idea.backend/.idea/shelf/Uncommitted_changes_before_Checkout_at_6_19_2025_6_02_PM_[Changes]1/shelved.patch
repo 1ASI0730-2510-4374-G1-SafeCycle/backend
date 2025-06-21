@@ -1,0 +1,150 @@
+Index: Bikes/Domain/Model/Aggregates/BikeStations.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.ComponentModel.DataAnnotations;\r\nusing backend.Bikes.Domain.Model.Commands;\r\nusing backend.Bikes.Domain.Model.ValueObjects;\r\n\r\nnamespace backend.Bikes.Domain.Model.Aggregates;\r\n\r\npublic partial class BikeStations\r\n{\r\n    protected BikeStations()\r\n    {\r\n        name = string.Empty;\r\n        address = string.Empty;\r\n        maxCapacity = 0;\r\n        Location = new Location(0, 0);\r\n    }\r\n\r\n    public BikeStations(CreateBikeStationCommand command)\r\n    {\r\n        name = command.name;\r\n        address = command.address;\r\n        maxCapacity = command.maxCapacity;\r\n        Location = command.location;\r\n    }\r\n\r\n    public int Id { get; set; }\r\n\r\n    [Required]\r\n    [StringLength(50, MinimumLength = 1)]\r\n    public string name { get; set; }\r\n\r\n    [StringLength(50, MinimumLength = 1)]\r\n    public string address { get; set; }\r\n\r\n    [Range(1, 1000)]\r\n    public int maxCapacity { get; set; }\r\n\r\n    [Required]\r\n    public Location Location { get; set; }\r\n    \r\n    \r\n    public void UpdateFromCommand(UpdateBikeStationCommand command)\r\n    {\r\n        name = command.name;\r\n        address = command.address;\r\n        maxCapacity = command.maxCapacity;\r\n        Location = command.location;\r\n    }\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Model/Aggregates/BikeStations.cs b/Bikes/Domain/Model/Aggregates/BikeStations.cs
+--- a/Bikes/Domain/Model/Aggregates/BikeStations.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/Bikes/Domain/Model/Aggregates/BikeStations.cs	(date 1750373582003)
+@@ -1,49 +1,49 @@
+-using System.ComponentModel.DataAnnotations;
+-using backend.Bikes.Domain.Model.Commands;
+-using backend.Bikes.Domain.Model.ValueObjects;
++    using System.ComponentModel.DataAnnotations;
++    using backend.Bikes.Domain.Model.Commands;
++    using backend.Bikes.Domain.Model.ValueObjects;
+ 
+-namespace backend.Bikes.Domain.Model.Aggregates;
++    namespace backend.Bikes.Domain.Model.Aggregates;
+ 
+-public partial class BikeStations
+-{
+-    protected BikeStations()
+-    {
+-        name = string.Empty;
+-        address = string.Empty;
+-        maxCapacity = 0;
+-        Location = new Location(0, 0);
+-    }
++    public partial class BikeStations
++    {
++        protected BikeStations()
++        {
++            name = string.Empty;
++            address = string.Empty;
++            maxCapacity = 0;
++            Location = new Location(0, 0);
++        }
+ 
+-    public BikeStations(CreateBikeStationCommand command)
+-    {
+-        name = command.name;
+-        address = command.address;
+-        maxCapacity = command.maxCapacity;
+-        Location = command.location;
+-    }
++        public BikeStations(CreateBikeStationCommand command)
++        {
++            name = command.name;
++            address = command.address;
++            maxCapacity = command.maxCapacity;
++            Location = command.location;
++        }
+ 
+-    public int Id { get; set; }
++        public int Id { get; set; }
+ 
+-    [Required]
+-    [StringLength(50, MinimumLength = 1)]
+-    public string name { get; set; }
++        [Required]
++        [StringLength(50, MinimumLength = 1)]
++        public string name { get; set; }
+ 
+-    [StringLength(50, MinimumLength = 1)]
+-    public string address { get; set; }
++        [StringLength(50, MinimumLength = 1)]
++        public string address { get; set; }
+ 
+-    [Range(1, 1000)]
+-    public int maxCapacity { get; set; }
++        [Range(1, 1000)]
++        public int maxCapacity { get; set; }
+ 
+-    [Required]
+-    public Location Location { get; set; }
+-    
+-    
+-    public void UpdateFromCommand(UpdateBikeStationCommand command)
+-    {
+-        name = command.name;
+-        address = command.address;
+-        maxCapacity = command.maxCapacity;
+-        Location = command.location;
+-    }
+-    
+-}
++        [Required]
++        public Location Location { get; set; }
++        
++        
++        public void UpdateFromCommand(UpdateBikeStationCommand command)
++        {
++            name = command.name;
++            address = command.address;
++            maxCapacity = command.maxCapacity;
++            Location = command.location;
++        }
++        
++    }
+Index: obj/rider.project.model.nuget.info
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>17502923860538205
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/rider.project.model.nuget.info b/obj/rider.project.model.nuget.info
+--- a/obj/rider.project.model.nuget.info	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/obj/rider.project.model.nuget.info	(date 1750373456004)
+@@ -1,1 +1,1 @@
+-17502923860538205
+\ No newline at end of file
++17503734559427069
+\ No newline at end of file
+Index: obj/rider.project.restore.info
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>17502940253118884
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/rider.project.restore.info b/obj/rider.project.restore.info
+--- a/obj/rider.project.restore.info	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/obj/rider.project.restore.info	(date 1750373457475)
+@@ -1,1 +1,1 @@
+-17502940253118884
+\ No newline at end of file
++17503734401094485
+\ No newline at end of file
+Index: obj/Debug/net9.0/backend.AssemblyInfo.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//------------------------------------------------------------------------------\r\n// <auto-generated>\r\n//     This code was generated by a tool.\r\n//\r\n//     Changes to this file may cause incorrect behavior and will be lost if\r\n//     the code is regenerated.\r\n// </auto-generated>\r\n//------------------------------------------------------------------------------\r\n\r\nusing System;\r\nusing System.Reflection;\r\n\r\n[assembly: System.Reflection.AssemblyCompanyAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyConfigurationAttribute(\"Debug\")]\r\n[assembly: System.Reflection.AssemblyFileVersionAttribute(\"1.0.0.0\")]\r\n[assembly: System.Reflection.AssemblyInformationalVersionAttribute(\"1.0.0+bae05c3aad6f57c150366488127963824d3e581f\")]\r\n[assembly: System.Reflection.AssemblyProductAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyTitleAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyVersionAttribute(\"1.0.0.0\")]\r\n\r\n// Generated by the MSBuild WriteCodeFragment class.\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/Debug/net9.0/backend.AssemblyInfo.cs b/obj/Debug/net9.0/backend.AssemblyInfo.cs
+--- a/obj/Debug/net9.0/backend.AssemblyInfo.cs	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/obj/Debug/net9.0/backend.AssemblyInfo.cs	(date 1750373458228)
+@@ -13,7 +13,7 @@
+ [assembly: System.Reflection.AssemblyCompanyAttribute("backend")]
+ [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+ [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bae05c3aad6f57c150366488127963824d3e581f")]
++[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22e7b8ce65f9d3966d33375218cf6980b035a914")]
+ [assembly: System.Reflection.AssemblyProductAttribute("backend")]
+ [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
+ [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

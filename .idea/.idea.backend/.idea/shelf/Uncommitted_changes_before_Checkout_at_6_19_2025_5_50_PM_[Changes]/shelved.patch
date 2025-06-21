@@ -1,0 +1,25 @@
+Index: backend.csproj
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><Project Sdk=\"Microsoft.NET.Sdk.Web\">\r\n\r\n  <PropertyGroup>\r\n    <TargetFramework>net9.0</TargetFramework>\r\n    <Nullable>enable</Nullable>\r\n    <ImplicitUsings>enable</ImplicitUsings>\r\n  </PropertyGroup>\r\n\r\n  <ItemGroup>\r\n    <PackageReference Include=\"Humanizer\" Version=\"2.14.1\" />\r\n    <PackageReference Include=\"Microsoft.AspNetCore.Identity\" Version=\"2.3.1\" />\r\n    <PackageReference Include=\"Microsoft.EntityFrameworkCore.Design\" Version=\"9.0.5\">\r\n      <PrivateAssets>all</PrivateAssets>\r\n      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>\r\n    </PackageReference>\r\n    <PackageReference Include=\"Microsoft.EntityFrameworkCore.SqlServer\" Version=\"9.0.5\" />\r\n    <PackageReference Include=\"Microsoft.EntityFrameworkCore.Tools\" Version=\"9.0.5\">\r\n      <PrivateAssets>all</PrivateAssets>\r\n      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>\r\n    </PackageReference>\r\n    <PackageReference Include=\"Swashbuckle.AspNetCore\" Version=\"8.1.2\" />\r\n    <PackageReference Include=\"Swashbuckle.AspNetCore.Annotations\" Version=\"8.1.2\" />\r\n    <PackageReference Include=\"Swashbuckle.AspNetCore.Swagger\" Version=\"8.1.2\" />\r\n  </ItemGroup>\r\n\r\n  <ItemGroup>\r\n    <Folder Include=\"Payment\\\" />\r\n    <Folder Include=\"Renting\\\" />\r\n    <Folder Include=\"Tours\\Infrastructure\\\" />\r\n    <Folder Include=\"Tours\\Interfaces\\\" />\r\n  </ItemGroup>\r\n\r\n</Project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend.csproj b/backend.csproj
+--- a/backend.csproj	(revision 22e7b8ce65f9d3966d33375218cf6980b035a914)
++++ b/backend.csproj	(date 1750373382876)
+@@ -26,8 +26,14 @@
+   <ItemGroup>
+     <Folder Include="Payment\" />
+     <Folder Include="Renting\" />
++    <Folder Include="Tours\Domain\Model\Aggregates\" />
+     <Folder Include="Tours\Infrastructure\" />
+     <Folder Include="Tours\Interfaces\" />
++    <Folder Include="User_Management\Domain\Model\Entities\" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <Compile Remove="User_Management\Domain\Model\Entities\User.cs" />
+   </ItemGroup>
+ 
+ </Project>

@@ -1,0 +1,49 @@
+Index: Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bike_Management.Domain.Services;\r\nusing backend.Bike_Management.Infrastructure.Repositories;\r\nusing backend.Bikes.Application.Internal.CommandServices;\r\nusing backend.Bikes.Application.Internal.QueryServices;\r\nusing backend.Bikes.Domain.Repositories;\r\nusing backend.Bikes.Domain.Services;\r\nusing backend.Bikes.Infrastructure.Repositories;\r\nusing backend.Shared.Domain.Repositories;\r\nusing backend.Renting.Application.Internal.CommandServices;\r\nusing backend.Renting.Application.Internal.QueryServices;\r\nusing backend.Renting.Domain.Repositories;\r\nusing backend.Renting.Domain.Services;\r\nusing backend.Renting.Infrastructure;\r\nusing backend.Shared.Domain.Repositories;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Repositories;\r\nusing backend.User_Management.Application.Internal.CommandServices;\r\nusing backend.User_Management.Application.Internal.QueryServices;\r\nusing backend.User_Management.Domain.Repositories;\r\nusing backend.User_Management.Domain.Services;\r\nusing backend.User_Management.Infrastructure;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing Microsoft.OpenApi.Models;\r\nvar builder = WebApplication.CreateBuilder(args);\r\n\r\n//Adding Swagger as a Service\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen(options =>\r\n{\r\n    options.SwaggerDoc(\"v1\",\r\n        new OpenApiInfo\r\n        {\r\n            Title = \"SafeCycle.API\",\r\n            Version = \"v1\",\r\n            Description = \"ACME.SafeCycle.API\",\r\n            TermsOfService = new Uri(\"https://safecycle.com/terms\"),\r\n            Contact = new OpenApiContact\r\n            {\r\n                Name = \"SafeCycle\",\r\n                Email = \"SafeCycle@gmail.com\"\r\n            },\r\n            License = new OpenApiLicense\r\n            {\r\n                Name = \"Apache 2.0\",\r\n                Url = new Uri(\"https://www.apache.org/licenses/LICENSE-2.0.html\")\r\n            }\r\n        });\r\n    options.AddSecurityDefinition(\"Bearer\", new OpenApiSecurityScheme\r\n    {\r\n        In = ParameterLocation.Header,\r\n        Description = \"JWT Authorization header using the Bearer scheme.\",\r\n        Name = \"Authorization\",\r\n        Type = SecuritySchemeType.Http,\r\n        BearerFormat = \"JWT\",\r\n        Scheme = \"bearer\"\r\n    });\r\n    \r\n    options.AddSecurityRequirement(new OpenApiSecurityRequirement\r\n    {\r\n        {\r\n            new OpenApiSecurityScheme\r\n            {\r\n                Reference = new OpenApiReference\r\n                {\r\n                    Id = \"Bearer\",\r\n                    Type = ReferenceType.SecurityScheme\r\n                }\r\n            },\r\n            []\r\n        }\r\n    });\r\n    options.EnableAnnotations();\r\n});\r\n\r\n//Add Controllers for manage our classes\r\nbuilder.Services.AddControllers();\r\n\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen(options => options.EnableAnnotations());\r\n\r\nvar connection = builder.Configuration.GetConnectionString(\"DefaultConnection\");\r\n\r\nif (string.IsNullOrEmpty(connection))\r\n{\r\n  throw new Exception(\"Database connection string not set\");\r\n}\r\n   \r\n//Add our DbContext connection to Dependency Injector\r\nbuilder.Services.AddDbContext<SafecycleDBContext>(options =>\r\n{\r\n  options.UseSqlServer(builder.Configuration.GetConnectionString(\"DefaultConnection\"));\r\n});\r\n// Shared\r\nbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();\r\n//BikeStations\r\nbuilder.Services.AddScoped<IBikeStationRepository, BikeStationsRepository>();\r\nbuilder.Services.AddScoped<IBikeStationCommandService, BikeStationCommandService>();\r\nbuilder.Services.AddScoped<IBikeStationQueryService, BikeStationQueryServices>();\r\n//Bikes\r\nbuilder.Services.AddScoped<IBikesRepository, BikesRepository>();\r\nbuilder.Services.AddScoped<IBikesCommandService, BikeCommandService>();\r\nbuilder.Services.AddScoped<IBikesQueryService, BikeQueryServices>();\r\n\r\n// Shared Bounded Context Injection Configuration\r\nbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();\r\n\r\nbuilder.Services.AddScoped<IUserRepository, UserRepository>();\r\nbuilder.Services.AddScoped<IUserQueryService, UserQueryService>();\r\nbuilder.Services.AddScoped<IUserCommandService, UserCommandService>();\r\n\r\nbuilder.Services.AddScoped<IRentRepository, RentRepository>();\r\nbuilder.Services.AddScoped<IRentQueryService, RentQueryService>();\r\nbuilder.Services.AddScoped<IRentCommandService, RentCommandService>();\r\n\r\nvar app = builder.Build();\r\n\r\n//Add scope for our DbContext\r\nusing (var scope = app.Services.CreateScope())\r\n{\r\n  var services = scope.ServiceProvider.GetRequiredService<SafecycleDBContext>();\r\n  services.Database.EnsureCreated();\r\n}\r\n\r\n\r\n// Add Swagger for use on Development\r\n\r\napp.UseSwagger();\r\napp.UseSwaggerUI();\r\n\r\napp.UseHttpsRedirection();\r\n\r\n//Mapping Controllers EndPoints\r\napp.MapControllers();\r\n\r\napp.Run();\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Program.cs b/Program.cs
+--- a/Program.cs	(revision bca79df2cb8cb8ec0a0c9eb56934b473f61f7baa)
++++ b/Program.cs	(date 1750478253598)
+@@ -1,17 +1,15 @@
+ using backend.Bike_Management.Domain.Services;
+-using backend.Bike_Management.Infrastructure.Repositories;
++using backend.Bikes.Domain.Services;
++using backend.Bikes.Infrastructure.Repositories;
+ using backend.Bikes.Application.Internal.CommandServices;
+ using backend.Bikes.Application.Internal.QueryServices;
+ using backend.Bikes.Domain.Repositories;
+-using backend.Bikes.Domain.Services;
+-using backend.Bikes.Infrastructure.Repositories;
+ using backend.Shared.Domain.Repositories;
+ using backend.Renting.Application.Internal.CommandServices;
+ using backend.Renting.Application.Internal.QueryServices;
+ using backend.Renting.Domain.Repositories;
+ using backend.Renting.Domain.Services;
+ using backend.Renting.Infrastructure;
+-using backend.Shared.Domain.Repositories;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+ using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
+ using backend.User_Management.Application.Internal.CommandServices;
+Index: obj/Debug/net9.0/backend.AssemblyInfo.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//------------------------------------------------------------------------------\r\n// <auto-generated>\r\n//     This code was generated by a tool.\r\n//\r\n//     Changes to this file may cause incorrect behavior and will be lost if\r\n//     the code is regenerated.\r\n// </auto-generated>\r\n//------------------------------------------------------------------------------\r\n\r\nusing System;\r\nusing System.Reflection;\r\n\r\n[assembly: System.Reflection.AssemblyCompanyAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyConfigurationAttribute(\"Debug\")]\r\n[assembly: System.Reflection.AssemblyFileVersionAttribute(\"1.0.0.0\")]\r\n[assembly: System.Reflection.AssemblyInformationalVersionAttribute(\"1.0.0+187898fc12190ae3077eba9e0e1e2d67dd718b8c\")]\r\n[assembly: System.Reflection.AssemblyProductAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyTitleAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyVersionAttribute(\"1.0.0.0\")]\r\n\r\n// Generated by the MSBuild WriteCodeFragment class.\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/Debug/net9.0/backend.AssemblyInfo.cs b/obj/Debug/net9.0/backend.AssemblyInfo.cs
+--- a/obj/Debug/net9.0/backend.AssemblyInfo.cs	(revision bca79df2cb8cb8ec0a0c9eb56934b473f61f7baa)
++++ b/obj/Debug/net9.0/backend.AssemblyInfo.cs	(date 1750476815478)
+@@ -13,7 +13,7 @@
+ [assembly: System.Reflection.AssemblyCompanyAttribute("backend")]
+ [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+ [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+187898fc12190ae3077eba9e0e1e2d67dd718b8c")]
++[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bca79df2cb8cb8ec0a0c9eb56934b473f61f7baa")]
+ [assembly: System.Reflection.AssemblyProductAttribute("backend")]
+ [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
+ [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

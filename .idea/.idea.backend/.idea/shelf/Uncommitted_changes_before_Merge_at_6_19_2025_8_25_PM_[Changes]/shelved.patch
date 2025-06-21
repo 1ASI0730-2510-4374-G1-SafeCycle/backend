@@ -1,0 +1,611 @@
+Index: Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\nusing Microsoft.EntityFrameworkCore;\r\n\r\nvar builder = WebApplication.CreateBuilder(args);\r\n\r\n//Adding Swagger as a Service\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen();\r\n\r\n//Add Controllers for manage our classes\r\nbuilder.Services.AddControllers();\r\n\r\nbuilder.Services.AddEndpointsApiExplorer();\r\nbuilder.Services.AddSwaggerGen(options => options.EnableAnnotations());\r\n\r\nvar connection = builder.Configuration.GetConnectionString(\"DefaultConnection\");\r\n\r\nif (string.IsNullOrEmpty(connection))\r\n{\r\n  throw new Exception(\"Database connection string not set\");\r\n}\r\n   \r\n//Add our DbContext connection to Dependency Injector\r\nbuilder.Services.AddDbContext<SafecycleDBContext>(options =>\r\n{\r\n  options.UseSqlServer(builder.Configuration.GetConnectionString(\"DefaultConnection\"));\r\n});\r\n\r\nvar app = builder.Build();\r\n\r\n//Add scope for our DbContext\r\nusing (var scope = app.Services.CreateScope())\r\n{\r\n  var services = scope.ServiceProvider.GetRequiredService<SafecycleDBContext>();\r\n  services.Database.EnsureCreated();\r\n}\r\n\r\n// Add Swagger for use on Development\r\n\r\napp.UseSwagger();\r\napp.UseSwaggerUI();\r\n\r\napp.UseHttpsRedirection();\r\n\r\n//Mapping Controllers EndPoints\r\napp.MapControllers();\r\n\r\napp.Run();\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Program.cs b/Program.cs
+--- a/Program.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Program.cs	(date 1750382722791)
+@@ -1,3 +1,5 @@
++using backend.Bikes.Application.Internal.CommandServices;
++using backend.Bikes.Domain.Services;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+ using Microsoft.EntityFrameworkCore;
+ 
+@@ -20,6 +22,9 @@
+   throw new Exception("Database connection string not set");
+ }
+    
++
++builder.Services.AddScoped<IBikesCommandService, BikesCommandService>();
++
+ //Add our DbContext connection to Dependency Injector
+ builder.Services.AddDbContext<SafecycleDBContext>(options =>
+ {
+@@ -39,7 +44,7 @@
+ 
+ app.UseSwagger();
+ app.UseSwaggerUI();
+-
++  
+ app.UseHttpsRedirection();
+ 
+ //Mapping Controllers EndPoints
+Index: Bikes/Domain/Model/Commands/CreateBikeCommand.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace backend.Bikes.Domain.Model.Commands;\r\n\r\npublic record CreateBikeCommand(string condition, string available); 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Model/Commands/CreateBikeCommand.cs b/Bikes/Domain/Model/Commands/CreateBikeCommand.cs
+--- a/Bikes/Domain/Model/Commands/CreateBikeCommand.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Model/Commands/CreateBikeCommand.cs	(date 1750382722786)
+@@ -1,3 +1,3 @@
+ namespace backend.Bikes.Domain.Model.Commands;
+ 
+-public record CreateBikeCommand(string condition, string available); 
+\ No newline at end of file
++public record CreateBikeCommand(string condition, string available, int bikeStationId); 
+\ No newline at end of file
+Index: Bikes/Domain/Services/IBikeStationCommandService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Bikes.Domain.Model.Commands;\r\n\r\nnamespace backend.Bike_Management.Domain.Services;\r\n\r\npublic interface IBikeStationCommandService\r\n{\r\n    Task<BikeStations?> Handle(CreateBikeStationCommand command);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Services/IBikeStationCommandService.cs b/Bikes/Domain/Services/IBikeStationCommandService.cs
+--- a/Bikes/Domain/Services/IBikeStationCommandService.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Services/IBikeStationCommandService.cs	(date 1750382722787)
+@@ -1,7 +1,7 @@
+ using backend.Bikes.Domain.Model.Aggregates;
+ using backend.Bikes.Domain.Model.Commands;
+ 
+-namespace backend.Bike_Management.Domain.Services;
++namespace backend.Bikes.Domain.Services;
+ 
+ public interface IBikeStationCommandService
+ {
+Index: Bikes/Domain/Services/IBikeStationQueryService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bike_Management.Domain.Model.Queries;\r\nusing backend.Bikes.Domain.Model.Aggregates;\r\n\r\nnamespace backend.Bike_Management.Domain.Services;\r\n\r\npublic interface IBikeStationQueryService\r\n{\r\n    Task<BikeStations?> Handle(GetBikeStationByIdQuery query);\r\n\r\n    Task<IEnumerable<BikeStations>> Handle(GetAllBikeStationsQuery query);\r\n    \r\n    Task<IEnumerable<BikeStations>> Handle(GetAvailableBikeStationsQuery query);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Services/IBikeStationQueryService.cs b/Bikes/Domain/Services/IBikeStationQueryService.cs
+--- a/Bikes/Domain/Services/IBikeStationQueryService.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Services/IBikeStationQueryService.cs	(date 1750382722788)
+@@ -9,5 +9,4 @@
+ 
+     Task<IEnumerable<BikeStations>> Handle(GetAllBikeStationsQuery query);
+     
+-    Task<IEnumerable<BikeStations>> Handle(GetAvailableBikeStationsQuery query);
+ }
+\ No newline at end of file
+Index: Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs
+===================================================================
+diff --git a/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs b/Bikes/Domain/Model/Queries/GetAllByBikeStationQuery.cs
+rename from Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs
+rename to Bikes/Domain/Model/Queries/GetAllByBikeStationQuery.cs
+--- a/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Model/Queries/GetAllByBikeStationQuery.cs	(date 1750382722786)
+@@ -1,3 +1,3 @@
+-namespace backend.Bike_Management.Domain.Model.Queries;
++namespace backend.Bikes.Domain.Model.Queries;
+ 
+-public record GetAvailableBikesQuery();
+\ No newline at end of file
++public record GetAllByBikeStationQuery(int bikeStationId);
+\ No newline at end of file
+Index: Bikes/Domain/Repositories/IBikesRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Shared.Domain.Repositories;\r\n\r\nnamespace backend.Bike_Management.Domain.Repositories;\r\n\r\npublic interface IBikesRepository : IBaseRepository<Bikes.Domain.Model.Aggregates.Bikes>\r\n{\r\n    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync();\r\n    \r\n    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync();\r\n    \r\n    Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Repositories/IBikesRepository.cs b/Bikes/Domain/Repositories/IBikesRepository.cs
+--- a/Bikes/Domain/Repositories/IBikesRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Repositories/IBikesRepository.cs	(date 1750382722787)
+@@ -1,13 +1,12 @@
+-using backend.Bikes.Domain.Model.Aggregates;
+ using backend.Shared.Domain.Repositories;
+ 
+-namespace backend.Bike_Management.Domain.Repositories;
++namespace backend.Bikes.Domain.Repositories;
+ 
+ public interface IBikesRepository : IBaseRepository<Bikes.Domain.Model.Aggregates.Bikes>
+ {
+     Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync();
+     
+-    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync();
++    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllByBikeStationIdAsync(int bikeStationId);
+     
+-    Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id);
++    Task<Bikes.Domain.Model.Aggregates.Bikes?> GetBikeByIdAsync(int id);
+ }
+\ No newline at end of file
+Index: Bikes/Domain/Repositories/IBikeStationRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Shared.Domain.Repositories;\r\n\r\nnamespace backend.Bike_Management.Domain.Repositories;\r\n\r\npublic interface IBikeStationRepository : IBaseRepository<BikeStations>\r\n{\r\n    Task<IEnumerable<BikeStations>> GetAllStationsAsync();\r\n    \r\n    Task<IEnumerable<BikeStations>> GetAllAvailableStationsAsync();\r\n    \r\n    Task<BikeStations> GetBikeStationByIdAsync(int id);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Repositories/IBikeStationRepository.cs b/Bikes/Domain/Repositories/IBikeStationRepository.cs
+--- a/Bikes/Domain/Repositories/IBikeStationRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Repositories/IBikeStationRepository.cs	(date 1750382722787)
+@@ -1,13 +1,11 @@
+ using backend.Bikes.Domain.Model.Aggregates;
+ using backend.Shared.Domain.Repositories;
+ 
+-namespace backend.Bike_Management.Domain.Repositories;
++namespace backend.Bikes.Domain.Repositories;
+ 
+ public interface IBikeStationRepository : IBaseRepository<BikeStations>
+ {
+     Task<IEnumerable<BikeStations>> GetAllStationsAsync();
+     
+-    Task<IEnumerable<BikeStations>> GetAllAvailableStationsAsync();
+-    
+-    Task<BikeStations> GetBikeStationByIdAsync(int id);
++    Task<BikeStations?> GetBikeStationByIdAsync(int id);
+ }
+\ No newline at end of file
+Index: Bikes/Domain/Services/IBikesQueryService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bike_Management.Domain.Model.Queries;\r\nusing backend.Bikes.Domain.Model.Aggregates;\r\n\r\nnamespace backend.Bike_Management.Domain.Services;\r\n\r\npublic interface IBikesQueryService\r\n{\r\n    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(GetBikeByIdQuery query);\r\n    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAllBikesQuery query);\r\n    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAvailableBikesQuery query);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Services/IBikesQueryService.cs b/Bikes/Domain/Services/IBikesQueryService.cs
+--- a/Bikes/Domain/Services/IBikesQueryService.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Services/IBikesQueryService.cs	(date 1750382722788)
+@@ -1,5 +1,6 @@
+ using backend.Bike_Management.Domain.Model.Queries;
+ using backend.Bikes.Domain.Model.Aggregates;
++using backend.Bikes.Domain.Model.Queries;
+ 
+ namespace backend.Bike_Management.Domain.Services;
+ 
+@@ -7,5 +8,5 @@
+ {
+     Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(GetBikeByIdQuery query);
+     Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAllBikesQuery query);
+-    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAvailableBikesQuery query);
++    Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> Handle(GetAllByBikeStationQuery query);
+ }
+\ No newline at end of file
+Index: Bikes/Domain/Services/IBikesCommandService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Bikes.Domain.Model.Commands;\r\n\r\nnamespace backend.Bike_Management.Domain.Services;\r\n\r\npublic interface IBikesCommandService\r\n{\r\n    Task<Bikes.Domain.Model.Aggregates.Bikes?> Handle(CreateBikeCommand command);\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Services/IBikesCommandService.cs b/Bikes/Domain/Services/IBikesCommandService.cs
+--- a/Bikes/Domain/Services/IBikesCommandService.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Domain/Services/IBikesCommandService.cs	(date 1750382722788)
+@@ -1,7 +1,6 @@
+-using backend.Bikes.Domain.Model.Aggregates;
+ using backend.Bikes.Domain.Model.Commands;
+ 
+-namespace backend.Bike_Management.Domain.Services;
++namespace backend.Bikes.Domain.Services;
+ 
+ public interface IBikesCommandService
+ {
+Index: Bikes/Infrastructure/Repositories/BikesRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bike_Management.Domain.Repositories;\r\nusing backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Repositories;\r\n\r\nnamespace backend.Bike_Management.Infrastructure.Repositories;\r\n\r\npublic class BikesRepository(SafecycleDBContext context) : BaseRepository<Bikes.Domain.Model.Aggregates.Bikes>(context), IBikesRepository\r\n\r\n{\r\n    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync()\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id)\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Infrastructure/Repositories/BikesRepository.cs b/Bikes/Infrastructure/Repositories/BikesRepository.cs
+--- a/Bikes/Infrastructure/Repositories/BikesRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Infrastructure/Repositories/BikesRepository.cs	(date 1750382722789)
+@@ -1,25 +1,30 @@
+-using backend.Bike_Management.Domain.Repositories;
+-using backend.Bikes.Domain.Model.Aggregates;
++using backend.Bikes.Domain.Repositories;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+ using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
++using Microsoft.EntityFrameworkCore;
+ 
+-namespace backend.Bike_Management.Infrastructure.Repositories;
++namespace backend.Bikes.Infrastructure.Repositories;
+ 
+ public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bikes.Domain.Model.Aggregates.Bikes>(context), IBikesRepository
+ 
+ {
+-    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()
++    public async Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllBikesAsync()
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
++            .ToListAsync();
+     }
+ 
+-    public Task<IEnumerable<Bikes.Domain.Model.Aggregates.Bikes>> GetAllAvailableBikesAsync()
++    public async Task<IEnumerable<Domain.Model.Aggregates.Bikes>> GetAllByBikeStationIdAsync(int bikeStationId)
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
++            .Where(b => b.bikeStation.Id == bikeStationId)
++            .ToListAsync();
+     }
+-
+-    public Task<Bikes.Domain.Model.Aggregates.Bikes> GetBikeByIdAsync(int id)
++    
++    public async Task<Domain.Model.Aggregates.Bikes?> GetBikeByIdAsync(int id)
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<Bikes.Domain.Model.Aggregates.Bikes>()
++            .Include(b => b.bikeStation)
++            .FirstOrDefaultAsync(b => b.Id == id);
+     }
+ }
+\ No newline at end of file
+Index: Bikes/Interfaces/BikesController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Net.Mime;\r\nusing backend.Bike_Management.Domain.Model.Queries;\r\nusing backend.Bike_Management.Domain.Services;\r\nusing backend.Bikes.Interfaces.REST.Resources;\r\nusing backend.Bikes.Interfaces.REST.Transform;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Swashbuckle.AspNetCore.Annotations;\r\n\r\nnamespace backend.Bikes.Interfaces;\r\n\r\n[ApiController]\r\n[Route(\"api/v1/[controller]\")]\r\n[Produces(MediaTypeNames.Application.Json)]\r\n[Tags(\"Favorite Sources API\")]\r\n\r\npublic class BikesController(IBikesCommandService bikesCommandService, IBikesQueryService bikesQueryService) : ControllerBase\r\n{\r\n    [HttpPost]\r\n    [SwaggerOperation(\r\n        Summary = \"Create a new Bike\",\r\n        Description = \"Create a new Bike\",\r\n        OperationId = \"CreateBike\")]\r\n    [SwaggerResponse(201, \"The Bike was created successfully.\")]\r\n    [SwaggerResponse(400, \"The Bike was not created successfully.\")]\r\n    public async Task<ActionResult> CreateBike([FromBody] CreateBikeResource resource)\r\n    {\r\n        var createBikeSourceCommand = CreateBikeCommandFromResourceAssembler.ToCommandFromResource(resource);\r\n        var result = await bikesCommandService.Handle(createBikeSourceCommand); \r\n        if(result is null) return BadRequest();\r\n        \r\n        return CreatedAtAction(nameof(GetBikeById), new { id = result.Id }, BikeResourceFromEntityAssembler.ToResourceFromEntity(result));\r\n    }\r\n\r\n    [HttpGet(\"´{id}\")]\r\n    [SwaggerOperation(Summary = \"Gets a Bike according to id\", Description = \"Gets a Bike according to id\",\r\n        OperationId = \"GetsBikeById\")]\r\n    public async Task<ActionResult> GetBikeById(int id)\r\n    {\r\n        var getBikeById = new GetBikeByIdQuery(id);\r\n        var result = await bikesQueryService.Handle(getBikeById);\r\n        if(result is null) return NotFound();\r\n        var resource = BikeResourceFromEntityAssembler.ToResourceFromEntity(result);\r\n        return Ok(resource); \r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Interfaces/BikesController.cs b/Bikes/Interfaces/BikesController.cs
+--- a/Bikes/Interfaces/BikesController.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Interfaces/BikesController.cs	(date 1750382722790)
+@@ -1,6 +1,7 @@
+ using System.Net.Mime;
+ using backend.Bike_Management.Domain.Model.Queries;
+ using backend.Bike_Management.Domain.Services;
++using backend.Bikes.Domain.Services;
+ using backend.Bikes.Interfaces.REST.Resources;
+ using backend.Bikes.Interfaces.REST.Transform;
+ using Microsoft.AspNetCore.Mvc;
+@@ -31,7 +32,7 @@
+         return CreatedAtAction(nameof(GetBikeById), new { id = result.Id }, BikeResourceFromEntityAssembler.ToResourceFromEntity(result));
+     }
+ 
+-    [HttpGet("´{id}")]
++    [HttpGet("{id}")]
+     [SwaggerOperation(Summary = "Gets a Bike according to id", Description = "Gets a Bike according to id",
+         OperationId = "GetsBikeById")]
+     public async Task<ActionResult> GetBikeById(int id)
+Index: Bikes/Infrastructure/Repositories/BikeStationsRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bike_Management.Domain.Repositories;\r\nusing backend.Bikes.Domain.Model.Aggregates;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Repositories;\r\n\r\nnamespace backend.Bike_Management.Infrastructure.Repositories;\r\n\r\npublic class BikeStationsRepository(SafecycleDBContext context) : BaseRepository<BikeStations>(context), IBikeStationRepository\r\n{\r\n    public Task<IEnumerable<BikeStations>> GetAllStationsAsync()\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public Task<IEnumerable<BikeStations>> GetAllAvailableStationsAsync()\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public Task<BikeStations> GetBikeStationByIdAsync(int id)\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs b/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs
+--- a/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Infrastructure/Repositories/BikeStationsRepository.cs	(date 1750382722789)
+@@ -1,24 +1,22 @@
+-using backend.Bike_Management.Domain.Repositories;
+ using backend.Bikes.Domain.Model.Aggregates;
++using backend.Bikes.Domain.Repositories;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
+ using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
++using Microsoft.EntityFrameworkCore;
+ 
+-namespace backend.Bike_Management.Infrastructure.Repositories;
++namespace backend.Bikes.Infrastructure.Repositories;
+ 
+ public class BikeStationsRepository(SafecycleDBContext context) : BaseRepository<BikeStations>(context), IBikeStationRepository
+ {
+-    public Task<IEnumerable<BikeStations>> GetAllStationsAsync()
++    public async Task<IEnumerable<BikeStations>> GetAllStationsAsync()
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<BikeStations>()
++            .ToListAsync();
+     }
+ 
+-    public Task<IEnumerable<BikeStations>> GetAllAvailableStationsAsync()
++    public async Task<BikeStations?> GetBikeStationByIdAsync(int id)
+     {
+-        throw new NotImplementedException();
+-    }
+-
+-    public Task<BikeStations> GetBikeStationByIdAsync(int id)
+-    {
+-        throw new NotImplementedException();
++        return await Context.Set<BikeStations>()
++            .FirstOrDefaultAsync(bs => bs.Id == id);
+     }
+ }
+\ No newline at end of file
+Index: Shared/Domain/Repositories/IBaseRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace backend.Shared.Domain.Repositories;\r\n\r\npublic interface IBaseRepository<T>\r\n{\r\n    Task AddAsync(T entity);\r\n    void Update(T entity);\r\n    void Remove(T entity);\r\n    \r\n    Task<IEnumerable<T>> GetAllAsync();\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Shared/Domain/Repositories/IBaseRepository.cs b/Shared/Domain/Repositories/IBaseRepository.cs
+--- a/Shared/Domain/Repositories/IBaseRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Shared/Domain/Repositories/IBaseRepository.cs	(date 1750382722792)
+@@ -1,10 +1,51 @@
+ namespace backend.Shared.Domain.Repositories;
+ 
+-public interface IBaseRepository<T>
++/// <summary>
++///     Base repository interface for all repositories
++/// </summary>
++/// <remarks>
++///     This interface is used to define the basic CRUD operations for all repositories
++/// </remarks>
++/// <typeparam name="TEntity">
++///     The entity type for the repository
++/// </typeparam>
++public interface IBaseRepository<TEntity>
+ {
+-    Task AddAsync(T entity);
+-    void Update(T entity);
+-    void Remove(T entity);
+-    
+-    Task<IEnumerable<T>> GetAllAsync();
++    /// <summary>
++    ///     Add an entity to the repository
++    /// </summary>
++    /// <param name="entity">
++    ///     The entity to add
++    /// </param>
++    /// <returns></returns>
++    Task AddAsync(TEntity entity);
++
++    /// <summary>
++    ///     Find an entity by its id
++    /// </summary>
++    /// <param name="id">
++    ///     The id of the entity to find
++    /// </param>
++    /// <returns>
++    ///     The entity if found, otherwise null
++    /// </returns>
++    Task<TEntity?> FindByIdAsync(int id);
++
++    void Update(TEntity entity);
++
++    /// <summary>
++    ///     Remove an entity from the repository
++    /// </summary>
++    /// <param name="entity">
++    ///     The entity to remove
++    /// </param>
++    void Remove(TEntity entity);
++
++    /// <summary>
++    ///     List all entities in the repository
++    /// </summary>
++    /// <returns>
++    ///     A list of all entities in the repository
++    /// </returns>
++    Task<IEnumerable<TEntity>> ListAsync();
+ }
+\ No newline at end of file
+Index: Bikes/Interfaces/REST/Resources/CreateBikeResource.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace backend.Bikes.Interfaces.REST.Resources;\r\n\r\npublic record CreateBikeResource(string available, string condition);\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs b/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs
+--- a/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Interfaces/REST/Resources/CreateBikeResource.cs	(date 1750382722791)
+@@ -1,3 +1,3 @@
+ namespace backend.Bikes.Interfaces.REST.Resources;
+ 
+-public record CreateBikeResource(string available, string condition);
++public record CreateBikeResource(string available, string condition, int bikeStationId );
+Index: Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Bikes.Domain.Model.Commands;\r\nusing backend.Bikes.Interfaces.REST.Resources;\r\n\r\n\r\nnamespace backend.Bikes.Interfaces.REST.Transform;\r\n\r\npublic static class CreateBikeCommandFromResourceAssembler\r\n{\r\n    public static CreateBikeCommand ToCommandFromResource(this CreateBikeResource resource)\r\n    {\r\n        return new CreateBikeCommand(resource.available, resource.condition);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs b/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs
+--- a/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Interfaces/REST/Transform/CreateBikeCommandFromResourceAssembler.cs	(date 1750382722791)
+@@ -8,6 +8,6 @@
+ {
+     public static CreateBikeCommand ToCommandFromResource(this CreateBikeResource resource)
+     {
+-        return new CreateBikeCommand(resource.available, resource.condition);
++        return new CreateBikeCommand(resource.available, resource.condition, resource.bikeStationId);
+     }
+ }
+\ No newline at end of file
+Index: Shared/Infrastructure/Persistence/EFC/Repositories/BaseRepository.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using backend.Shared.Domain.Repositories;\r\nusing backend.Shared.Infrastructure.Persistence.EFC.Configuration;\r\n\r\nnamespace backend.Shared.Infrastructure.Persistence.EFC.Repositories;\r\n\r\npublic class BaseRepository<TEntity> : IBaseRepository<TEntity>\r\n{\r\n    \r\n    protected readonly SafecycleDBContext context;\r\n\r\n    public BaseRepository(SafecycleDBContext context)\r\n    {\r\n        this.context = context;\r\n    }\r\n    \r\n    public Task AddAsync(TEntity entity)\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public void Update(TEntity entity)\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public void Remove(TEntity entity)\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n\r\n    public Task<IEnumerable<TEntity>> GetAllAsync()\r\n    {\r\n        throw new NotImplementedException();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Shared/Infrastructure/Persistence/EFC/Repositories/BaseRepository.cs b/Shared/Infrastructure/Persistence/EFC/Repositories/BaseRepository.cs
+--- a/Shared/Infrastructure/Persistence/EFC/Repositories/BaseRepository.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Shared/Infrastructure/Persistence/EFC/Repositories/BaseRepository.cs	(date 1750382722793)
+@@ -1,35 +1,58 @@
+ using backend.Shared.Domain.Repositories;
+ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
++using Microsoft.EntityFrameworkCore;
+ 
+ namespace backend.Shared.Infrastructure.Persistence.EFC.Repositories;
+ 
+-public class BaseRepository<TEntity> : IBaseRepository<TEntity>
++/// <summary>
++///     Base repository for all repositories
++/// </summary>
++/// <remarks>
++///     This class is used to define the basic CRUD operations for all repositories.
++///     This class implements the IBaseRepository interface.
++/// </remarks>
++/// <typeparam name="TEntity">
++///     The entity type for the repository
++/// </typeparam>
++public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+ {
+-    
+-    protected readonly SafecycleDBContext context;
++    protected readonly SafecycleDBContext Context;
++
++    /// <summary>
++    ///     Default constructor for the base repository
++    /// </summary>
++    protected BaseRepository(SafecycleDBContext context)
++    {
++        Context = context;
++    }
+ 
+-    public BaseRepository(SafecycleDBContext context)
++    // inheritedDoc
++    public async Task AddAsync(TEntity entity)
+     {
+-        this.context = context;
++        await Context.Set<TEntity>().AddAsync(entity);
+     }
+-    
+-    public Task AddAsync(TEntity entity)
++
++    // inheritedDoc
++    public async Task<TEntity?> FindByIdAsync(int id)
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<TEntity>().FindAsync(id);
+     }
+ 
++    // inheritedDoc
+     public void Update(TEntity entity)
+     {
+-        throw new NotImplementedException();
++        Context.Set<TEntity>().Update(entity);
+     }
+ 
++    // inheritedDoc
+     public void Remove(TEntity entity)
+     {
+-        throw new NotImplementedException();
++        Context.Set<TEntity>().Remove(entity);
+     }
+ 
+-    public Task<IEnumerable<TEntity>> GetAllAsync()
++    // inheritedDoc
++    public async Task<IEnumerable<TEntity>> ListAsync()
+     {
+-        throw new NotImplementedException();
++        return await Context.Set<TEntity>().ToListAsync();
+     }
+ }
+\ No newline at end of file
+Index: Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs b/Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs
+deleted file mode 100644
+--- a/Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ /dev/null	(revision c6b1a557802242d15794d78442ccbf21575af090)
+@@ -1,3 +0,0 @@
+-namespace backend.Bike_Management.Domain.Model.Queries;
+-
+-public record GetAvailableBikeStationsQuery();
+\ No newline at end of file
+Index: obj/Debug/net9.0/backend.sourcelink.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\"documents\":{\"C:\\\\Users\\\\gabri\\\\git-repos\\\\upc\\\\2025-1\\\\appWeb\\\\backend\\\\*\":\"https://raw.githubusercontent.com/1ASI0730-2510-4374-G1-SafeCycle/backend/1a3a88f73e53f25c0fafac246de676e91bd6a299/*\"}}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/Debug/net9.0/backend.sourcelink.json b/obj/Debug/net9.0/backend.sourcelink.json
+--- a/obj/Debug/net9.0/backend.sourcelink.json	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/obj/Debug/net9.0/backend.sourcelink.json	(date 1750382722803)
+@@ -1,1 +1,1 @@
+-{"documents":{"C:\\Users\\gabri\\git-repos\\upc\\2025-1\\appWeb\\backend\\*":"https://raw.githubusercontent.com/1ASI0730-2510-4374-G1-SafeCycle/backend/1a3a88f73e53f25c0fafac246de676e91bd6a299/*"}}
+\ No newline at end of file
++{"documents":{"C:\\Users\\gabri\\git-repos\\upc\\2025-1\\appWeb\\backend\\*":"https://raw.githubusercontent.com/1ASI0730-2510-4374-G1-SafeCycle/backend/c6b1a557802242d15794d78442ccbf21575af090/*"}}
+\ No newline at end of file
+Index: Bikes/Interfaces/BikeStationController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Net.Mime;\r\nusing backend.Bike_Management.Domain.Model.Queries;\r\nusing backend.Bike_Management.Domain.Services;\r\nusing backend.Bikes.Interfaces.REST.Resources;\r\nusing backend.Bikes.Interfaces.REST.Transform;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Swashbuckle.AspNetCore.Annotations;\r\n\r\nnamespace backend.Bikes.Interfaces;\r\n\r\n[ApiController]\r\n[Route(\"api/v1/[controller]\")]\r\n[Produces(MediaTypeNames.Application.Json)]\r\n[Tags(\"Favorite Sources API\")]\r\npublic class BikeStationController(IBikeStationCommandService bikeStationCommandService, IBikeStationQueryService bikeStationQueryService) : ControllerBase\r\n{\r\n    [HttpPost]\r\n    [SwaggerOperation(\r\n        Summary = \"Create a Bike Station\",\r\n        Description = \"Creates a Bike Station\",\r\n        OperationId = \"CreateBikeStation\"\r\n    )]\r\n    [SwaggerResponse(201, \"The Bike Station was created successfully.\")]\r\n    [SwaggerResponse(400, \"The Bike Station was not created.\")]\r\n    public async Task<ActionResult> CreateBikeStation([FromBody] CreateBikeStationResource resource)\r\n    {\r\n        var createBikeStationSourceCommand = CreateBikeStationCommandFromResourceAssembler.ToCommandFromResource(resource);\r\n        var result = await bikeStationCommandService.Handle(createBikeStationSourceCommand);\r\n        if(result is null) return BadRequest();\r\n        \r\n        return CreatedAtAction(nameof(GetBikesStationById), new { id = result.Id }, \r\n            BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result));\r\n    }\r\n    \r\n    [HttpGet(\"{id}\")]\r\n    [SwaggerOperation(\r\n        Summary = \"Gets a bike station according to id\",\r\n        Description = \"Gets a bike station according to id\",\r\n        OperationId = \"GetBikesStationById\"\r\n    )]\r\n    public async Task<ActionResult> GetBikesStationById(int id)\r\n    {\r\n        var getBikeStationById = new GetBikeStationByIdQuery(id);\r\n        var result = await bikeStationQueryService.Handle(getBikeStationById);\r\n        if (result is null) return NotFound();\r\n        var resource = BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result);\r\n        return Ok(resource);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Bikes/Interfaces/BikeStationController.cs b/Bikes/Interfaces/BikeStationController.cs
+--- a/Bikes/Interfaces/BikeStationController.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/Bikes/Interfaces/BikeStationController.cs	(date 1750382722790)
+@@ -1,6 +1,7 @@
+ using System.Net.Mime;
+ using backend.Bike_Management.Domain.Model.Queries;
+ using backend.Bike_Management.Domain.Services;
++using backend.Bikes.Domain.Services;
+ using backend.Bikes.Interfaces.REST.Resources;
+ using backend.Bikes.Interfaces.REST.Transform;
+ using Microsoft.AspNetCore.Mvc;
+Index: Bikes/Application/Internal/CommandServices/BikesCommandService.cs
+===================================================================
+diff --git a/Bikes/Application/Internal/CommandServices/BikesCommandService.cs b/Bikes/Application/Internal/CommandServices/BikesCommandService.cs
+new file mode 100644
+--- /dev/null	(date 1750382722785)
++++ b/Bikes/Application/Internal/CommandServices/BikesCommandService.cs	(date 1750382722785)
+@@ -0,0 +1,26 @@
++using backend.Bikes.Domain.Model.Commands;
++using backend.Bikes.Domain.Repositories;
++using backend.Bikes.Domain.Services;
++using backend.Shared.Domain.Repositories;
++
++namespace backend.Bikes.Application.Internal.CommandServices;
++
++public class BikesCommandService (IBikesRepository bikesRepository,
++    IBikeStationRepository bikeStationRepository,
++    IUnitOfWork unitOfWork) : IBikesCommandService
++{
++    public async Task<Domain.Model.Aggregates.Bikes?> Handle(CreateBikeCommand command)
++    {
++        var bike = new Domain.Model.Aggregates.Bikes(command);
++
++        var station = await bikeStationRepository.GetBikeStationByIdAsync(command.bikeStationId);
++        if (station == null) throw new Exception("BikeStation not found");
++
++        bike.bikeStation = station;
++
++        await bikesRepository.AddAsync(bike);
++        await unitOfWork.CompleteAsync();
++
++        return bike;
++    }
++}
+\ No newline at end of file
+Index: obj/Debug/net9.0/backend.AssemblyInfo.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//------------------------------------------------------------------------------\r\n// <auto-generated>\r\n//     This code was generated by a tool.\r\n//\r\n//     Changes to this file may cause incorrect behavior and will be lost if\r\n//     the code is regenerated.\r\n// </auto-generated>\r\n//------------------------------------------------------------------------------\r\n\r\nusing System;\r\nusing System.Reflection;\r\n\r\n[assembly: System.Reflection.AssemblyCompanyAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyConfigurationAttribute(\"Debug\")]\r\n[assembly: System.Reflection.AssemblyFileVersionAttribute(\"1.0.0.0\")]\r\n[assembly: System.Reflection.AssemblyInformationalVersionAttribute(\"1.0.0+1a3a88f73e53f25c0fafac246de676e91bd6a299\")]\r\n[assembly: System.Reflection.AssemblyProductAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyTitleAttribute(\"backend\")]\r\n[assembly: System.Reflection.AssemblyVersionAttribute(\"1.0.0.0\")]\r\n\r\n// Generated by the MSBuild WriteCodeFragment class.\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/obj/Debug/net9.0/backend.AssemblyInfo.cs b/obj/Debug/net9.0/backend.AssemblyInfo.cs
+--- a/obj/Debug/net9.0/backend.AssemblyInfo.cs	(revision c6b1a557802242d15794d78442ccbf21575af090)
++++ b/obj/Debug/net9.0/backend.AssemblyInfo.cs	(date 1750382722800)
+@@ -13,7 +13,7 @@
+ [assembly: System.Reflection.AssemblyCompanyAttribute("backend")]
+ [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+ [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a3a88f73e53f25c0fafac246de676e91bd6a299")]
++[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6b1a557802242d15794d78442ccbf21575af090")]
+ [assembly: System.Reflection.AssemblyProductAttribute("backend")]
+ [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
+ [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

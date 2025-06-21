@@ -1,0 +1,34 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1" date="1750374199120" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 6/19/2025 6:02 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net9.0/refint/backend.dll" />
+    <option name="AFTER_PATH" value="obj/Debug/net9.0/refint/backend.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/backend.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net9.0/apphost.exe" />
+    <option name="AFTER_PATH" value="obj/Debug/net9.0/apphost.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/apphost.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" />
+    <option name="AFTER_PATH" value="obj/Debug/net9.0/backend.csproj.CoreCompileInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/backend.csproj.CoreCompileInputs.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net9.0/backend.pdb" />
+    <option name="AFTER_PATH" value="obj/Debug/net9.0/backend.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/backend.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Debug/net9.0/backend.exe" />
+    <option name="AFTER_PATH" value="bin/Debug/net9.0/backend.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/backend.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" />
+    <option name="AFTER_PATH" value="obj/Debug/net9.0/backend.AssemblyInfoInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend/.idea/shelf/Uncommitted_changes_before_Checkout_at_6_19_2025_6_02_PM_[Changes]1/backend.AssemblyInfoInputs.cache" />
+  </binary>
+</changelist>
