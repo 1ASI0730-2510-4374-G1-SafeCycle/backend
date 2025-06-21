@@ -1,4 +1,4 @@
-﻿using System.Net.Mime;
+using System.Net.Mime;
 using backend.Bikes.Domain.Model.Queries;
 using backend.Bikes.Domain.Services;
 using backend.Bikes.Interfaces.REST.Resources;
@@ -45,6 +45,19 @@ public class BikeStationController(IBikeStationCommandService bikeStationCommand
         if (result is null) return NotFound();
         var resource = BikeStationResourceFromEntityAssembler.ToResourceFromEntity(result);
         return Ok(resource);
+    }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<BikeStationResource>>> GetAllBikeStations()
+    {
+        var getAllQuery = new GetAllBikeStationsQuery();
+        var result = await bikeStationQueryService.Handle(getAllQuery);
+
+        foreach (var station in result)
+        {
+            if (station != null) BikeStationResourceFromEntityAssembler.ToResourceFromEntity(station);
+        }
+        
+        return Ok(result);
     }
     
     [HttpPut("{id}")]
