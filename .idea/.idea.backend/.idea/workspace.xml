@@ -23,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -286,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750526590188</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat: add cors allow all">
+      <option name="closed" value="true" />
+      <created>1750551215168</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1750551215168</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +320,8 @@
     <MESSAGE value="feat: include user in paymentinformation endpoint" />
     <MESSAGE value="chore: added and configured PostgreSQL dependency | configured connection string for render.com postgresql db" />
     <MESSAGE value="chore: added and configured PostgreSQL dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: added and configured PostgreSQL dependency" />
+    <MESSAGE value="feat: add cors allow all" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add cors allow all" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
