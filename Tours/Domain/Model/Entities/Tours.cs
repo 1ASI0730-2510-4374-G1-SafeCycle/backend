@@ -31,7 +31,7 @@ public partial class Tour
     [StringLength(10, MinimumLength = 1)]
     public string hour { get; set; }
 
-   [StringLength(10, MinimumLength = 1)]
+    [StringLength(2048, MinimumLength = 1)]
     public string img { get; set; }
 
     [Range(1, 1000)]
