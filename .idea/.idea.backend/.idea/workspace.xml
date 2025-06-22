@@ -11,11 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2f110409-402a-497b-96ab-3bef04e99499" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Application/Internal/QueryServices/BikeQueryServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Application/Internal/QueryServices/BikeQueryServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikesByStationIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Services/IBikesQueryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Domain/Services/IBikesQueryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bikes/Interfaces/BikesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Interfaces/BikesController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750551215168</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix: GetAvailableBikesByStationIdQuery.cs">
+      <option name="closed" value="true" />
+      <created>1750553213749</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1750553213749</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +329,8 @@
     <MESSAGE value="chore: added and configured PostgreSQL dependency | configured connection string for render.com postgresql db" />
     <MESSAGE value="chore: added and configured PostgreSQL dependency" />
     <MESSAGE value="feat: add cors allow all" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add cors allow all" />
+    <MESSAGE value="fix: GetAvailableBikesByStationIdQuery.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: GetAvailableBikesByStationIdQuery.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
