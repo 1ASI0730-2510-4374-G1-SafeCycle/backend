@@ -33,6 +33,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 //Adding Swagger as a Service
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -155,6 +166,7 @@ using (var scope = app.Services.CreateScope())
   services.Database.EnsureCreated();
 }
 
+app.UseCors(myAllowSpecificOrigins);
 
 // Add Swagger for use on Development
 
