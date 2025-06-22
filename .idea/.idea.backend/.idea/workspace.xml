@@ -9,8 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f110409-402a-497b-96ab-3bef04e99499" name="Changes" comment="chore: cache files">
+    <list default="true" id="2f110409-402a-497b-96ab-3bef04e99499" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bikes/Application/Internal/QueryServices/BikeQueryServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Application/Internal/QueryServices/BikeQueryServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikeStationsQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikesQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Domain/Model/Queries/GetAvailableBikesByStationIdQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bikes/Domain/Services/IBikesQueryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Domain/Services/IBikesQueryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bikes/Interfaces/BikesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Bikes/Interfaces/BikesController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
