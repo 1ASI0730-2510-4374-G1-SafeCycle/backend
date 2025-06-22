@@ -44,16 +44,10 @@ public class BikesController(IBikesCommandService bikesCommandService, IBikesQue
 
     }
     
-    [HttpGet("available")]
-    [SwaggerOperation(
-        Summary = "Get all available bikes",
-        Description = "Returns a list of bikes marked as available",
-        OperationId = "GetAllAvailableBikes"
-    )]
-    [SwaggerResponse(200, "List of available bikes retrieved successfully.")]
-    public async Task<IActionResult> GetAvailableBikes()
+    [HttpGet("available/{stationId}")]
+    public async Task<IActionResult> GetAvailableBikes([FromRoute] int stationId)
     {
-        var result = await bikesQueryService.Handle(new GetAvailableBikesQuery());
+        var result = await bikesQueryService.Handle(new GetAvailableBikesByStationIdQuery(stationId));
         var resources = result.Select(BikeResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }

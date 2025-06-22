@@ -7,5 +7,5 @@ public interface IBikesQueryService
 {
     Task<Bike?> Handle(GetBikeByIdQuery query);
     Task<IEnumerable<Bike>> Handle(GetAllBikesQuery query);
-    Task<IEnumerable<Bike>> Handle(GetAvailableBikesQuery query);
+    Task<IEnumerable<Bike>> Handle(GetAvailableBikesByStationIdQuery byStationIdQuery);
 }
