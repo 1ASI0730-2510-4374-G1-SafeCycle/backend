@@ -1,3 +1,4 @@
+using backend.IAM.Application.Internal.OutboundServices;
 using backend.Shared.Domain.Repositories;
 using backend.IAM.Domain.Model.Aggregates;
 using backend.IAM.Domain.Model.Commands;
@@ -8,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.IAM.Application.Internal.CommandServices;
 
-public class UserCommandService(IUserRepository userRepository, IUnitOfWork unitOfWork) : IUserCommandService
+public class UserCommandService(IUserRepository userRepository, IUnitOfWork unitOfWork,
+    IHashingService hashingService, ITokenService tokenService) : IUserCommandService
 {
     public async Task<User?> Handle(CreateUserCommand command)
     {
@@ -48,5 +50,14 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
             throw new Exception($"User with id {command.id} doesnt exists.", e);
         }
         
+    }
+
+    public async Task<(User user, string token)> Handle(SignInCommand command)
+    {
+        var user = await userRepository.FindUserByUsername(command.username);
+        if( user == null || !hashingService.VerifyPassword(command.username, user.Password) )
+            throw new Exception($"Username or password is invalid.");
+        var token = tokenService.GenerateToken(user);
+        return (user, token);
     }
 }

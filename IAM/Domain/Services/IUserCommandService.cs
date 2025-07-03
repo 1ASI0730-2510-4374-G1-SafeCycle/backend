@@ -8,4 +8,5 @@ public interface IUserCommandService
 {
     Task<User?> Handle(CreateUserCommand command);
     Task Handle(DeleteUserCommand command);
+    Task<(User user, string token)> Handle(SignInCommand command);
 }
