@@ -12,7 +12,7 @@ namespace backend.IAM.Application.Internal.CommandServices;
 public class UserCommandService(IUserRepository userRepository, IUnitOfWork unitOfWork,
     IHashingService hashingService, ITokenService tokenService) : IUserCommandService
 {
-    public async Task<User?> Handle(CreateUserCommand command)
+    public async Task<User?> Handle(SignUpCommand command)
     {
         var user = await userRepository.FindUserByEmail(command.Email);
         
@@ -54,9 +54,9 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
 
     public async Task<(User user, string token)> Handle(SignInCommand command)
     {
-        var user = await userRepository.FindUserByUsername(command.username);
-        if( user == null || !hashingService.VerifyPassword(command.username, user.Password) )
-            throw new Exception($"Username or password is invalid.");
+        var user = await userRepository.FindUserByEmail(command.email);
+        if( user == null || !hashingService.VerifyPassword(command.password, user.Password) )
+            throw new Exception($"Email or password is invalid.");
         var token = tokenService.GenerateToken(user);
         return (user, token);
     }

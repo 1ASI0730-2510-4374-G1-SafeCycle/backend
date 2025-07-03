@@ -2,11 +2,13 @@ using System.Net.Mime;
 using backend.IAM.Domain.Model.Commands;
 using backend.IAM.Domain.Model.Queries;
 using backend.IAM.Domain.Services;
+using backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using backend.IAM.Interfaces.REST.Resources;
 using backend.IAM.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.IAM.Interfaces.REST;
+
 
 [ApiController]
 [Route("api/v1/[controller]")]
@@ -18,9 +20,9 @@ public class UserController(
     ) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserResource resource)
+    public async Task<IActionResult> CreateUser([FromBody] SignUpResource resource)
     {
-        var createUserCommand = CreateUserCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var createUserCommand = SignUpCommandFromResourceAssembler.ToCommandFromResource(resource);
         var result = await commandService.Handle(createUserCommand);
         
         if (result == null) return BadRequest();

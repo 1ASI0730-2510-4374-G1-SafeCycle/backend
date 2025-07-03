@@ -3,11 +3,11 @@ using backend.IAM.Interfaces.REST.Resources;
 
 namespace backend.IAM.Interfaces.REST.Transform;
 
-public static class CreateUserCommandFromResourceAssembler
+public static class SignUpCommandFromResourceAssembler
 {
-    public static CreateUserCommand ToCommandFromResource(this CreateUserResource resource)
+    public static SignUpCommand ToCommandFromResource(this SignUpResource resource)
     {
-        return new CreateUserCommand(resource.Username,
+        return new SignUpCommand(resource.Username,
             resource.Email,
             resource.Password, 
             resource.TypeUser, 

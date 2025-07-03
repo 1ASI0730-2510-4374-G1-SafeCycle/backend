@@ -7,7 +7,7 @@ namespace backend.IAM.Domain.Model.Aggregates;
 
 public partial class User
 {
-    public User(CreateUserCommand command)
+    public User(SignUpCommand command)
     {
         Username = command.Username;
         Email = command.Email;

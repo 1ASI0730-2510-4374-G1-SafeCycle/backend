@@ -1,6 +1,6 @@
 namespace backend.IAM.Domain.Model.Commands;
 
-public record CreateUserCommand(string Username, 
+public record SignUpCommand(string Username, 
  string Email,
  string Password, 
  string TypeUser, 
