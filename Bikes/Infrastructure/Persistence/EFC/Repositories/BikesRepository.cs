@@ -4,7 +4,7 @@ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Bikes.Infrastructure.Repositories;
+namespace backend.Bikes.Infrastructure.Persistence.EFC.Repositories;
 
 public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bike>(context), IBikesRepository
 

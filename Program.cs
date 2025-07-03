@@ -1,8 +1,8 @@
 using backend.Bikes.Domain.Services;
-using backend.Bikes.Infrastructure.Repositories;
 using backend.Bikes.Application.Internal.CommandServices;
 using backend.Bikes.Application.Internal.QueryServices;
 using backend.Bikes.Domain.Repositories;
+using backend.Bikes.Infrastructure.Persistence.EFC.Repositories;
 using backend.Shared.Domain.Repositories;
 using backend.Renting.Application.Internal.CommandServices;
 using backend.Renting.Application.Internal.QueryServices;
@@ -12,15 +12,21 @@ using backend.Renting.Infrastructure;
 using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 using backend.IAM.Application.Internal.CommandServices;
+using backend.IAM.Application.Internal.OutboundServices;
 using backend.IAM.Application.Internal.QueryServices;
 using backend.IAM.Domain.Repositories;
 using backend.IAM.Domain.Services;
+using backend.IAM.Infrastructure.Hashing.BCrypt.Services;
 using backend.IAM.Infrastructure.Persistence.EFC.Repositories;
+using backend.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using backend.IAM.Infrastructure.Token.JWT.Configuration;
+using backend.IAM.Infrastructure.Token.JWT.Services;
 using backend.Payments.Application.Internal.CommandServices;
 using backend.Payments.Application.Internal.QueryServices;
 using backend.Payments.Domain.Repositories;
 using backend.Payments.Domain.Services;
 using backend.Payments.Infrastructure.Repositories;
+using backend.Renting.Infrastructure.Persistence.EFC.Repositories;
 using backend.Tours.Application.Internal.CommandServices;
 using backend.Tours.Application.Internal.QueryServices;
 using backend.Tours.Domain.Repositories;
@@ -152,6 +158,14 @@ builder.Services.AddScoped<IRentRepository, RentRepository>();
 builder.Services.AddScoped<IRentQueryService, RentQueryService>();
 builder.Services.AddScoped<IRentCommandService, RentCommandService>();
 
+// IAM Bounded Context Dependency Injection Configuration
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
 var app = builder.Build();
 
 //Add scope for our DbContext
@@ -169,7 +183,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
+app.UseRequestAuthorizationMiddleware();
 //Mapping Controllers EndPoints
 app.MapControllers();
 

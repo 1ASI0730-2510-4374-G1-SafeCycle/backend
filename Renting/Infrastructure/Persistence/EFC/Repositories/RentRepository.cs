@@ -4,7 +4,7 @@ using backend.Shared.Infrastructure.Persistence.EFC.Configuration;
 using backend.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Renting.Infrastructure;
+namespace backend.Renting.Infrastructure.Persistence.EFC.Repositories;
 
 public class RentRepository(SafecycleDBContext context) : BaseRepository<Rent>(context), IRentRepository
 {
