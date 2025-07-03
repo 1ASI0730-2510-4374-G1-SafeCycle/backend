@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/diegomora/RiderProjects/backend/backend.csproj": {}
+    "E:\\PROYECTOS\\.NET\\backend\\backend.csproj": {}
   },
   "projects": {
-    "/Users/diegomora/RiderProjects/backend/backend.csproj": {
+    "E:\\PROYECTOS\\.NET\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/diegomora/RiderProjects/backend/backend.csproj",
+        "projectUniqueName": "E:\\PROYECTOS\\.NET\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/diegomora/RiderProjects/backend/backend.csproj",
-        "packagesPath": "/Users/diegomora/.nuget/packages/",
-        "outputPath": "/Users/diegomora/RiderProjects/backend/obj/",
+        "projectPath": "E:\\PROYECTOS\\.NET\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\jackw\\.nuget\\packages\\",
+        "outputPath": "E:\\PROYECTOS\\.NET\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/diegomora/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jackw\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/opt/homebrew/Cellar/dotnet/9.0.5/libexec/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,12 +38,16 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "EntityFrameworkCore.CreatedUpdatedDate": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -52,6 +55,10 @@
             "Humanizer": {
               "target": "Package",
               "version": "[2.14.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.6, )"
             },
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
@@ -85,6 +92,10 @@
               "target": "Package",
               "version": "[9.0.5, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.12.1, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
@@ -100,6 +111,10 @@
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
               "version": "[8.1.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.12.1, )"
             }
           },
           "imports": [
@@ -121,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.5/libexec/sdk/9.0.106/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\jackw\\.dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4,7 +4,7 @@ using backend.IAM.Domain.Model.Aggregates;
 using backend.IAM.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.IAM.Infrastructure;
+namespace backend.IAM.Infrastructure.Persistence.EFC.Repositories;
 
 public class UserRepository(SafecycleDBContext context) : BaseRepository<User>(context), IUserRepository
 {

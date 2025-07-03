@@ -1,7 +1,4 @@
 using backend.Bikes.Domain.Services;
-using backend.Bikes.Domain.Services;
-using backend.Bikes.Infrastructure.Repositories;
-using backend.Bikes.Domain.Services;
 using backend.Bikes.Infrastructure.Repositories;
 using backend.Bikes.Application.Internal.CommandServices;
 using backend.Bikes.Application.Internal.QueryServices;
@@ -18,7 +15,7 @@ using backend.IAM.Application.Internal.CommandServices;
 using backend.IAM.Application.Internal.QueryServices;
 using backend.IAM.Domain.Repositories;
 using backend.IAM.Domain.Services;
-using backend.IAM.Infrastructure;
+using backend.IAM.Infrastructure.Persistence.EFC.Repositories;
 using backend.Payments.Application.Internal.CommandServices;
 using backend.Payments.Application.Internal.QueryServices;
 using backend.Payments.Domain.Repositories;
