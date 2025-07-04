@@ -1,6 +1,9 @@
 ﻿using backend.IAM.Application.Internal.OutboundServices;
 using backend.IAM.Domain.Model.Queries;
 using backend.IAM.Domain.Services;
+using backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+
+
 
 namespace backend.IAM.Infrastructure.Pipeline.Middleware.Components;
 
@@ -10,12 +13,11 @@ public class RequestAuthorizationMiddleware(RequestDelegate next)
     {
         Console.WriteLine("Entering Invoke Async");
         
-        var endpoint = context.GetEndpoint();
-        var anonymousAllow = endpoint?.Metadata?.GetMetadata<Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute>() != null;
+        var anonymousAllow = context.Request.HttpContext.GetEndpoint()!.Metadata
+            .Any(m => m.GetType() == typeof(AllowAnonymousAttribute));
 
-        Console.WriteLine($"Request path: {context.Request.Path}");
-        Console.WriteLine($"Method: {context.Request.Method}");
-        Console.WriteLine($"Allow Anonymous: {anonymousAllow}");
+        
+        Console.WriteLine($"Allow Anonymous : {anonymousAllow}");
         
         if (anonymousAllow)
         {

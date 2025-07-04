@@ -1,6 +1,6 @@
 ﻿using System.Net.Mime;
 using backend.IAM.Domain.Services;
-using Microsoft.AspNetCore.Authorization;
+using backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using backend.IAM.Interfaces.REST.Resources;
 using backend.IAM.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
