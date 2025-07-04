@@ -19,7 +19,7 @@ public class UserRepository(SafecycleDBContext context) : BaseRepository<User>(c
         return await Context.Set<User>().FirstOrDefaultAsync(f => f.Email == email);
     }
 
-    public async Task<IEnumerable<User>> FindUsersByType(string typeUser)
+    public async Task<IEnumerable<User>> FindUsersByEmail(string typeUser)
     {
        return await Context.Set<User>().Where(f => f.TypeUser == typeUser).ToListAsync();
     }

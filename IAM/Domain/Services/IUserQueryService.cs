@@ -7,5 +7,5 @@ public interface IUserQueryService
 {
     Task<IEnumerable<User?>> Handle(GetAllUsersQuery query);
     Task<User?> Handle(GetUserByIdQuery query);
-    Task<IEnumerable<User?>> Handle(GetUserByTypeUserQuery query);
+    Task<User?> Handle(GetUserByEmail query);
 }

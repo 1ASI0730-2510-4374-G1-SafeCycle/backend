@@ -7,11 +7,11 @@ namespace backend.IAM.Domain.Model.Aggregates;
 
 public partial class User
 {
-    public User(SignUpCommand command)
+    public User(SignUpCommand command, string hashedPassword)
     {
         Username = command.Username;
         Email = command.Email;
-        Password = command.Password;
+        Password = hashedPassword;
         TypeUser = command.TypeUser;
         MaxDailyReservationHour = command.MaxDailyReservationHour;
         IdentificationUser = command.IdentificationUser;
@@ -21,13 +21,12 @@ public partial class User
     [StringLength(50)]
     public string Username { get; private set; }
     [Required]
-    [StringLength(50)]
+    [StringLength(100)]
     public string Email { get; private set; }
     [Required]
-    [StringLength(50)]
     public string Password { get; private set; }
     [Required]
-    [StringLength(7)]
+    [StringLength(10)]
     public string TypeUser { get; private set; }
     [Required]
     public TimeSpan MaxDailyReservationHour { get; private set; }

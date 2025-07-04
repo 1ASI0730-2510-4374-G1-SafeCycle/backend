@@ -15,20 +15,24 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
     public async Task<User?> Handle(SignUpCommand command)
     {
         var user = await userRepository.FindUserByEmail(command.Email);
+
+        if (user != null)
+            return null;
         
-        if(user != null)
-            throw new Exception($"User with email {command.Email} already exists.");
+        var hashedPassword = hashingService.HashPassword(command.Password);
+
+        user = new User(command, hashedPassword);
         
-        user = new User(command);
 
         try
         {
             await userRepository.AddAsync(user);
             await unitOfWork.CompleteAsync();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return null;
+            Console.WriteLine($"Error while saving user: {ex.Message}");
+            throw;
         }
 
         return user;
@@ -52,11 +56,12 @@ public class UserCommandService(IUserRepository userRepository, IUnitOfWork unit
         
     }
 
-    public async Task<(User user, string token)> Handle(SignInCommand command)
+    public async Task<(User? user, string? token)> Handle(SignInCommand command)
     {
         var user = await userRepository.FindUserByEmail(command.email);
-        if( user == null || !hashingService.VerifyPassword(command.password, user.Password) )
-            throw new Exception($"Email or password is invalid.");
+        
+        if (user == null || !hashingService.VerifyPassword(command.password, user.Password))
+            return (null, null);
         var token = tokenService.GenerateToken(user);
         return (user, token);
     }

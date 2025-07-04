@@ -27,10 +27,10 @@ public class TokenService(IOptions<TokenSettings> tokenSettings) : ITokenService
             Expires = DateTime.UtcNow.AddDays(7),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
-        var tokenHandler = new JsonWebTokenHandler();
+        var tokenHandler = new JwtSecurityTokenHandler();
         
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        return token;
+        return tokenHandler.WriteToken(token);
     }
 
     public async Task<int?> VerifyToken(string token)
@@ -38,7 +38,7 @@ public class TokenService(IOptions<TokenSettings> tokenSettings) : ITokenService
         if (string.IsNullOrWhiteSpace(token))
             return null;
         
-        var tokenHandler = new JsonWebTokenHandler();
+        var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_tokenSettings.Secret);
 
         try

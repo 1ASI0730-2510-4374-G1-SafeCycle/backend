@@ -1,6 +1,6 @@
 ﻿using System.Net.Mime;
 using backend.IAM.Domain.Services;
-using backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+using Microsoft.AspNetCore.Authorization;
 using backend.IAM.Interfaces.REST.Resources;
 using backend.IAM.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +15,7 @@ namespace backend.IAM.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 public class AuthorizationController(IUserCommandService userCommandService) : ControllerBase
 {
+    
     [AllowAnonymous]
     [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInResource signInResource)
@@ -22,6 +23,9 @@ public class AuthorizationController(IUserCommandService userCommandService) : C
         var signInCommand = SignInCommandFromResourceAssembler.ToCommandFromResource(signInResource);
         var authenticatedUser = await userCommandService.Handle(signInCommand);
 
+        if (authenticatedUser.user == null || authenticatedUser.token == null)
+            return Unauthorized("NO_EMAIL_FOUND");
+                
         var resource = AuthenticatedUserResourceFromEntityAssembler
             .ToResourceFromEntity(authenticatedUser.user, authenticatedUser.token);
         
@@ -34,7 +38,11 @@ public class AuthorizationController(IUserCommandService userCommandService) : C
     public async Task<IActionResult> SignUp([FromBody] SignUpResource signUpResource)
     {
         var signUpCommand = SignUpCommandFromResourceAssembler.ToCommandFromResource(signUpResource);
-        await userCommandService.Handle(signUpCommand);
+        var user = await userCommandService.Handle(signUpCommand);
+
+        if (user == null)
+            return Unauthorized("EMAIL_EXISTS");
+        
         return Ok(new { message = "User created successfully" });
     }
 

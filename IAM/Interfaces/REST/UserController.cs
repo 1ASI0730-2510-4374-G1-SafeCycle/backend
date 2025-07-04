@@ -20,15 +20,28 @@ public class UserController(
     ) : ControllerBase
 {
     [HttpPost]
+    
     public async Task<IActionResult> CreateUser([FromBody] SignUpResource resource)
     {
         var createUserCommand = SignUpCommandFromResourceAssembler.ToCommandFromResource(resource);
-        var result = await commandService.Handle(createUserCommand);
-        
-        if (result == null) return BadRequest();
+        try
+        {
+            var result = await commandService.Handle(createUserCommand);
 
-        return CreatedAtAction(nameof(GetUserById), new { id = result.Id },
-            UserResourceFromEntityAssembler.ToResourceFromEntity(result));
+            if (result == null) return BadRequest();
+
+            return CreatedAtAction(nameof(GetUserById), new { id = result.Id },
+                UserResourceFromEntityAssembler.ToResourceFromEntity(result));
+        }
+        catch (Exception e)
+        {
+            if (e.Message == "EMAIL_EXISTS")
+            {
+                return Conflict(new { code = "EMAIL_EXISTS", message = "El email ya está registrado." });
+            }
+
+            return StatusCode(500, "Error interno del servidor.");
+        }
     }
 
     [HttpGet("{id}")]
@@ -36,6 +49,20 @@ public class UserController(
     {
         var getByIdQuery = new GetUserByIdQuery(id);
         var result = await  userQueryService.Handle(getByIdQuery);
+        
+        if (result == null) return NotFound();
+        
+        var resource = UserResourceFromEntityAssembler.ToResourceFromEntity(result);
+        
+        return Ok(resource);
+    }
+    
+    
+    [HttpGet("email/{email}")]
+    public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
+    {
+        var getUserByEmail = new GetUserByEmail(email);
+        var result = await  userQueryService.Handle(getUserByEmail);
         
         if (result == null) return NotFound();
         
