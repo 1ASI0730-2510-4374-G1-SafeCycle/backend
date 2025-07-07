@@ -16,4 +16,9 @@ public class RentQueryService(IRentRepository repository) : IRentQueryService
     {
         return await repository.GetByIdAsync(query.id);
     }
+
+    public async Task<Rent?> Handle(GetRentByUserId query)
+    {
+        return await repository.GetByUserId(query.userId);
+    }
 }
