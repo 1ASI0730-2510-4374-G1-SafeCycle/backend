@@ -8,4 +8,6 @@ public interface IToursQueryService
     Task<Tour?> Handle(GetTourByIdQuery query);
 
     Task<IEnumerable<Tour>> Handle(GetAllToursQuery query);
+    
+    Task<Tour?> Handle(GetTourBookingByNameQuery query);
 }

@@ -9,7 +9,7 @@ public partial class PaymentInformation
 {
     protected PaymentInformation()
     {
-        cardNumber = 0;
+        cardNumber = string.Empty;
         type = string.Empty;
         holder = string.Empty;
         amount = 0;
@@ -27,9 +27,7 @@ public partial class PaymentInformation
     
     public int id { get;  set; }
     
-    [Required]
-    [Range(1, 1000)]
-    public int cardNumber { get; set; }
+    public string cardNumber { get; set; }
     [Required]
     [StringLength(50, MinimumLength = 1)]
     public string type { get; set; }

@@ -9,4 +9,5 @@ public interface IToursRepository: IBaseRepository<Tour>
     Task<IEnumerable<Tour>> GetAllToursAsync();
     
     Task<Tour?> GetToursByIdAsync(int id);
+    Task<Tour?> FindTourByNameAsync(string name);
 }

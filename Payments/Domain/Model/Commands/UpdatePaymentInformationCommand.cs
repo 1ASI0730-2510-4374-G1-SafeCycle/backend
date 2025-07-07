@@ -2,7 +2,7 @@
 
 public record UpdatePaymentInformationCommand(
     int Id,
-    int cardNumber,
+    string cardNumber,
     string type,
     string holder,
     double amount,

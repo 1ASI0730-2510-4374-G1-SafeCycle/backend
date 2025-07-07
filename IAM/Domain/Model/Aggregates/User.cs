@@ -30,7 +30,6 @@ public partial class User
     public string TypeUser { get; private set; }
     [Required]
     public TimeSpan MaxDailyReservationHour { get; private set; }
-    [Required]
     [StringLength(50)]
     public string IdentificationUser { get; private set; }
     

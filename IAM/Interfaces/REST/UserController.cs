@@ -56,19 +56,18 @@ public class UserController(
         
         return Ok(resource);
     }
-    
-    
+    [AllowAnonymous]
     [HttpGet("email/{email}")]
     public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
     {
         var getUserByEmail = new GetUserByEmail(email);
         var result = await  userQueryService.Handle(getUserByEmail);
         
-        if (result == null) return NotFound();
+        if (result == null) return Ok();
         
         var resource = UserResourceFromEntityAssembler.ToResourceFromEntity(result);
-        
-        return Ok(resource);
+
+        return NotFound();
     }
 
     [HttpGet]

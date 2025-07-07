@@ -23,4 +23,10 @@ public class ToursRepository(SafecycleDBContext context) : BaseRepository<Tour>(
         return await Context.Set<Tour>()
             .FirstOrDefaultAsync(b => b.Id == id);
     }
+
+    public async Task<Tour?> FindTourByNameAsync(string name)
+    {
+        return await Context.Set<Tour>()
+            .FirstOrDefaultAsync(x => x.name == name);
+    }
 }

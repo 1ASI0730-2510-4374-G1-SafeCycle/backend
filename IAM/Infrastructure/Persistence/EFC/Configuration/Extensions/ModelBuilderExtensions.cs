@@ -14,6 +14,6 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<User>().Property(x => x.Password).IsRequired();
         modelBuilder.Entity<User>().Property(x => x.TypeUser).IsRequired();
         modelBuilder.Entity<User>().Property(x => x.MaxDailyReservationHour).IsRequired();
-        modelBuilder.Entity<User>().Property(x => x.IdentificationUser).IsRequired();
+        modelBuilder.Entity<User>().Property(x => x.IdentificationUser);
     }
 }

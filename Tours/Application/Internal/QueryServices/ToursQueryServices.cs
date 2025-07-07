@@ -16,4 +16,9 @@ public class ToursQueryServices(IToursRepository toursRepository): IToursQuerySe
     {
         return await toursRepository.GetAllToursAsync();
     }
+
+    public async Task<Tour?> Handle(GetTourBookingByNameQuery query)
+    {
+        return await toursRepository.FindTourByNameAsync(query.name);
+    }
 }
