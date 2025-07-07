@@ -27,6 +27,7 @@ public partial class PaymentInformation
     
     public int id { get;  set; }
     
+    [StringLength(19, MinimumLength = 13)]
     public string cardNumber { get; set; }
     [Required]
     [StringLength(50, MinimumLength = 1)]

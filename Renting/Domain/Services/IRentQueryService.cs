@@ -7,4 +7,6 @@ public interface IRentQueryService
 {
     Task<IEnumerable<Rent>> Handle(GetAllRentsQuery query);
     Task<Rent?> Handle(GetRentByIdQuery query);
+
+    Task<Rent?> Handle(GetRentByUserId query);
 }

@@ -3,6 +3,7 @@ using backend.Payment.Interfaces.REST.Transform;
 using backend.Payments.Domain.Model.Queries;
 using backend.Payments.Domain.Services;
 using backend.Payments.Interfaces.REST.Resources;
+using backend.Payments.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

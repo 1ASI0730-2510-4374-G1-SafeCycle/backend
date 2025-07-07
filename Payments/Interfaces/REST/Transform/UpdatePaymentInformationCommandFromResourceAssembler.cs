@@ -1,7 +1,7 @@
 ﻿using backend.Payments.Domain.Model.Commands;
 using backend.Payments.Interfaces.REST.Resources;
 
-namespace backend.Payment.Interfaces.REST.Transform;
+namespace backend.Payments.Interfaces.REST.Transform;
 
 public static class UpdatePaymentInformationCommandFromResourceAssembler
 {

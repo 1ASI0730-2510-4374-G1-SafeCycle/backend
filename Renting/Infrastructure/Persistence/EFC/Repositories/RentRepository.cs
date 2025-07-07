@@ -17,4 +17,14 @@ public class RentRepository(SafecycleDBContext context) : BaseRepository<Rent>(c
             .Include(r => r.bikeStations)
             .FirstOrDefaultAsync(r => r.Id == id);
     }
+
+    public async Task<Rent?> GetByUserId(long userId)
+    {
+        return await Context.Set<Rent>()
+            .Include(r => r.Payment)
+            .ThenInclude(p => p.paymentInformation)
+            .Include(r => r.user)
+            .Include(r => r.bikeStations)
+            .FirstOrDefaultAsync(r => r.user.Id == userId);
+    }
 }

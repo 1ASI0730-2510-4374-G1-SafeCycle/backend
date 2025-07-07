@@ -12,14 +12,9 @@ public class BikeQueryServices(IBikesRepository bikesRepository): IBikesQuerySer
         return await bikesRepository.GetBikeByIdAsync(query.Id);
     }
 
-    public async Task<IEnumerable<Bike>> Handle(GetAllBikesQuery query)
-    {
-        return await bikesRepository.GetAllBikesAsync();
-    }
-
     public async Task<IEnumerable<Bike>> Handle(GetAvailableBikesByStationIdQuery byStationIdQuery)
     {
-        var allBikes = await bikesRepository.GetAllBikesAsync();
+        var allBikes = await bikesRepository.GetAllBikesByStationIdAsync(byStationIdQuery.stationId);
         return allBikes.Where(bike => bike.available == true);
     }
 }
