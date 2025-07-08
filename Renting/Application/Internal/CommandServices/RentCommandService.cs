@@ -43,7 +43,7 @@ public class RentCommandService(IRentRepository repository, IPaymentRepository p
 
     public async Task Handle(DeleteRentCommand command)
     {
-        var rentId = await repository.FindByIdAsync(command.userId);
+        var rentId = await repository.GetByUserId(command.userId);
         if (rentId == null) throw new Exception("Rent not found");
 
         try
