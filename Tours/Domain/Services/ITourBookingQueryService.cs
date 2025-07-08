@@ -7,4 +7,6 @@ public interface ITourBookingQueryService
     Task<TourBooking?> Handle(GetTourBookingByIdQuery query);
     
     Task<IEnumerable<TourBooking>> Handle(GetAllTourBookingQuery query);
+    
+    
 }

@@ -66,4 +66,13 @@ public class TourController(IToursCommandService tourCommandService, IToursQuery
 
         return Ok(ToursResourceFromEntityAssembler.ToResourceFromEntity(result));
     }
+
+    [HttpGet]
+    public async Task<ActionResult> GetByName([FromQuery] string name)
+    {
+        var command = new GetTourBookingByNameQuery(name);
+        var result = await tourQueryService.Handle(command);
+        if (result is null) return NotFound();
+        return Ok(result.Id);
+    }
 }

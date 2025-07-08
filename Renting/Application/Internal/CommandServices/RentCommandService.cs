@@ -40,4 +40,20 @@ public class RentCommandService(IRentRepository repository, IPaymentRepository p
 
         return rent;
     }
+
+    public async Task Handle(DeleteRentCommand command)
+    {
+        var rentId = await repository.FindByIdAsync(command.userId);
+        if (rentId == null) throw new Exception("Rent not found");
+
+        try
+        {
+            repository.Remove(rentId);
+            await unitOfWork.CompleteAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Error deleting rent", e);
+        }
+    }
 }

@@ -9,4 +9,5 @@ public interface IRentCommandService
 {
     Task<Rent?> Handle(CreateRentCommand command);
     
+    Task Handle(DeleteRentCommand command);
 }
