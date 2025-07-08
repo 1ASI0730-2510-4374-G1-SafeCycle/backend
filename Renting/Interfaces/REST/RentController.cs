@@ -47,4 +47,17 @@ public class RentController(
         return Ok(resource);
     }
     
+    [HttpGet("user/{userid}")]
+    [SwaggerOperation(Summary = "Gets a Rent according to user id", Description = "Gets a Rent according to id",
+        OperationId = "GetsRentById")]
+
+    public async Task<ActionResult> GetRentByUserId(int userid)
+    {
+        var getRentByUserId = new GetRentByUserId(userid);
+        var result = await rentQueryService.Handle(getRentByUserId);
+        if (result is null) return NotFound();
+        var resource = RentResourceFromEntityAssembler.ToResourceFromEntity(result);
+        return Ok(resource);
+    }
+    
 }

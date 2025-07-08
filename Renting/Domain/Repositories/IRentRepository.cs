@@ -7,4 +7,6 @@ public interface IRentRepository : IBaseRepository<Rent>
 {
     Task<Rent?> GetByIdAsync(int id);
     
+    Task<Rent?> GetByUserId(long userId);
+    
 }

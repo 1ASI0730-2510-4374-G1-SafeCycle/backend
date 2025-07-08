@@ -2,7 +2,7 @@
 using backend.Payments.Interfaces.REST.Resources;
 using PaymentInformation = backend.Payments.Domain.Model.Aggregates.PaymentInformation;
 
-namespace backend.Payment.Interfaces.REST.Transform;
+namespace backend.Payments.Interfaces.REST.Transform;
 
 public static class PaymentInformationResourceFromEntityAssembler
 {

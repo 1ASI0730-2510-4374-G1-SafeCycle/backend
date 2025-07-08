@@ -9,13 +9,21 @@ namespace backend.Bikes.Infrastructure.Persistence.EFC.Repositories;
 public class BikesRepository(SafecycleDBContext context) : BaseRepository<Bike>(context), IBikesRepository
 
 {
-    public async Task<IEnumerable<Bike>> GetAllBikesAsync()
+    public async Task<IEnumerable<Bike>> GetAllBikesByStationIdAsync()
     {
         return await Context.Set<Bike>()
             .Include(b => b.bikeStation)
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Bike>> GetAllBikesByStationIdAsync(int stationId)
+    {
+        return await Context.Set<Bike>()
+            .Where(b => b.available == true && b.bikeStation.Id == stationId)
+            .Include(b => b.bikeStation)
+            .ToListAsync();
+    }
+    
     public async Task<IEnumerable<Bike>> GetAllAvailableBikesAsync()
     {
         return await Context.Set<Bike>()
