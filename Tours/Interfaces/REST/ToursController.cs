@@ -50,6 +50,22 @@ public class TourController(IToursCommandService tourCommandService, IToursQuery
         
     }
 
+    [HttpGet]
+    [SwaggerOperation(
+        Summary = "Get all Tours",
+        Description = "Returns a list of all Tours",
+        OperationId = "GetAllTours"
+    )]
+    [SwaggerResponse(200, "List of tours returned successfully.")]
+    public async Task<ActionResult> GetAllTours()
+    {
+        var query = new GetAllToursQuery();
+        var result = await tourQueryService.Handle(query);
+        var resources = result.Select(ToursResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+
+
     [HttpPut("{id}")]
     [SwaggerOperation(
         Summary = "Update a Tour",
@@ -66,4 +82,13 @@ public class TourController(IToursCommandService tourCommandService, IToursQuery
 
         return Ok(ToursResourceFromEntityAssembler.ToResourceFromEntity(result));
     }
+
+    /*[HttpGet("{name}")]
+    public async Task<ActionResult> GetByName(string name)
+    {
+        var command = new GetTourBookingByNameQuery(name);
+        var result = await tourQueryService.Handle(command);
+        if (result is null) return NotFound();
+        return Ok(result.Id);
+    }*/
 }

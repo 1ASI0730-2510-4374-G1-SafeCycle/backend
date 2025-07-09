@@ -46,7 +46,16 @@ public class RentController(
         var resource = RentResourceFromEntityAssembler.ToResourceFromEntity(result);
         return Ok(resource);
     }
-    
+    [HttpPost("delete")]
+    [SwaggerOperation(Summary = "Delete a Rent according to id", Description = "Delete a Rent according to id",
+        OperationId = "DeleteRentById")]
+
+    public async Task<ActionResult> DeleteRentById([FromBody]DeleteRentResource resource)
+    {
+        var deleteRentById = DeleteRentCommandFromResourceAssembler.ToCommandFromEntity(resource);
+        await rentCommandService.Handle(deleteRentById);
+        return Ok();
+    }
     [HttpGet("user/{userid}")]
     [SwaggerOperation(Summary = "Gets a Rent according to user id", Description = "Gets a Rent according to id",
         OperationId = "GetsRentById")]

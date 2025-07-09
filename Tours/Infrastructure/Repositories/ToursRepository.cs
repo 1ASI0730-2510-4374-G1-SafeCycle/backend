@@ -13,9 +13,9 @@ public class ToursRepository(SafecycleDBContext context) : BaseRepository<Tour>(
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Tour>> GetAllToursAsync()
+    public async Task<IEnumerable<Tour>> GetAllToursAsync()
     {
-        throw new NotImplementedException();
+        return await Context.Set<Tour>().ToListAsync();
     }
 
     public async Task<Tour?> GetToursByIdAsync(int id)
